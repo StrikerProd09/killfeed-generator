@@ -50,7 +50,9 @@
   --rkg-font-family-src-selected: "";
   --rkg-p-x-selected: 20px;
   --rkg-p-y-selected: 6px;
-  --rkg-font-color-selected: #ffffff;
+  --rkg-font-color-selected: #fff8e0;
+  --rkg-font-color-1-selected: #fff8e0;
+  --rkg-font-color-2-selected: #fff0f0;
   --rkg-border-width-selected: 2px;
   --rkg-border-color-selected: #1d1d1d;
   --rkg-border-radius-selected: 0px;
