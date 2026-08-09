@@ -1,9 +1,9 @@
 var nr = 0;
+var globalFlip = false;
 
 function bright() {
   document.getElementById("background_overlay").value = "#fff";
-  document.getElementById("killfeed-generator").style.backgroundColor =
-    "#fff";
+  document.getElementById("killfeed-generator").style.backgroundColor = "#fff";
 }
 
 function dark() {
@@ -170,6 +170,9 @@ function drawKillfeedItem(item, scale) {
     var player2 = p2El ? p2El.textContent : "";
 
     var weaponEl = item.querySelector("img.sp_icon");
+    var isWeaponFlipped = weaponEl
+      ? weaponEl.classList.contains("flip-horizontal")
+      : false;
     var additionalEls = Array.prototype.slice.call(
       item.querySelectorAll(".additional"),
     );
@@ -202,9 +205,7 @@ function drawKillfeedItem(item, scale) {
           ? iconMaxH * (weapon.naturalWidth / weapon.naturalHeight)
           : 0;
         var additionalsW = additionalsImages.map(function (img) {
-          return img
-            ? iconMaxH * (img.naturalWidth / img.naturalHeight)
-            : 0;
+          return img ? iconMaxH * (img.naturalWidth / img.naturalHeight) : 0;
         });
 
         var gap = 10;
@@ -248,13 +249,27 @@ function drawKillfeedItem(item, scale) {
         cursor += w1 + gap;
 
         if (weapon) {
-          ctx.drawImage(
-            weapon,
-            cursor,
-            centerY - iconMaxH / 2,
-            weaponW,
-            iconMaxH,
-          );
+          ctx.save();
+          if (isWeaponFlipped) {
+            ctx.translate(cursor + weaponW / 2, centerY);
+            ctx.scale(-1, 1);
+            ctx.drawImage(
+              weapon,
+              -weaponW / 2,
+              -iconMaxH / 2,
+              weaponW,
+              iconMaxH,
+            );
+          } else {
+            ctx.drawImage(
+              weapon,
+              cursor,
+              centerY - iconMaxH / 2,
+              weaponW,
+              iconMaxH,
+            );
+          }
+          ctx.restore();
           cursor += weaponW + gap;
         }
 
@@ -386,8 +401,11 @@ $(document).ready(function () {
         player1 = params.player1 || "Player1";
         player2 = params.player2 || "Player2";
         additionals = params.additionals || [];
+        globalFlip = params.flip === true;
       } else {
-        console.error("Failed to load params: " + fileName + " (" + xhr.status + ")");
+        console.error(
+          "Failed to load params: " + fileName + " (" + xhr.status + ")",
+        );
       }
     } catch (e) {
       console.error("Failed to load params: " + fileName, e);
@@ -474,6 +492,10 @@ $(document).ready(function () {
       var p2 = el.getAttribute("player_name_2") || player2;
       var id = el.getAttribute("id") || "";
       var location = el.getAttribute("location") || "suffix";
+
+      var isFlipped = globalFlip || el.getAttribute("flip") === "true";
+      var flipClass = isFlipped ? " flip-horizontal" : "";
+
       var item = document.createElement("div");
       item.className = "killfeed-item";
       if (id) {
@@ -482,7 +504,9 @@ $(document).ready(function () {
       item.innerHTML =
         "<p class='player1'>" +
         p1 +
-        "</p><img class='sp_icon' alt='Weapon' src='" +
+        "</p><img class='sp_icon" +
+        flipClass +
+        "' alt='Weapon' src='" +
         path +
         img +
         ".webp'>" +
@@ -556,21 +580,32 @@ $(document).ready(function () {
 
   var text = "";
   for (var j = 0; j < images.length; j++) {
+    var imgObj = images[j];
+    var imgName = typeof imgObj === "object" ? imgObj.name : imgObj;
+
+    var isFlipped =
+      globalFlip || (typeof imgObj === "object" && imgObj.flip === true);
+    var flipClass = isFlipped ? " flip-horizontal" : "";
+
     text +=
-"<div id=" +
-        j +
-        "_" +
-        images[j] +
-        " class='killfeed-item'><p class='player1'>" +
-        player1 +
-        "</p><img class='sp_icon' alt='Weapon' src='" +
-        path +
-        images[j] +
-        ".webp'>" +
-        additionalSlotsHtml("suffix") +
-        "<p class='player2'>" +
-        player2 +
-        "</p></div>";
+      "<div id=" +
+      j +
+      "_" +
+      imgName +
+      " class='killfeed-item'>" +
+      "<p class='player1'>" +
+      player1 +
+      "</p>" +
+      "<img class='sp_icon" +
+      flipClass +
+      "' alt='Weapon' src='" +
+      path +
+      imgName +
+      ".webp'>" +
+      additionalSlotsHtml("suffix") +
+      "<p class='player2'>" +
+      player2 +
+      "</p></div>";
   }
   document.getElementById("killfeed-generator").innerHTML = text;
 

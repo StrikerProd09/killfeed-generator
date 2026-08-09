@@ -1334,6 +1334,9 @@ canvas {
   vertical-align: middle;
   display: inline-block;
 }
+.sp_icon.flip-horizontal {
+  transform: scaleX(-1);
+}
 
 @media only screen and (min-width: 1366px) {
 

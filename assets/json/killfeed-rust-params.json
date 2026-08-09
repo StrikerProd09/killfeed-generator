@@ -14,5 +14,6 @@
   "path"       : "assets/img/killfeed-icons/rust/",
   "player1"    : "Player1",
   "player2"    : "Player2",
-  "additionals": ["Head", "No Scope"]
+  "additionals": ["Head", "No Scope"],
+  "flip"       : false
 }
