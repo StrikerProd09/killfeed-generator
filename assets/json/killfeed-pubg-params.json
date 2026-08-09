@@ -20,6 +20,6 @@
   "path"       : "assets/img/killfeed-icons/pubg/",
   "player1"    : "Player1",
   "player2"    : "Player2",
-  "additionals": ["Headshop", "No Scope"],
+  "additionals": ["Headshot", "No Scope"],
   "flip"       : true
 }
