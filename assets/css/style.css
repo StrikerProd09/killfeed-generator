@@ -1166,7 +1166,7 @@ aside {
 
 #screenshot-stage img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
   max-width: 100%;
 }
