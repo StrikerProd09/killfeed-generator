@@ -1,0 +1,18 @@
+[
+    {
+        "page_id"    : "1",
+        "page_html"  : "killfeed-generator-rust.html",
+        "path_url"   : "killfeed-generator-rust",
+        "title"      : "Rust - Killfeed Generator",
+        "description": "Generate RUST Death Notice Overlays for photo-video editing, fast and simple to use.",
+        "img_bg"     : "assets/img/banners/rust_editing_contest/rust_editing_contest_background.webp"
+    },
+    {
+        "page_id"    : "2",
+        "page_html"  : "killfeed-generator-pubg.html",
+        "path_url"   : "killfeed-generator-rust",
+        "title"      : "PUBG - Killfeed Generator",
+        "description": "Generate PUBG Death Notice Overlays for photo-video editing, fast and simple to use.",
+        "img_bg"     : "assets/img/banners/pubg_editing_contest/pubg_editing_contest_background.webp"
+    }
+]

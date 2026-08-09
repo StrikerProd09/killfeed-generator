@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUBG KillFeed Generator</title>
+  <meta name="description"
+    content="Generate and customize custom PUBG death notices and killfeed images. Edit player names, toggle headshot icons, and easily download your canvas image for free.">
+  <meta name="keywords" content="PUBG killfeed generator">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PUBG KillFeed Generator">
+  <meta property="og:description"
+    content="Create custom PUBG death notices and killfeed images instantly. Customize names, headshots, and download your canvas.">
+  <meta property="og:url" content="https://strikerprod09.github.io/PUBG-killfeed_generator">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PUBG KillFeed Generator">
+  <meta name="twitter:description" content="Create custom PUBG death notices and killfeed images instantly.">
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico">
+  <link rel="stylesheet" href="assets/css/params_PUBG.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERK4PD4QH4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-ERK4PD4QH4');
+  </script>
+  <script src="assets/js/html2canvas.js"></script>
+  <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/banner-slider.js"></script>
+  <script src="assets/js/cookie-notice.js"></script>
+  <script src="assets/js/gameplay-player.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="assets/js/cookie-notice.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="site-header-bar">
+      <a class="brand" href="#home">
+        <img src="assets/img/logo/logo_rectangle.webp" alt="PUBG KillFeed Generator Logo" width="363" height="120"
+          class="logo-img">
+        <span class="site-title">PUBG KillFeed Generator</span>
+      </a>
+      <div class="main-nav-section">
+        <nav class="main-nav">
+          <a href="#home">Home</a>
+          <a href="#killfeed-generator">Generator</a>
+          <a href="#preview-killfeed-gameplay">Preview</a>
+          <a href="#how-to-use">Help</a>
+        </nav>
+        <button class="nav-share" id="nav-share" type="button" aria-label="Share link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+            <path d="M16 6l-4-4-4 4"></path>
+            <path d="M12 2v13"></path>
+          </svg>
+          <span class="nav-share-label" id="nav-share-label">Copied</span>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="nav-toggle-icon nav-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"></path>
+            <path d="M3 12h18"></path>
+            <path d="M3 18h18"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="overlay-noise">
+    <article class="aside-section">
+      <section class="main-section">
+        <section class="hero" id="home">
+          <div class="hero-inner">
+            <span class="site-title width-md-100">PUBG <span style="color:var(--rkg-color-primary)">KillFeed</span>
+              Generator</span>
+            <p class="hero-subtitle">Generate <span style="font-style: italic;">PUBG Death Notice Overlays</span> for
+              photo-video editing, fast and simple to use.</p>
+            <div class="time" style="display: none;"><span>Published on: </span>
+              <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V12L15 15" stroke="var(--rkg-color-white)" stroke-width="2" stroke-linecap="round" />
+                <circle cx="12" cy="12" r="9" stroke="var(--rkg-color-white)" stroke-width="2" />
+              </svg>
+              <time datetime="2021-04">Aug 2026</time>
+            </div>
+          </div>
+          <div class="hero-background" role="img" aria-label="Hero Banner KillFeed Generator preview image"
+            style="background-image: url('assets/img/banners/pubg_editing_contest/pubg_editing_contest_background.webp');">
+          </div>
+        </section>
+
+        <div class="container">
+          <section class="settings-tab overlay-noise">
+            <h2>Settings</h2>
+            <div class="settings-actions">
+              <button class="btn btn-primary btn-active" id="customize" onclick="customize()">Options</button>
+              <a href="#preview-killfeed-gameplay" class="btn btn-primary">Preview</a>
+              <button class="btn btn-secondary" id="download_psd"
+                onclick="location.href='assets/psd/PUBG_death_notice.psd'">PSD
+                Template</button>
+            </div>
+            <div id="options">
+              <div class="option-group">
+                <span>Export: </span>
+                <label class="custom-checkbox" id="all-content-checkbox">
+                  <input type="checkbox" id="download1" name="download1">
+                  <span class="checkmark"></span>
+                  <span class="check-label">All Content</span>
+                </label>
+              </div>
+              <div class="option-group">
+                <div class="option-field">
+                  <span>Player 1: </span>
+                  <input type="text" id="player_1" value="" placeholder="Player 1">
+                </div>
+                <div class="option-field">
+                  <span>Player 2: </span>
+                  <input type="text" id="player_2" value="" placeholder="Player 2">
+                </div>
+                <button class="btn btn-primary" onclick="players_apply()">Apply</button>
+              </div>
+              <div class="option-group">
+                <div class="option-field">
+                  <span>Headshot: </span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="headshot_toggle" location="suffix" order="1">
+                    <span class="toggle-track">
+                      <span class="toggle-thumb"></span>
+                    </span>
+                  </label>
+                </div>
+                <div class="option-field">
+                  <span>No-Scope: </span>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="noscope_toggle" location="suffix" order="2">
+                    <span class="toggle-track">
+                      <span class="toggle-thumb"></span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div class="option-group">
+                <span>Background Color: </span>
+                <button class="btn btn-secondary" id="bright" onclick="bright()">Bright</button>
+                <button class="btn btn-secondary" id="dark" onclick="dark()">Dark</button>
+                <input type="text" id="background_overlay" value="" placeholder="Hex Color">
+                <button class="btn btn-primary" onclick="background_apply()">Apply</button>
+              </div>
+              <section class="item-style-tab">
+                <h3>Item Style</h3>
+                <div class="option-group">
+                  <div class="option-field">
+                    <span>Font Size: </span>
+                    <input id="item_font_size" type="number" value="25" min="8" max="120">
+                    <span>px</span>
+                  </div>
+                  <div class="option-field">
+                    <span>Font Family: </span>
+                    <select id="item_font_family"></select>
+                  </div>
+
+                </div>
+                <div class="option-group">
+                  <span>Font Source:
+                    <span class="info-icon" tabindex="0" role="note" aria-label="Help">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 16v-4"></path>
+                        <path d="M12 8h.01"></path>
+                      </svg>
+                      <span class="info-tooltip">
+                        You can load external font with url of src of font in Font Source.
+                        <span class="info-tooltip-actions">
+                          <button class="btn btn-secondary" id="item_font_load_pw" type="button"
+                            onclick="loadExampleFont('https://fonts.gstatic.com/s/playwritevn/v11/mtG94_hXJqPSu8nf5RBY5i0w3Q.woff2', 'Playwrite VN')">Playwrite
+                            VN</button>
+                          <button class="btn btn-secondary" id="item_font_load_tt" type="button"
+                            onclick="loadExampleFont('https://fonts.gstatic.com/s/titilliumweb/v19/NaPDcZTIAOhVxoMyOr9n_E7ffBzCGItzYw.woff2', 'Titillium Web')">Titillium
+                            Web</button>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                  <input id="item_font_src" type="text" placeholder="https://.../font.woff2">
+                  <button class="btn btn-secondary" id="item_font_load" onclick="loadFontFromUrl()">Load Font</button>
+                </div>
+                <div class="option-group">
+                  <div class="option-field">
+                    <span>Padding X: </span>
+                    <input id="item_p_x" type="number" value="20" min="0" max="200">
+                  </div>
+                  <div class="option-field">
+                    <span>Padding Y: </span>
+                    <input id="item_p_y" type="number" value="6" min="0" max="200">
+                  </div>
+                </div>
+                <div class="option-group">
+                  <div class="option-field">
+                    <span>Text Color: </span>
+                    <input id="item_font_color" type="color" value="#ffffff">
+                  </div>
+                  <div class="option-field">
+                    <span>Background: </span>
+                    <input id="item_bg_color" type="color" value="#0c0c0c">
+                  </div>
+                  <div class="option-field">
+                    <span>Border Width: </span>
+                    <input id="item_border_width" type="number" value="2" min="0" max="20">
+                  </div>
+                  <div class="option-field">
+                    <span>Border Color: </span>
+                    <input id="item_border_color" type="color" value="#1d1d1d">
+                  </div>
+                </div>
+              </section>
+
+            </div>
+            <div class="bg-img-overlay"
+              style=" background-image: url('assets/img/banners/pubg_editing_contest/pubg_editing_contest_background.webp');">
+            </div>
+          </section>
+          <section style="margin-top: var(--rkg-size-xl)">
+            <h3>Choose an element:</h3>
+          </section>
+          <div id="killfeed-generator" params="killfeed-PUBG-params.json"></div>
+        </div>
+
+        <section class="output-section" id="killfeed-generator-output">
+          <div id="preview-box-output" class="flex-center preview-box overlay-noise"">
+          <span style=" display: block;">Selected Element: </span>
+            <div id="preview_content">
+              <div id="target"></div>
+            </div>
+            <button class="btn btn-primary" id="convert_elem" onclick="takeScreenShot()">Convert</button>
+            <span id="convert_elem_msg">Element converted to image. Scoll down to download it.</span>
+          </div>
+          <div id="download_img">
+
+            <button class="btn btn-primary" id="download_link">Download</button>
+            <p>If the download don't start: Right click on image - Save image as...</p>
+          </div>
+        </section>
+
+        <section class="preview-killfeed-gameplay" id="preview-killfeed-gameplay">
+
+          <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_2.webm" fps="24" killfeed-item-start="75"
+            killfeed-item-end="270" data-popup="true">
+            <killfeed-item img="UI_weapon_icon_ump9" player_name_1="Player" player_name_2="Enemy"
+              params_root_id="killfeed-generator" id="19_L96"></killfeed-item>
+          </div>
+
+          <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_3.webm" fps="24" killfeed-item-start="24"
+            killfeed-item-end="220" data-popup="true">
+            <killfeed-item img="UI_weapon_icon_kar98k" player_name_1="Player" player_name_2="Enemy"
+              params_root_id="killfeed-generator" id="2_Bolt"></killfeed-item>
+          </div>
+
+          <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_1.webm" killfeed-item-start="150"
+            killfeed-item-end="264" fps="24" data-popup="true">
+            <killfeed-item img="UI_weapon_icon_beryl_m762" player_name_1="Player" player_name_2="Enemy"
+              params_root_id="killfeed-generator" id="21_LR-300"></killfeed-item>
+          </div>
+
+        </section>
+
+        <section class="how-to-use-section overlay-noise" id="how-to-use">
+          <h2>How to Use</h2>
+          <hr class="divider">
+          <p>In the page, you can customize Player 1 and Player 2 names, enable the headshot icon, download a single
+            item, or download all items at once.</p>
+          <p><strong>To download a single item:</strong></p>
+          <ol>
+            <li>Left-click on the item you want to download.</li>
+            <li>Scroll to the bottom of the page and click the <strong>Convert</strong> button to transform the HTML
+              element into a canvas.</li>
+            <li>use the <strong>Download</strong> button or Right-click on the generated canvas element, select
+              <strong>Save image as...</strong>, and choose a name
+              and location for your file.
+            </li>
+          </ol>
+        </section>
+
+      </section>
+      <aside>
+        <item class="aside-item">
+          <div class="aside-content">
+            <h3 class="aside-title">PUBG Icons</h3>
+            <p class="aside-description">Most weapon icons used on this website are sourced from PUBG Fandom. All rights
+              belong to their respective owners.</p>
+          </div>
+          <a class="btn btn-secondary aside-button"
+            href="https://pubg.fandom.com/wiki/Category:UI_weapon_icons">Icons</a>
+        </item>
+        <item>
+
+        </item>
+        <item style="margin-bottom: var(--rkg-size-md);">
+          <div class="banner-slider" id="banner-slider" data-popup="true">
+            <div class="banner-slider-track" id="banner-slider-track">
+              <img class="aside-image banner-slide"
+                src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_01.webp"
+                alt="Killfeed Generator Banner 1" width="250">
+              <img class="aside-image banner-slide"
+                src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_02.webp"
+                alt="Killfeed Generator Banner 2" width="250">
+              <img class="aside-image banner-slide"
+                src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_03.webp"
+                alt="Killfeed Generator Banner 3" width="250">
+            </div>
+            <button class="banner-slider-arrow banner-slider-prev" type="button" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"></path>
+              </svg>
+            </button>
+            <button class="banner-slider-arrow banner-slider-next" type="button" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"></path>
+              </svg>
+            </button>
+            <div class="banner-slider-dots" id="banner-slider-dots"></div>
+          </div>
+        </item>
+        <item>
+          <h3 class="aside-title">PUBG Editing Contest</h3>
+          <p class="aside-description">This is the first video editing contest hosted with PUBG pre-rendered video
+            clips.</p>
+          <a class="btn btn-secondary aside-button"
+            href="https://sites.google.com/view/strikerproduction/contests/pubg-editing-contest">About</a>
+        </item>
+        <item>
+          <h3 class="aside-title">PUBG Clips</h3>
+          <p class="aside-description">Free PUBG clips packs for video editing.</p>
+          <p class="aside-description">Packs have POVs and cinematics.
+          </p>
+          <a class="btn btn-secondary aside-button"
+            href="https://drive.google.com/file/d/16N7qMhzL1iJ7gMDVbpUZv3t9RBZTXp0t/view">Download</a>
+        </item>
+      </aside>
+    </article>
+  </main>
+
+  <footer class="overlay-noise">
+    <div class="footer-columns">
+      <div class="footer-section">
+        <a class="brand" href="#home">
+          <img src="assets/img/logo/pubgec_logo.webp" alt="StrikerProd09S" width="70" height="70">
+          <span class="site-title">PUBG <span style="color:var(--rkg-color-primary)">KillFeed</span>
+            <br><span>Generator</span></span>
+        </a>
+        <p class="footer-rights">All rights reserved by Striker Production</p>
+        <div class="footer-socials">
+          <a class="footer-social" href="https://www.youtube.com/@strikerproduction" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z" />
+            </svg>
+          </a>
+          <a class="footer-social" href="https://sites.google.com/view/strikerproduction/" aria-label="Website">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm7.07 6h-2.95a15.6 15.6 0 0 0-1.38-3.2A8.03 8.03 0 0 1 19.07 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.05 8.05 0 0 1 0-4h3.08c-.06.66-.09 1.32-.09 2s.03 1.34.09 2H4.26zM5 17h2.1c.35 1.15.82 2.23 1.39 3.2A7.98 7.98 0 0 1 5 17zm1.9-5h2.91a17.5 17.5 0 0 0 0 4H6.9a17.6 17.6 0 0 1 0-4zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 16h-4.68a15.5 15.5 0 0 1 0-4h4.68c.2 1.32.2 2.68 0 4zm.86 4.2c.57-.97 1.11-2.05 1.39-3.2H19a7.98 7.98 0 0 1-3.8 3.2zM16.6 12c.06-.66.09-1.32.09-2s-.03-1.34-.09-2h2.55a8.05 8.05 0 0 1 0 4H16.6zM19.65 8h-2.32a15.6 15.6 0 0 0 1.04-2.68A8.03 8.03 0 0 1 19.65 8zM7.63 5.32A15.6 15.6 0 0 0 6.25 8H3.93a8.03 8.03 0 0 1 3.7-2.68z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-links-title">PUBG Editing Contest</h3>
+        <ul class="footer-links">
+          <li><a href="https://sites.google.com/view/strikerproduction/contests/pubg-editing-contest">About Editing
+              Contest</a></li>
+          <li><a href="https://www.youtube.com/playlist?list=PLm3Prvo0l7fP7ybyBazzGMGEol0oigcrj">Video
+              Editing Competitions</a></li>
+          <li><a href="https://drive.google.com/file/d/16N7qMhzL1iJ7gMDVbpUZv3t9RBZTXp0t/view">Video Clips</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-notice" id="cookie-notice">
+    <p class="cookie-notice-text">This website uses cookies and tracks user interactions to measure site performance.
+      We use Google Analytics to understand how visitors use this site and to improve our content.</p>
+    <button class="btn btn-secondary aside-button cookie-accept" id="cookie-accept" type="button">I understand</button>
+  </div>
+</body>
+
+</html>

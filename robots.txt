@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://strikerprod09.github.io/killfeed-generator/sitemap.xml
