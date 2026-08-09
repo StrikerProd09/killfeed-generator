@@ -75,8 +75,39 @@ function customize() {
   $("#customize").toggleClass("btn-active");
 }
 
+function elValue(id, fallback) {
+  var el = document.getElementById(id);
+  return el ? el.value : fallback;
+}
+
+function hexToRgba(hex, opacity) {
+  var clean = (hex || "#000000").replace("#", "");
+  if (clean.length === 3) {
+    clean = clean
+      .split("")
+      .map(function (c) {
+        return c + c;
+      })
+      .join("");
+  }
+  var num = parseInt(clean, 16);
+  if (isNaN(num)) {
+    num = 0;
+  }
+  var r = (num >> 16) & 255;
+  var g = (num >> 8) & 255;
+  var b = num & 255;
+  return "rgba(" + r + ", " + g + ", " + b + ", " + opacity + ")";
+}
+
 function applyItemStyle() {
   var root = document.documentElement;
+  var fontColor1 = elValue("item_font_color_1", elValue("item_font_color", "#ffffff"));
+  var fontColor2 = elValue("item_font_color_2", elValue("item_font_color", "#ffffff"));
+  var bgColor = elValue("item_bg_color", "#0c0c0c");
+  var bgOpacity = parseFloat(elValue("item_bg_opacity", "100")) || 100;
+  var borderWidth = elValue("item_border_width", "2");
+  var borderRadius = elValue("item_border_radius", "0");
   root.style.setProperty(
     "--rkg-font-size-selected",
     document.getElementById("item_font_size").value + "px",
@@ -93,21 +124,36 @@ function applyItemStyle() {
     "--rkg-p-y-selected",
     document.getElementById("item_p_y").value + "px",
   );
-  root.style.setProperty(
-    "--rkg-font-color-selected",
-    document.getElementById("item_font_color").value,
-  );
+  root.style.setProperty("--rkg-font-color-selected", fontColor1);
+  root.style.setProperty("--rkg-font-color-1-selected", fontColor1);
+  root.style.setProperty("--rkg-font-color-2-selected", fontColor2);
   root.style.setProperty(
     "--rkg-background-color-selected",
-    document.getElementById("item_bg_color").value,
+    hexToRgba(bgColor, bgOpacity / 100),
   );
   root.style.setProperty(
     "--rkg-border-width-selected",
-    document.getElementById("item_border_width").value + "px",
+    borderWidth + "px",
   );
   root.style.setProperty(
     "--rkg-border-color-selected",
-    document.getElementById("item_border_color").value,
+    elValue("item_border_color", "#1d1d1d"),
+  );
+  root.style.setProperty(
+    "--rkg-border-radius-selected",
+    borderRadius + "px",
+  );
+  var itemsShadow = parseFloat(elValue("item_icon_shadow", "0")) || 0;
+  var ratio = itemsShadow / 100;
+  var iconMaxH = 50;
+  var shadowOffset = (iconMaxH * 0.02 * ratio).toFixed(2);
+  var shadowBlur = (iconMaxH * 0.1 * ratio).toFixed(2);
+  root.style.setProperty("--rkg-items-shadow-x-selected", shadowOffset + "px");
+  root.style.setProperty("--rkg-items-shadow-y-selected", shadowOffset + "px");
+  root.style.setProperty("--rkg-items-shadow-blur-selected", shadowBlur + "px");
+  root.style.setProperty(
+    "--rkg-items-shadow-color-selected",
+    "rgba(0, 0, 0, " + (0.8 * ratio).toFixed(2) + ")",
   );
 }
 
@@ -206,6 +252,14 @@ function drawKillfeedItem(item, scale) {
     var p2El = item.querySelector(".player2");
     var player1 = p1El ? p1El.textContent : "";
     var player2 = p2El ? p2El.textContent : "";
+    var fontColor1 = p1El
+      ? window.getComputedStyle(p1El).color
+      : spec.color || "#000";
+    var fontColor2 = p2El
+      ? window.getComputedStyle(p2El).color
+      : spec.color || "#000";
+    var borderRadiusSpec =
+      parseFloat(spec.borderTopLeftRadius) || 0;
 
     var weaponEl = item.querySelector("img.sp_icon");
     var isWeaponFlipped = weaponEl
@@ -264,23 +318,66 @@ function drawKillfeedItem(item, scale) {
         ctx.scale(scale, scale);
 
         ctx.fillStyle = bgColor;
-        ctx.fillRect(0, 0, totalW, totalH);
+        if (borderRadiusSpec > 0) {
+          ctx.beginPath();
+          ctx.roundRect(0, 0, totalW, totalH, borderRadiusSpec);
+          ctx.fill();
+        } else {
+          ctx.fillRect(0, 0, totalW, totalH);
+        }
 
         if (borderWidth > 0) {
           ctx.lineWidth = borderWidth;
           ctx.strokeStyle = borderColor;
-          ctx.strokeRect(
-            borderWidth / 2,
-            borderWidth / 2,
-            totalW - borderWidth,
-            totalH - borderWidth,
-          );
+          if (borderRadiusSpec > 0) {
+            ctx.beginPath();
+            ctx.roundRect(
+              borderWidth / 2,
+              borderWidth / 2,
+              totalW - borderWidth,
+              totalH - borderWidth,
+              borderRadiusSpec,
+            );
+            ctx.stroke();
+          } else {
+            ctx.strokeRect(
+              borderWidth / 2,
+              borderWidth / 2,
+              totalW - borderWidth,
+              totalH - borderWidth,
+            );
+          }
         }
 
         ctx.font = fontSize + "px " + fontFamily;
         ctx.textBaseline = "middle";
         ctx.textAlign = "left";
-        ctx.fillStyle = fontColor;
+        ctx.fillStyle = fontColor1;
+
+        var rootStyle = window.getComputedStyle(document.documentElement);
+        var iconShadow = {
+          x:
+            parseFloat(
+              rootStyle.getPropertyValue("--rkg-items-shadow-x-selected"),
+            ) || 0,
+          y:
+            parseFloat(
+              rootStyle.getPropertyValue("--rkg-items-shadow-y-selected"),
+            ) || 0,
+          blur:
+            parseFloat(
+              rootStyle.getPropertyValue("--rkg-items-shadow-blur-selected"),
+            ) || 0,
+          color:
+            rootStyle.getPropertyValue("--rkg-items-shadow-color-selected") ||
+            "rgba(0, 0, 0, 0)",
+        };
+        if (iconShadow.x || iconShadow.y || iconShadow.blur) {
+          ctx.shadowColor = iconShadow.color;
+          ctx.shadowOffsetX = iconShadow.x;
+          ctx.shadowOffsetY = iconShadow.y;
+          ctx.shadowBlur = iconShadow.blur;
+        }
 
         var cursor = borderWidth + padX;
         ctx.fillText(player1, cursor, centerY);
@@ -321,7 +418,13 @@ function drawKillfeedItem(item, scale) {
           cursor += aW + gap;
         }
 
+        ctx.fillStyle = fontColor2;
         ctx.fillText(player2, cursor, centerY);
+
+        ctx.shadowColor = "transparent";
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.shadowBlur = 0;
 
         resolve(canvas);
       })
@@ -791,6 +894,16 @@ $(document).ready(function () {
           target.id.indexOf("item_") === 0 &&
           target.id !== "item_font_src"
         ) {
+          if (target.id === "item_bg_opacity" || target.id === "item_icon_shadow") {
+            var valueId =
+              target.id === "item_bg_opacity"
+                ? "item_bg_opacity_value"
+                : "item_icon_shadow_value";
+            var label = document.getElementById(valueId);
+            if (label) {
+              label.textContent = target.value + "%";
+            }
+          }
           applyItemStyle();
         }
       });

@@ -1505,11 +1505,21 @@ canvas {
   justify-content: center;
   background-color: var(--rkg-background-color-selected);
   border: var(--rkg-border-width-selected) solid var(--rkg-border-color-selected);
+  border-radius: var(--rkg-border-radius-selected, 0px);
   color: var(--rkg-font-color-selected);
   padding: var(--rkg-p-y-selected) var(--rkg-p-x-selected);
   font-family: var(--rkg-font-family-selected);
   font-size: var(--rkg-font-size-selected);
   margin: 1px;
+}
+
+.killfeed-item > * {
+  filter: drop-shadow(
+    var(--rkg-items-shadow-x-selected, 0px)
+    var(--rkg-items-shadow-y-selected, 0px)
+    var(--rkg-items-shadow-blur-selected, 0px)
+    var(--rkg-items-shadow-color-selected, rgba(0, 0, 0, 0.6))
+  );
 }
 
 .killfeed-item p {
@@ -1518,6 +1528,14 @@ canvas {
   font-family: var(--rkg-font-family-selected);
   display: inline-block;
   font-size: var(--rkg-font-size-selected);
+}
+
+.killfeed-item .player1 {
+  color: var(--rkg-font-color-1-selected, var(--rkg-font-color-selected));
+}
+
+.killfeed-item .player2 {
+  color: var(--rkg-font-color-2-selected, var(--rkg-font-color-selected));
 }
 
 .killfeed-item:hover {

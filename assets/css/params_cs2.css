@@ -50,8 +50,15 @@
   --rkg-font-family-src-selected: "";
   --rkg-p-x-selected: 20px;
   --rkg-p-y-selected: 6px;
-  --rkg-font-color-selected: #ffffff;
+  --rkg-font-color-selected: #a2aed5;
+  --rkg-font-color-1-selected: #a2aed5;
+  --rkg-font-color-2-selected: #f6d180;
   --rkg-border-width-selected: 2px;
-  --rkg-border-color-selected: #1d1d1d;
-  --rkg-background-color-selected: #0c0c0c;
+  --rkg-border-color-selected: #b54839;
+  --rkg-border-radius-selected: 6px;
+  --rkg-background-color-selected: rgba(12, 12, 12, 0.7);
+  --rkg-items-shadow-x-selected: 0.70px;
+  --rkg-items-shadow-y-selected: 0.70px;
+  --rkg-items-shadow-blur-selected: 3.50px;
+  --rkg-items-shadow-color-selected: rgba(0, 0, 0, 0.56);
 }
