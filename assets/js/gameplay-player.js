@@ -69,26 +69,49 @@
       return offset;
     }
 
+    var autoPlaying = false;
+
     function update() {
       var time = video.currentTime;
+      var playing = autoPlaying && !video.paused && !video.ended;
       items.forEach(function (item) {
-        var visible = time >= item.startTime && time <= item.endTime;
-        childOf(item).style.opacity = visible ? "1" : "0";
+        var visible;
+        if (!playing) {
+          visible = true;
+        } else {
+          visible = time >= item.startTime && time <= item.endTime;
+        }
+        var child = childOf(item);
+        child.style.opacity = visible ? "1" : "0";
+        if (child !== item.el) {
+          item.el.style.opacity = "";
+          item.el.style.transform = "";
+        }
       });
       positionItems();
     }
 
     video.addEventListener("timeupdate", update);
     video.addEventListener("play", update);
+    video.addEventListener("pause", update);
     video.addEventListener("play", function () {
+      autoPlaying = true;
       requestAnimationFrame(update);
+    });
+    video.addEventListener("pause", function () {
+      autoPlaying = false;
+      update();
     });
 
     var playPromise = video.play();
     if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(function () {
-        update();
-      });
+      playPromise
+        .then(function () {
+          autoPlaying = true;
+        })
+        .catch(function () {
+          update();
+        });
     } else {
       update();
     }
