@@ -30,6 +30,44 @@ function players_apply() {
   for (var i = 0; i < p2.length; i++) {
     p2[i].innerHTML = player_2;
   }
+  updatePlayerParams(player_1, player_2);
+}
+
+function updatePlayerParams(player_1, player_2) {
+  var hashAnchor = window.location.hash.split("?")[0] || "";
+  var params = {};
+  var sources = [window.location.search, window.location.hash];
+  sources.forEach(function (source) {
+    if (!source || source.indexOf("?") === -1) {
+      return;
+    }
+    source
+      .split("?")[1]
+      .split("&")
+      .forEach(function (pair) {
+        var parts = pair.split("=");
+        if (parts[0]) {
+          params[decodeURIComponent(parts[0])] = decodeURIComponent(
+            parts[1] || "",
+          );
+        }
+      });
+  });
+  params["player_1"] = player_1;
+  params["player_2"] = player_2;
+  var pairs = [];
+  Object.keys(params).forEach(function (key) {
+    pairs.push(
+      encodeURIComponent(key) + "=" + encodeURIComponent(params[key]),
+    );
+  });
+  var newUrl =
+    window.location.pathname + "?" + pairs.join("&") + hashAnchor;
+  if (window.history && window.history.replaceState) {
+    window.history.replaceState(null, "", newUrl);
+  } else {
+    window.location.hash = hashAnchor + "?" + pairs.join("&");
+  }
 }
 
 function customize() {
@@ -608,6 +646,37 @@ $(document).ready(function () {
       "</p></div>";
   }
   document.getElementById("killfeed-generator").innerHTML = text;
+
+  function getUrlParam(name) {
+    var sources = [window.location.search, window.location.hash];
+    for (var s = 0; s < sources.length; s++) {
+      var source = sources[s] || "";
+      var query = source.indexOf("?") !== -1 ? source.split("?")[1] : "";
+      var pairs = query.split("&");
+      for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i].split("=");
+        if (pair[0] && decodeURIComponent(pair[0]) === name) {
+          return decodeURIComponent(pair[1] || "").replace(/^"+|"+$/g, "");
+        }
+      }
+    }
+    return null;
+  }
+
+  var urlP1 = getUrlParam("player_1");
+  var urlP2 = getUrlParam("player_2");
+  if (urlP1 !== null || urlP2 !== null) {
+    var inputP1 = document.getElementById("player_1");
+    var inputP2 = document.getElementById("player_2");
+    if (inputP1 && urlP1 !== null) {
+      inputP1.value = urlP1;
+    }
+    if (inputP2 && urlP2 !== null) {
+      inputP2.value = urlP2;
+    }
+    players_apply();
+    console.log("[url-params] player_1: " + urlP1 + " player_2: " + urlP2);
+  }
 
   $(".toggle-switch input[type='checkbox'][location][order]").on(
     "change",
