@@ -14,5 +14,13 @@
         "title"      : "PUBG - Killfeed Generator",
         "description": "Generate PUBG Death Notice Overlays for photo-video editing, fast and simple to use.",
         "img_bg"     : "assets/img/banners/pubg_editing_contest/pubg_editing_contest_background.webp"
+    },
+    {
+        "page_id"    : "3",
+        "page_html"  : "killfeed-generator-cs2.html",
+        "path_url"   : "killfeed-generator-cs2",
+        "title"      : "CS2 - Killfeed Generator",
+        "description": "Generate CS2 Death Notice Overlays for photo-video editing, fast and simple to use.",
+        "img_bg"     : "assets/img/banners/csgo_editing_contest/csgo_editing_contest_background.webp"
     }
 ]

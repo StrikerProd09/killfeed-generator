@@ -1,0 +1,12 @@
+{
+  "images"     : [
+    "ak47",      "aug",       "awp",       "bizon",     "c75a",      "deagle",    "elite",     "famas",     "fiveseven", "g3sg1",     "galilar",   "glock18",   "hkp2000",
+    "m249",      "m4a1s",     "m4a4",      "mac10",     "mag7",      "mp5 (1)",   "mp7",       "mp9",       "nova",      "p250",      "p90",       "revolver",  "scar20",
+    "sg552",     "ssg08",     "taser",     "tec9",      "ump45",     "usps",      "wawedoff",  "xm1014"
+  ],
+  "path"       : "assets/img/killfeed-icons/cs2/",
+  "player1"    : "Player1",
+  "player2"    : "Player2",
+  "additionals": ["Headshot", "No Scope", "Blind", "Door", "Flashbang", "Fly", "Smoke", "Explosion"],
+  "flip"       : false
+}

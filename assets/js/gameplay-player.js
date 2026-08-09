@@ -1,6 +1,8 @@
 (function () {
   function init() {
-    var sections = document.querySelectorAll("#preview-killfeed-gameplay .gameplay");
+    var sections = document.querySelectorAll(
+      "#preview-killfeed-gameplay .gameplay",
+    );
     if (!sections.length) {
       return;
     }
@@ -11,10 +13,36 @@
 
   function setupGameplay(gameplay) {
     var src = gameplay.getAttribute("root");
-    var start = parseInt(gameplay.getAttribute("killfeed-item-start"), 10);
-    var end = parseInt(gameplay.getAttribute("killfeed-item-end"), 10);
+    if (!src) {
+      return;
+    }
     var fps = parseFloat(gameplay.getAttribute("fps")) || 24;
-    if (!src || isNaN(start) || isNaN(end)) {
+
+    var containerStart = gameplay.getAttribute("killfeed-item-start");
+    var containerEnd = gameplay.getAttribute("killfeed-item-end");
+
+    var rawItems = gameplay.querySelectorAll("killfeed-item");
+    if (!rawItems.length) {
+      return;
+    }
+
+    var items = [];
+    for (var i = 0; i < rawItems.length; i++) {
+      var el = rawItems[i];
+      var start = el.getAttribute("killfeed-item-start") || containerStart;
+      var end = el.getAttribute("killfeed-item-end") || containerEnd;
+      var startTime = parseInt(start, 10) / fps;
+      var endTime = parseInt(end, 10) / fps;
+      if (isNaN(startTime) || isNaN(endTime)) {
+        continue;
+      }
+      items.push({
+        el: el,
+        startTime: startTime,
+        endTime: endTime,
+      });
+    }
+    if (!items.length) {
       return;
     }
 
@@ -27,15 +55,27 @@
     video.preload = "auto";
     gameplay.insertBefore(video, gameplay.firstChild);
 
-    var startTime = start / fps;
-    var endTime = end / fps;
+    function childOf(item) {
+      return item.el.querySelector(".killfeed-item") || item.el;
+    }
+
+    function positionItems() {
+      var offset = 0;
+      items.forEach(function (item) {
+        var child = childOf(item);
+        child.style.transform = "translateY(" + offset + "px)";
+        offset += child.offsetHeight + 6;
+      });
+      return offset;
+    }
 
     function update() {
-      var killfeedItem = gameplay.querySelector(".killfeed-item");
-      if (killfeedItem) {
-        var visible = video.currentTime >= startTime && video.currentTime <= endTime;
-        killfeedItem.style.opacity = visible ? "1" : "0";
-      }
+      var time = video.currentTime;
+      items.forEach(function (item) {
+        var visible = time >= item.startTime && time <= item.endTime;
+        childOf(item).style.opacity = visible ? "1" : "0";
+      });
+      positionItems();
     }
 
     video.addEventListener("timeupdate", update);
@@ -47,12 +87,24 @@
     var playPromise = video.play();
     if (playPromise && typeof playPromise.catch === "function") {
       playPromise.catch(function () {
-        // Autoplay blocked; fall back to showing the first frame.
         update();
       });
     } else {
       update();
     }
+
+    var attempts = 0;
+    var positionTimer = setInterval(function () {
+      var offset = positionItems();
+      attempts++;
+      if (offset > 0 || attempts > 20) {
+        clearInterval(positionTimer);
+        update();
+      }
+    }, 100);
+
+    window.addEventListener("resize", positionItems);
+    video.addEventListener("loadeddata", positionItems);
   }
 
   if (document.readyState === "loading") {
