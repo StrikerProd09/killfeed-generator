@@ -265,9 +265,13 @@ function drawKillfeedItem(item, scale) {
     var isWeaponFlipped = weaponEl
       ? weaponEl.classList.contains("flip-horizontal")
       : false;
-    var additionalEls = Array.prototype.slice.call(
-      item.querySelectorAll(".additional"),
+    var prefixEls = Array.prototype.slice.call(
+      item.querySelectorAll(".additional[data-location='prefix']"),
     );
+    var suffixEls = Array.prototype.slice.call(
+      item.querySelectorAll(".additional[data-location='suffix']"),
+    );
+    var additionalEls = prefixEls.concat(suffixEls);
     var weaponSrc = weaponEl ? weaponEl.getAttribute("src") : null;
 
     var loaders = [];
@@ -281,9 +285,15 @@ function drawKillfeedItem(item, scale) {
     Promise.all(loaders)
       .then(function (imgs) {
         var weapon = imgs[0] || null;
-        var additionalsImages = [];
+        var prefixCount = prefixEls.length;
+        var prefixImages = [];
+        var suffixImages = [];
         for (var k = 1; k < imgs.length; k++) {
-          additionalsImages.push(imgs[k]);
+          if (k < 1 + prefixCount) {
+            prefixImages.push(imgs[k]);
+          } else {
+            suffixImages.push(imgs[k]);
+          }
         }
 
         var probe = document.createElement("canvas");
@@ -296,14 +306,21 @@ function drawKillfeedItem(item, scale) {
         var weaponW = weapon
           ? iconMaxH * (weapon.naturalWidth / weapon.naturalHeight)
           : 0;
-        var additionalsW = additionalsImages.map(function (img) {
+        var prefixW = prefixImages.map(function (img) {
+          return img ? iconMaxH * (img.naturalWidth / img.naturalHeight) : 0;
+        });
+        var suffixW = suffixImages.map(function (img) {
           return img ? iconMaxH * (img.naturalWidth / img.naturalHeight) : 0;
         });
 
         var gap = 10;
         var innerH = Math.max(fontSize, iconMaxH);
-        var contentW = w1 + gap + weaponW;
-        additionalsW.forEach(function (w) {
+        var contentW = w1 + gap;
+        prefixW.forEach(function (w) {
+          contentW += w ? gap + w : 0;
+        });
+        contentW += weaponW ? gap + weaponW : 0;
+        suffixW.forEach(function (w) {
           contentW += w ? gap + w : 0;
         });
         contentW += gap + w2;
@@ -383,6 +400,16 @@ function drawKillfeedItem(item, scale) {
         ctx.fillText(player1, cursor, centerY);
         cursor += w1 + gap;
 
+        for (var p = 0; p < prefixImages.length; p++) {
+          var pImg = prefixImages[p];
+          var pW = prefixW[p];
+          if (!pImg || !pW) {
+            continue;
+          }
+          ctx.drawImage(pImg, cursor, centerY - iconMaxH / 2, pW, iconMaxH);
+          cursor += pW + gap;
+        }
+
         if (weapon) {
           ctx.save();
           if (isWeaponFlipped) {
@@ -408,9 +435,9 @@ function drawKillfeedItem(item, scale) {
           cursor += weaponW + gap;
         }
 
-        for (var a = 0; a < additionalsImages.length; a++) {
-          var aImg = additionalsImages[a];
-          var aW = additionalsW[a];
+        for (var a = 0; a < suffixImages.length; a++) {
+          var aImg = suffixImages[a];
+          var aW = suffixW[a];
           if (!aImg || !aW) {
             continue;
           }
@@ -609,14 +636,23 @@ $(document).ready(function () {
 
   function additionalSlotsHtml(location) {
     var html = "";
-    for (var i = 0; i < additionals.length; i++) {
+    var toggles = document.querySelectorAll(
+      ".toggle-switch input[type='checkbox'][location][order]",
+    );
+    for (var i = 0; i < toggles.length; i++) {
+      var toggle = toggles[i];
+      if (toggle.getAttribute("location") !== location) {
+        continue;
+      }
+      var order = parseInt(toggle.getAttribute("order"), 10);
+      var name = additionals[order - 1];
       html +=
         "<span class='additional' data-additional='" +
-        additionals[i] +
+        name +
         "' data-location='" +
         location +
         "' data-order='" +
-        (i + 1) +
+        order +
         "'></span>";
     }
     return html;
@@ -645,13 +681,15 @@ $(document).ready(function () {
       item.innerHTML =
         "<p class='player1'>" +
         p1 +
-        "</p><img class='sp_icon" +
+        "</p>" +
+        additionalSlotsHtml("prefix") +
+        "<img class='sp_icon" +
         flipClass +
         "' alt='Weapon' src='" +
         path +
         img +
         ".webp'>" +
-        additionalSlotsHtml(location) +
+        additionalSlotsHtml("suffix") +
         "<p class='player2'>" +
         p2 +
         "</p>";
@@ -737,6 +775,7 @@ $(document).ready(function () {
       "<p class='player1'>" +
       player1 +
       "</p>" +
+      additionalSlotsHtml("prefix") +
       "<img class='sp_icon" +
       flipClass +
       "' alt='Weapon' src='" +
