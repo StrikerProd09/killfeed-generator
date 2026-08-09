@@ -36,6 +36,7 @@
   <script src="assets/js/gameplay-player.js"></script>
   <script src="assets/js/popup.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/screenshot-preview.js"></script>
   <script src="assets/js/cookie-notice.js"></script>
 </head>
 
@@ -52,6 +53,7 @@
           <a href="#home">Home</a>
           <a href="#killfeed-generator">Generator</a>
           <a href="#preview-killfeed-gameplay">Preview</a>
+          <a href="#preview-killfeed-screenshot">Screenshot</a>
           <a href="#how-to-use">Help</a>
         </nav>
         <button class="nav-share" id="nav-share" type="button" aria-label="Share link">
@@ -266,6 +268,30 @@
 
         </section>
 
+        <section class="preview-killfeed-screenshot" id="preview-killfeed-screenshot"
+          data-preview-img="assets/img/gameplay/gameplay_cs2.webp">
+          <h3>Preview in Screenshot</h3>
+          <div class="option-group">
+            <div class="option-field">
+              <span>Image: </span>
+              <input type="file" id="screenshot_file"
+                accept="image/png,image/jpg,image/jpeg,image/avif,image/webp,image/bmp">
+            </div>
+          </div>
+          <div id="screenshot-stage">
+            <img id="screenshot-image" alt="Screenshot preview">
+            <div id="screenshot-killfeeds"></div>
+          </div>
+          <div class="screenshot-actions">
+            <button class="btn btn-primary" id="screenshot_add_elem" type="button">Add in Photo</button>
+            <button class="btn btn-primary" id="screenshot_download" type="button">Download Image</button>
+            <label class="screenshot-zoom-control option-field">
+              <span>Zoom:</span>
+              <input type="range" id="screenshot_zoom" min="0" max="200" value="100" step="1" style="width: 100%;">
+            </label>
+          </div>
+        </section>
+
         <section class="how-to-use-section overlay-noise" id="how-to-use">
           <h2>How to Use</h2>
           <hr class="divider">
@@ -345,9 +371,9 @@
     <div class="footer-columns">
       <div class="footer-section">
         <a class="brand" href="#home">
-          <img src="assets/img/logo/cs2ec_logo.webp" alt="StrikerProd09S" width="70" height="70">
-          <span class="site-title">cs2 <span style="color:var(--rkg-color-primary)">KillFeed</span>
-            <br><span>Generator</span></span>
+          <img src="assets/img/logo/csgoec_logo.webp" alt="StrikerProd09S" width="70" height="70">
+          <span class="site-title">Counter Strike 2 <br><span style="color:var(--rkg-color-primary)">KillFeed</span>
+            <span>Generator</span></span>
         </a>
         <p class="footer-rights">All rights reserved by Striker Production</p>
         <div class="footer-socials">
@@ -367,7 +393,7 @@
       </div>
 
       <div class="footer-section">
-        <h3 class="footer-links-title">cs2 Editing Contest</h3>
+        <h3 class="footer-links-title">CS2 Editing Contest</h3>
         <ul class="footer-links">
           <li><a href="https://sites.google.com/view/strikerproduction/contests/cs2-editing-contest">About Editing
               Contest</a></li>

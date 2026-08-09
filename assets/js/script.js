@@ -715,6 +715,7 @@ $(document).ready(function () {
     console.log("Element selected - ID: " + id);
     var preview = document.getElementById(id);
     console.log("killfeed-generator " + id + ": " + preview);
+    window.__selectedKillfeedHTML = preview.innerHTML;
     document.getElementById("target").innerHTML =
       "<div id='target_preview' id_target=" +
       id +

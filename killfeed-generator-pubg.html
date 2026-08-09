@@ -37,6 +37,7 @@
   <script src="assets/js/popup.js"></script>
   <script src="assets/js/script.js"></script>
   <script src="assets/js/cookie-notice.js"></script>
+  <script src="assets/js/screenshot-preview.js"></script>
 </head>
 
 <body>
@@ -267,6 +268,30 @@
               params_root_id="killfeed-generator" id="21_LR-300"></killfeed-item>
           </div>
 
+        </section>
+
+        <section class="preview-killfeed-screenshot" id="preview-killfeed-screenshot"
+          data-preview-img="assets/img/gameplay/gameplay_pubg.webp">
+          <h3>Preview in Screenshot</h3>
+          <div class="option-group">
+            <div class="option-field">
+              <span>Image: </span>
+              <input type="file" id="screenshot_file"
+                accept="image/png,image/jpg,image/jpeg,image/avif,image/webp,image/bmp">
+            </div>
+          </div>
+          <div id="screenshot-stage">
+            <img id="screenshot-image" alt="Screenshot preview">
+            <div id="screenshot-killfeeds"></div>
+          </div>
+          <div class="screenshot-actions">
+            <button class="btn btn-primary" id="screenshot_add_elem" type="button">Add in Photo</button>
+            <button class="btn btn-primary" id="screenshot_download" type="button">Download Image</button>
+            <label class="screenshot-zoom-control option-field">
+              <span>Zoom:</span>
+              <input type="range" id="screenshot_zoom" min="0" max="200" value="100" step="1" style="width: 100%;">
+            </label>
+          </div>
         </section>
 
         <section class="how-to-use-section overlay-noise" id="how-to-use">
