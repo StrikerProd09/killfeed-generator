@@ -21,5 +21,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- CS2 Killfeed Generator -->
+  <url>
+    <loc>https://strikerprod09.github.io/killfeed-generator/killfeed-generator-cs2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
 </urlset>
