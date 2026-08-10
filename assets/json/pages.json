@@ -22,5 +22,13 @@
         "title"      : "CS2 - Killfeed Generator",
         "description": "Generate CS2 Death Notice Overlays for photo-video editing, fast and simple to use.",
         "img_bg"     : "assets/img/banners/csgo_editing_contest/csgo_editing_contest_background.webp"
+    },
+    {
+        "page_id"    : "4",
+        "page_html"  : "killfeed-generator-codmw3.html",
+        "path_url"   : "killfeed-generator-codmw3",
+        "title"      : "COD MW3 - Killfeed Generator",
+        "description": "Generate COD MW3 Death Notice Overlays for photo-video editing, fast and simple to use.",
+        "img_bg"     : "assets/img/banners/codmw3_editing_contest/codmw3_editing_contest_background.webp"
     }
 ]

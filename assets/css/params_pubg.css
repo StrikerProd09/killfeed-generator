@@ -57,4 +57,6 @@
   --rkg-items-shadow-y-selected: 0.70px;
   --rkg-items-shadow-blur-selected: 3.50px;
   --rkg-items-shadow-color-selected: rgba(0, 0, 0, 0.56);
+  --rkg-icon-size-selected: 50px;
+  --rkg-gap-selected: 10px;
 }

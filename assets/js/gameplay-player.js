@@ -60,11 +60,22 @@
     }
 
     function positionItems() {
+      var rootStyle = window.getComputedStyle(document.documentElement);
+      var gap = parseFloat(
+        rootStyle.getPropertyValue("--rkg-stack-gap"),
+      );
+      if (isNaN(gap) || gap <= 0) {
+        gap = 12;
+      }
+      var bottomPos = rootStyle.getPropertyValue("--rkg-item-pos-bottom") || "";
+      var stackUp = bottomPos && bottomPos.trim() !== "" && bottomPos.trim() !== "auto";
       var offset = 0;
       items.forEach(function (item) {
         var child = childOf(item);
-        child.style.transform = "translateY(" + offset + "px)";
-        offset += child.offsetHeight + 6;
+        child.style.transform = stackUp
+          ? "translateY(-" + offset + "px)"
+          : "translateY(" + offset + "px)";
+        offset += child.offsetHeight + gap;
       });
       return offset;
     }

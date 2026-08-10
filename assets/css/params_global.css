@@ -48,4 +48,6 @@
   --rkg-border-width-selected: 2px;
   --rkg-border-color-selected: #1d1d1d;
   --rkg-background-color-selected: #0c0c0c;
+  --rkg-icon-size-selected: 50px;
+  --rkg-gap-selected: 10px;
 }

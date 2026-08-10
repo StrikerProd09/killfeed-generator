@@ -11,56 +11,54 @@
   "flip"       : false,
   "settings"   : {
     "additionals": {
-      "Headshot":   "suffix",
-      "No Scope":   "suffix",
-      "Blind":      "suffix",
-      "Door":       "suffix",
-      "Flashbang":  "suffix",
-      "Fly":        "prefix",
-      "Smoke":      "suffix",
-      "Explosion":  "suffix"
+      "Headshot" : "suffix",
+      "No Scope" : "suffix",
+      "Blind"    : "suffix",
+      "Door"     : "suffix",
+      "Flashbang": "suffix",
+      "Fly"      : "prefix",
+      "Smoke"    : "suffix",
+      "Explosion": "suffix"
     },
-    "item_style": {
+    "item_style" : {
       "groups": [
         {
-          "name": "Typography",
+          "name"  : "Typography",
           "fields": [
-            {"id": "item_font_size", "label": "Font Size", "type": "number", "value": 25, "min": 8, "max": 120, "suffix": "px"},
-            {"id": "item_font_family", "label": "Font Family", "type": "font_family"}
+            {"id": "item_font_size",   "label": "Font Size",   "type": "number",      "value": 22,                "min":   8, "max": 120, "suffix": "px"             },
+            {"id": "item_icon_size",   "label": "Icon Size",   "type": "number",      "value": 30,                "min":   8, "max": 120, "suffix": "px"             },
+            {"id": "item_font_weight", "label": "Font Weight", "type": "number",      "value": 500,               "min": 100, "max": 900,                 "step": 100},
+            {"id": "item_font_family", "label": "Font Family", "type": "font_family", "value": "stratumno2_bold"                                                     }
           ]
         },
-        { "type": "font_source" },
+        {"type": "font_source"},
         {
-          "name": "Padding",
+          "name"  : "Padding",
           "fields": [
-            {"id": "item_p_x", "label": "Padding X", "type": "number", "value": 20, "min": 0, "max": 200},
-            {"id": "item_p_y", "label": "Padding Y", "type": "number", "value": 6, "min": 0, "max": 200}
-          ]
-        },
-        {
-          "name": "Colors",
-          "fields": [
-            {"id": "item_font_color_1", "label": "Text1 Color", "type": "color", "value": "#a2aed5"},
-            {"id": "item_font_color_2", "label": "Text2 Color", "type": "color", "value": "#f6d180"},
-            {"id": "item_bg_color", "label": "Background", "type": "color", "value": "#0c0c0c"},
-            {"id": "item_bg_opacity", "label": "Background Opacity", "type": "range", "value": 70, "min": 0, "max": 100, "step": 1}
+            {"id": "item_p_x", "label": "Padding X", "type": "number", "value": 20, "min":    0, "max": 200                },
+            {"id": "item_p_y", "label": "Padding Y", "type": "number", "value":  6, "min":    0, "max": 200                },
+            {"id": "item_gap", "label": "Items Gap", "type": "number", "value": 10, "min": -100, "max": 200, "suffix": "px"}
           ]
         },
         {
-          "name": "Border",
+          "name"  : "Colors",
           "fields": [
-            {"id": "item_border_width", "label": "Border Width", "type": "number", "value": 2, "min": 0, "max": 20},
-            {"id": "item_border_radius", "label": "Border Radius", "type": "number", "value": 6, "min": 0, "max": 100},
-            {"id": "item_border_color", "label": "Border Color", "type": "color", "value": "#b54839"},
-            {"id": "item_border_opacity", "label": "Border Opacity", "type": "range", "value": 100, "min": 0, "max": 100, "step": 1}
+            {"id": "item_font_color_1", "label": "Text1 Color",        "type": "color", "value": "#a2aed5"                                 },
+            {"id": "item_font_color_2", "label": "Text2 Color",        "type": "color", "value": "#f6d180"                                 },
+            {"id": "item_bg_color",     "label": "Background",         "type": "color", "value": "#0c0c0c"                                 },
+            {"id": "item_bg_opacity",   "label": "Background Opacity", "type": "range", "value": 70,        "min": 0, "max": 100, "step": 1}
           ]
         },
         {
-          "name": "Effects",
+          "name"  : "Border",
           "fields": [
-            {"id": "item_icon_shadow", "label": "Items Shadow", "type": "range", "value": 70, "min": 0, "max": 100, "step": 1}
+            {"id": "item_border_width",   "label": "Border Width",   "type": "number", "value": 2,         "min": 0, "max":  20           },
+            {"id": "item_border_radius",  "label": "Border Radius",  "type": "number", "value": 6,         "min": 0, "max": 100           },
+            {"id": "item_border_color",   "label": "Border Color",   "type": "color",  "value": "#b54839"                                 },
+            {"id": "item_border_opacity", "label": "Border Opacity", "type": "range",  "value": 100,       "min": 0, "max": 100, "step": 1}
           ]
-        }
+        },
+        { "name": "Effects", "fields": [ {"id": "item_icon_shadow", "label": "Items Shadow", "type": "range", "value": 70, "min": 0, "max": 100, "step": 1}, {"id": "item_position", "label": "Item Position", "type": "position", "value": "top:6%;right:2%" } ] }
       ]
     }
   }

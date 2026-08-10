@@ -118,6 +118,12 @@ function applyItemStyle() {
     "'" + document.getElementById("item_font_family").value + "'",
   );
   root.style.setProperty(
+    "--rkg-font-weight-selected",
+    document.getElementById("item_font_weight")
+      ? document.getElementById("item_font_weight").value
+      : "500",
+  );
+  root.style.setProperty(
     "--rkg-p-x-selected",
     document.getElementById("item_p_x").value + "px",
   );
@@ -157,6 +163,52 @@ function applyItemStyle() {
   root.style.setProperty(
     "--rkg-items-shadow-color-selected",
     "rgba(0, 0, 0, " + (0.8 * ratio).toFixed(2) + ")",
+  );
+  var iconSize = parseFloat(elValue("item_icon_size", "50")) || 50;
+  if (iconSize <= 0) {
+    iconSize = 50;
+  }
+  root.style.setProperty("--rkg-icon-size-selected", iconSize + "px");
+  var itemsGap = parseFloat(elValue("item_gap", "10"));
+  if (isNaN(itemsGap)) {
+    itemsGap = 10;
+  }
+  root.style.setProperty("--rkg-gap-selected", itemsGap + "px");
+  root.style.setProperty("--rkg-stack-gap", (itemsGap * 1.2).toFixed(2) + "px");
+  var posEl = document.getElementById("item_position");
+  var posValue = posEl ? posEl.value : "top:6%;right:2%";
+  var posTokens = {
+    top: "",
+    right: "",
+    bottom: "",
+    left: "",
+  };
+  String(posValue)
+    .split(";")
+    .forEach(function (part) {
+      var kv = part.split(":");
+      if (kv.length === 2) {
+        var key = kv[0].trim().toLowerCase();
+        if (posTokens.hasOwnProperty(key)) {
+          posTokens[key] = kv[1].trim();
+        }
+      }
+    });
+  root.style.setProperty(
+    "--rkg-item-pos-top",
+    posTokens.top || "auto",
+  );
+  root.style.setProperty(
+    "--rkg-item-pos-right",
+    posTokens.right || "auto",
+  );
+  root.style.setProperty(
+    "--rkg-item-pos-bottom",
+    posTokens.bottom || "auto",
+  );
+  root.style.setProperty(
+    "--rkg-item-pos-left",
+    posTokens.left || "auto",
   );
 }
 
@@ -234,6 +286,8 @@ function drawKillfeedItem(item, scale) {
       .replace(/["']/g, "")
       .trim();
     var varSize = rootStyle.getPropertyValue("--rkg-font-size-selected") || "";
+    var varWeight =
+      rootStyle.getPropertyValue("--rkg-font-weight-selected") || "";
 
     var fontFamily = isFontFamilyKnown
       ? spec.fontFamily.replace(/["']/g, "")
@@ -242,6 +296,7 @@ function drawKillfeedItem(item, scale) {
       ? parseFloat(spec.fontSize)
       : parseFloat(varSize);
     fontSize = fontSize && fontSize > 0 ? fontSize : 25;
+    var fontWeight = varWeight ? varWeight.trim() : "500";
 
     var fontColor =
       spec.color && spec.color !== "rgb(0, 0, 0)" ? spec.color : "#000";
@@ -301,11 +356,21 @@ function drawKillfeedItem(item, scale) {
 
         var probe = document.createElement("canvas");
         var pctx = probe.getContext("2d");
-        pctx.font = fontSize + "px " + fontFamily;
+        pctx.font = fontWeight + " " + fontSize + "px " + fontFamily;
         var w1 = pctx.measureText(player1).width;
         var w2 = pctx.measureText(player2).width;
 
-        var iconMaxH = Math.min(fontSize * 2, 50);
+        var rootStyleSel = window.getComputedStyle(document.documentElement);
+        var iconSizeVal = parseFloat(
+          rootStyleSel.getPropertyValue("--rkg-icon-size-selected"),
+        );
+        var iconMaxH =
+          iconSizeVal && iconSizeVal > 0 ? iconSizeVal : Math.min(fontSize * 2, 50);
+        var gapVal = parseFloat(
+          rootStyleSel.getPropertyValue("--rkg-gap-selected"),
+        );
+        var gap = isNaN(gapVal) ? 10 : gapVal;
+        var innerH = Math.max(fontSize, iconMaxH);
         var weaponW = weapon
           ? iconMaxH * (weapon.naturalWidth / weapon.naturalHeight)
           : 0;
@@ -316,8 +381,6 @@ function drawKillfeedItem(item, scale) {
           return img ? iconMaxH * (img.naturalWidth / img.naturalHeight) : 0;
         });
 
-        var gap = 10;
-        var innerH = Math.max(fontSize, iconMaxH);
         var contentW = w1 + gap;
         prefixW.forEach(function (w) {
           contentW += w ? gap + w : 0;
@@ -369,7 +432,7 @@ function drawKillfeedItem(item, scale) {
           }
         }
 
-        ctx.font = fontSize + "px " + fontFamily;
+        ctx.font = fontWeight + " " + fontSize + "px " + fontFamily;
         ctx.textBaseline = "middle";
         ctx.textAlign = "left";
         ctx.fillStyle = fontColor1;
@@ -645,7 +708,22 @@ $(document).ready(function () {
         field.label +
         ": </span><select id='" +
         field.id +
-        "'></select></div>"
+        "'" +
+        (field.value ? " data-default='" + field.value + "'" : "") +
+        "></select></div>"
+      );
+    }
+    if (field.type === "position") {
+      return (
+        '<div class="option-field"><span>' +
+        field.label +
+        ": </span><input id='" +
+        field.id +
+        "' type='text' value='" +
+        (field.value || "top:6%;right:2%") +
+        "' placeholder='top:6%;right:2%'>" +
+        (field.suffix ? "<span>" + field.suffix + "</span>" : "") +
+        "</div>"
       );
     }
     if (field.type === "color") {
@@ -801,6 +879,15 @@ $(document).ready(function () {
           select.appendChild(opt);
         });
         select.value = fonts[0]["font-family"] || "";
+        var defaultFont = select.getAttribute("data-default");
+        if (defaultFont) {
+          for (var fi = 0; fi < select.options.length; fi++) {
+            if (select.options[fi].value === defaultFont) {
+              select.value = defaultFont;
+              break;
+            }
+          }
+        }
       } else {
         console.error("Failed to load fonts (" + xhr.status + ")");
       }
@@ -813,6 +900,7 @@ $(document).ready(function () {
   }
 
   loadLocalFonts();
+  applyItemStyle();
 
   function additionalSlotsHtml(location) {
     var html = "";
@@ -922,21 +1010,6 @@ $(document).ready(function () {
   }
   togglePreviewBox();
 
-  var navToggle = document.getElementById("nav-toggle");
-  var mainNav = document.querySelector(".main-nav");
-  if (navToggle && mainNav) {
-    navToggle.addEventListener("click", function () {
-      var open = mainNav.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-      navToggle.classList.toggle("open", open);
-    });
-    mainNav.addEventListener("click", function () {
-      mainNav.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-      navToggle.classList.remove("open");
-    });
-  }
-
   var text = "";
   for (var j = 0; j < images.length; j++) {
     var imgObj = images[j];
@@ -1015,6 +1088,7 @@ $(document).ready(function () {
         "']";
       var slots = document.querySelectorAll(selector);
       for (var i = 0; i < slots.length; i++) {
+        slots[i].style.display = enabled ? "flex" : "none";
         slots[i].innerHTML = enabled
           ? "<img class='sp_icon' alt='" +
             name +
@@ -1154,9 +1228,12 @@ $(document).ready(function () {
 
   var urlStyleIds = [
     "item_font_size",
+    "item_icon_size",
     "item_font_family",
+    "item_font_weight",
     "item_p_x",
     "item_p_y",
+    "item_gap",
     "item_font_color_1",
     "item_font_color_2",
     "item_bg_color",
@@ -1167,6 +1244,7 @@ $(document).ready(function () {
     "item_border_opacity",
     "item_icon_shadow",
     "item_font_src",
+    "item_position",
   ];
   var styleApplied = false;
   urlStyleIds.forEach(function (id) {

@@ -81,6 +81,7 @@
     function inlineItemStyles(item) {
       var fontFamily = "";
       var fontSize = "";
+      var fontWeight = "";
       var color = "";
       var backgroundColor = "";
       var borderWidth = "";
@@ -91,6 +92,7 @@
         var root = window.getComputedStyle(document.documentElement);
         fontFamily = root.getPropertyValue("--rkg-font-family-selected") || "";
         fontSize = root.getPropertyValue("--rkg-font-size-selected") || "";
+        fontWeight = root.getPropertyValue("--rkg-font-weight-selected") || "";
         color = root.getPropertyValue("--rkg-font-color-selected") || "";
         backgroundColor =
           root.getPropertyValue("--rkg-background-color-selected") || "";
@@ -115,6 +117,13 @@
         var p2 = item.querySelectorAll("p");
         for (var j = 0; j < p2.length; j++) {
           p2[j].style.fontFamily = fontFamily.trim();
+        }
+      }
+      if (fontWeight) {
+        item.style.fontWeight = fontWeight.trim();
+        var p3 = item.querySelectorAll("p");
+        for (var jj = 0; jj < p3.length; jj++) {
+          p3[jj].style.fontWeight = fontWeight.trim();
         }
       }
       if (color) {
@@ -191,8 +200,29 @@
           var bg = data[1];
           var bgW = bg.naturalWidth || bg.width;
           var bgH = bg.naturalHeight || bg.height;
-          var margin = Math.round(bgH * 0.02);
-          var gap = Math.round(bgH * 0.02);
+          var rootStyle = window.getComputedStyle(document.documentElement);
+          function cssVarToPx(name, fallback, base) {
+            var val =
+              (rootStyle.getPropertyValue(name) || "").trim().toLowerCase();
+            if (!val || val === "auto" || val === "") {
+              return fallback;
+            }
+            if (val.indexOf("%") !== -1) {
+              return Math.round((parseFloat(val) / 100) * base);
+            }
+            var px = parseFloat(val);
+            return isNaN(px) ? fallback : px;
+          }
+          var top = cssVarToPx("--rkg-item-pos-top", Math.round(bgH * 0.06), bgH);
+          var bottom = cssVarToPx("--rkg-item-pos-bottom", 0, bgH);
+          var right = cssVarToPx("--rkg-item-pos-right", Math.round(bgW * 0.02), bgW);
+          var left = cssVarToPx("--rkg-item-pos-left", 0, bgW);
+          var gap = parseFloat(
+            rootStyle.getPropertyValue("--rkg-stack-gap"),
+          );
+          if (isNaN(gap) || gap <= 0) {
+            gap = Math.round(bgH * 0.024);
+          }
           var canvas = document.createElement("canvas");
           canvas.width = Math.round(bgW * zoom);
           canvas.height = Math.round(bgH * zoom);
@@ -202,12 +232,23 @@
           ctx.fillRect(0, 0, bgW, bgH);
           ctx.drawImage(bg, 0, 0, bgW, bgH);
           return Promise.all(jobs).then(function (itemCanvases) {
-            var y = margin;
-            itemCanvases.forEach(function (itemCanvas) {
-              var x = bgW - itemCanvas.width - margin;
-              ctx.drawImage(itemCanvas, x, y);
-              y += itemCanvas.height + gap;
-            });
+            var x = right
+              ? bgW - itemCanvases[0].width - right
+              : left;
+            if (bottom) {
+              var y = bgH - bottom;
+              for (var i = 0; i < itemCanvases.length; i++) {
+                y -= itemCanvases[i].height;
+                ctx.drawImage(itemCanvases[i], x, y);
+                y -= gap;
+              }
+            } else {
+              var ty = top;
+              itemCanvases.forEach(function (itemCanvas) {
+                ctx.drawImage(itemCanvas, x, ty);
+                ty += itemCanvas.height + gap;
+              });
+            }
             return canvas;
           });
         });

@@ -1,12 +1,21 @@
 (function () {
   function init() {
-    var slider = document.getElementById("banner-slider");
-    if (!slider) {
+    var sliders = document.querySelectorAll(".banner-slider");
+    if (!sliders.length) {
       return;
     }
 
-    var track = document.getElementById("banner-slider-track");
-    var dots = document.getElementById("banner-slider-dots");
+    sliders.forEach(function (slider) {
+      setupSlider(slider);
+    });
+  }
+
+  function setupSlider(slider) {
+    var track = slider.querySelector(".banner-slider-track");
+    var dots = slider.querySelector(".banner-slider-dots");
+    if (!track || !dots) {
+      return;
+    }
     var slides = track.querySelectorAll(".banner-slide");
     var current = 0;
 

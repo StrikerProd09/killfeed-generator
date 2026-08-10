@@ -1,0 +1,69 @@
+{
+  "images"     : [
+    "AK-47_HUD_icon_MW3",             "44_Magnum_HUD_MW2",              "AA-12_Pickup_MW2",               "ACR_6.8_HUD_icon_MW3",           "AS50_HUD_MW3",
+    "Barrett_.50cal_Pickup_CoD4",     "CM901_hud_MW3",                  "Cod4-mini-gun-pickup",           "FGM-148_Javelin_HUD_icon_MW3",   "FMG9_HUD_MW3",
+    "Five_Seven_HUD_icon_MW3",        "Flashbang_HUD_Icon_MWR",         "G18_Pickup_MW2",                 "Hud_m320",                       "KSG_12_HUD_MW3",
+    "L118A_HUD_MW3",                  "L85_HUD_MW2",                    "L86_LSW_pickup_MW2",             "M14_EBR_HUD_MW3",                "M16A4_Pickup_CoD4",
+    "M1911_Pickup_CoD4",              "M240_Pickup_MW2",                "M4A1_Grenadier_pickup_CoD4",     "M4A1_SOPMOD_pickup_CoD4",        "M9_HUD_CoD4",
+    "MK14_Pickup_MW3",                "MK46_HUD_MW3",                   "MP5SD_Pickup_CoD4",              "MP5_Pickup_CoD4",                "MP9_HUD_MW3",
+    "MSR_HUD_MW3",                    "MW2_Pickup_Kriss",               "MW2_Pickup_Riot_Shield",         "MW2_Pickup_SPAS12",              "MW3_FAD_HUD",
+    "MW_Pickup_AKD74u",               "MW_Pickup_Desert_Eagle",         "MW_Pickup_DragunovSVD",          "MW_Pickup_G36C",                 "MW_Pickup_M14_Scoped",
+    "MW_Pickup_M4Carbine",            "MW_Pickup_M60E4",                "Model_1887_Pickup_MW2",          "P90_Pickup_CoD4",                "P99_Pick-up",
+    "PM9_HUD_MW3",                    "PP90M1_HUD_MW3",                 "RPG-7_HUD_icon_MW3",             "RSASS_HUD_MW3",                  "Ranger_Pickup_MW2",
+    "SCAR-L_Killfeed_MW3",            "SMAW_HUD_MW3",                   "SOFLAM_HUD_icon_inactive_MW3",   "Skorpion_Pickup_CoD4",           "Smoke_Grenade_HUD_icon_MW2",
+    "Stinger_HUD_MW3",                "Striker_Pickup_MW2",             "Type_95_HUD_MW3",                "UMP45_Pickup_MW2",               "USP.45_Pickup_CoD4",
+    "XM25_HUD_MW3",                   "AC-130_icon_MW3",                "Assault_Drone_icon_MW3",         "Attack_Helicopter_HUD_icon_MW3", "Care_Package_HUD_icon_MW3",
+    "MW3_AH-6_Overwatch",             "MW3_I.M.S",                      "MW3_Osprey_Gunner",              "MW3_Precision_Airstrike",        "MW3_Predator_Missile_Icon",
+    "MW3_Strafe_Run",                 "Reaper_MW3",                     "Sentry_Gun_HUD_icon_MW3",        "MW2-Claymore-HUD",               "C4_HUD_icon_MW3",
+    "Throwing_knife_icon",            "Semtex_HUD_icon_MW2",            "M67_Grenade_Icon_MW2"
+  ],
+  "path"       : "assets/img/killfeed-icons/codmw3/",
+  "player1"    : "Player1",
+  "player2"    : "Player2",
+  "additionals": ["Headshot"],
+  "flip"       : false,
+  "settings"   : {
+    "additionals": {"Headshot": "suffix"},
+    "item_style" : {
+      "groups": [
+        {
+          "name"  : "Typography",
+          "fields": [
+            {"id": "item_font_size",   "label": "Font Size",   "type": "number",      "value": 17,                     "min":   8, "max": 120, "suffix": "px"             },
+            {"id": "item_icon_size",   "label": "Icon Size",   "type": "number",      "value": 25,                     "min":   8, "max": 120, "suffix": "px"             },
+            {"id": "item_font_weight", "label": "Font Weight", "type": "number",      "value": 500,                    "min": 100, "max": 900,                 "step": 100},
+            {"id": "item_font_family", "label": "Font Family", "type": "font_family", "value": "Conduit-ITC-Std-Font"                                                     }
+          ]
+        },
+        {"type": "font_source"},
+        {
+          "name"  : "Padding",
+          "fields": [
+            {"id": "item_p_x", "label": "Padding X", "type": "number", "value": 10, "min":    0, "max": 200                },
+            {"id": "item_p_y", "label": "Padding Y", "type": "number", "value":  4, "min":    0, "max": 200                },
+            {"id": "item_gap", "label": "Items Gap", "type": "number", "value": 10, "min": -100, "max": 200, "suffix": "px"}
+          ]
+        },
+        {
+          "name"  : "Colors",
+          "fields": [
+            {"id": "item_font_color_1", "label": "Text1 Color",        "type": "color", "value": "#ffffff"                                 },
+            {"id": "item_font_color_2", "label": "Text2 Color",        "type": "color", "value": "#ffffff"                                 },
+            {"id": "item_bg_color",     "label": "Background",         "type": "color", "value": "#0c0c0c"                                 },
+            {"id": "item_bg_opacity",   "label": "Background Opacity", "type": "range", "value": 60,        "min": 0, "max": 100, "step": 1}
+          ]
+        },
+        {
+          "name"  : "Border",
+          "fields": [
+            {"id": "item_border_width",   "label": "Border Width",   "type": "number", "value": 2,         "min": 0, "max":  20           },
+            {"id": "item_border_radius",  "label": "Border Radius",  "type": "number", "value": 0,         "min": 0, "max": 100           },
+            {"id": "item_border_color",   "label": "Border Color",   "type": "color",  "value": "#1d1d1d"                                 },
+            {"id": "item_border_opacity", "label": "Border Opacity", "type": "range",  "value": 5,         "min": 0, "max": 100, "step": 1}
+          ]
+        },
+        { "name": "Effects", "fields": [ {"id": "item_icon_shadow", "label": "Items Shadow", "type": "range", "value": 0, "min": 0, "max": 100, "step": 1}, {"id": "item_position", "label": "Item Position", "type": "position", "value": "bottom:14%;right:2%" } ] }
+      ]
+    }
+  }
+}
