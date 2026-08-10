@@ -6,11 +6,6 @@
   font-family: "Roboto-Medium";
   src: url("../font/Roboto-Medium.ttf");
 }
-@font-face {
-  font-family: "BebasNeue";
-  src: url("../font/BebasNeue.ttf");
-}
-
 :root {
   --rkg-color-primary: #3e658a;
   --rkg-color-secondary: #3e5072;
@@ -27,7 +22,7 @@
   --rkg-link: var(--rkg-color-primary);
 
   --rkg-font-primary: "Heebo", sans-serif;
-  --rkg-font-secondary: "Roboto-Medium", sans-serif;
+  --rkg-font-secondary: "Heebo", sans-serif;
 
   --rkg-size-xs: 4px;
   --rkg-size-sm: 8px;

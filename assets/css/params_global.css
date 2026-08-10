@@ -1,11 +1,8 @@
-ce {
-  font-family: "Roboto-Medium";
+@font-face {
+  font-family: "Heebo";
   src: url("../font/Roboto-Medium.ttf");
 }
-@font-face {
-  font-family: "MavenPro";
-  src: url("../font/MavenPro.ttf");
-}
+
 
 :root {
   --rkg-color-primary: #5e6875;
@@ -22,8 +19,8 @@ ce {
 
   --rkg-link: var(--rkg-color-primary);
 
-  --rkg-font-primary: "Roboto-Medium", sans-serif;
-  --rkg-font-secondary: "MavenPro", sans-serif;
+  --rkg-font-primary: "Heebo", sans-serif;
+  --rkg-font-secondary: "Heebo", sans-serif;
 
   --rkg-size-xs: 4px;
   --rkg-size-sm: 8px;

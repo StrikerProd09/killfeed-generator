@@ -1,5 +1,13 @@
 [
     {"font-family": "Roboto-Medium", "src": "assets/font/Roboto-Medium.ttf"},
     {"font-family": "Heebo",         "src": "assets/font/Heebo.ttf"        },
-    {"font-family": "BebasNeue",     "src": "assets/font/BebasNeue.ttf"    }
+    {"font-family": "BebasNeue",     "src": "assets/font/BebasNeue.ttf"    },
+    {"font-family": "Headliner",     "src": "assets/font/Headliner.ttf"    },
+    {"font-family": "Float",         "src": "assets/font/Float.ttf"        },
+    {"font-family": "Brokenz",       "src": "assets/font/Brokenz.ttf"      },
+    {"font-family": "Board of Directors Hv", "src": "assets/font/Board of Directors Hv.otf"},
+    {"font-family": "MavenPro",      "src": "assets/font/MavenPro.ttf"     },
+    {"font-family": "Laghino-Regular", "src": "assets/font/Laghino-Regular.otf"},
+    {"font-family": "HIGHRING",      "src": "assets/font/HIGHRING.ttf"     },
+    {"font-family": "Montserrat",    "src": "assets/font/Montserrat.ttf"   }
 ]
