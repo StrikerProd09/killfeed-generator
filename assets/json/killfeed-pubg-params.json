@@ -1,25 +1,66 @@
 {
   "images"     : [
-    "UI_behicle_explosion",             "UI_buggy",                         "UI_throwable_icon_Snowball",       "UI_weapon_icon_akm",
-    "UI_weapon_icon_aug_a3",            "UI_weapon_icon_awm",               "UI_weapon_icon_beryl_m762",        "UI_weapon_icon_Blue_Zone_Grenade",
-    "UI_weapon_icon_crossbow",          "UI_weapon_icon_crowbar",           "UI_weapon_icon_DBS",               "UI_weapon_icon_Decoy_Grenade",
-    "UI_weapon_icon_dp-28",             "UI_weapon_icon_flare_gun",         "UI_weapon_icon_frag_grenade",      "UI_weapon_icon_G36C",
-    "UI_weapon_icon_groza",             "UI_weapon_icon_K2",                "UI_weapon_icon_kar98k",            "UI_weapon_icon_Lynx6",
-    "UI_weapon_icon_m16a4",             "UI_weapon_icon_m24",               "UI_weapon_icon_m249",              "UI_weapon_icon_m416",
-    "UI_weapon_icon_machete",           "UI_weapon_icon_MG3",               "UI_weapon_icon_micro_uzi",         "UI_weapon_icon_mini_14",
-    "UI_weapon_icon_Mk12",              "UI_weapon_icon_mk14_ebr",          "UI_weapon_icon_mk47_mutant",       "UI_weapon_icon_molotov",
-    "UI_weapon_icon_mortar",            "UI_weapon_icon_MP5K",              "UI_weapon_icon_p18c",              "UI_weapon_icon_p1911",
-    "UI_weapon_icon_P90",               "UI_weapon_icon_p92",               "UI_weapon_icon_pan",               "UI_weapon_icon_PanzerFaust",
-    "UI_weapon_icon_PP-19_Bizon",       "UI_weapon_icon_qbu",               "UI_weapon_icon_qbz95",             "UI_weapon_icon_r1895",
-    "UI_weapon_icon_r45",               "UI_weapon_icon_s12k",              "UI_weapon_icon_s1897",             "UI_weapon_icon_s686",
-    "UI_weapon_icon_sawed-off",         "UI_weapon_icon_scar-l",            "UI_weapon_icon_sickle",            "UI_weapon_icon_sks",
-    "UI_weapon_icon_sks (1)",           "UI_weapon_icon_slr",               "UI_weapon_icon_smoke_grenade",     "UI_weapon_icon_Sticky_Bomb",
-    "UI_weapon_icon_stun_grenade",      "UI_weapon_icon_tommy_gun",         "UI_weapon_icon_ump9",              "UI_weapon_icon_vector",
+    "UI_weapon_icon_akm",               "UI_weapon_icon_aug_a3",            "UI_weapon_icon_awm",               "UI_weapon_icon_beryl_m762",
+    "UI_weapon_icon_Blue_Zone_Grenade", "UI_weapon_icon_crossbow",          "UI_weapon_icon_crowbar",           "UI_weapon_icon_DBS",
+    "UI_weapon_icon_Decoy_Grenade",     "UI_weapon_icon_dp-28",             "UI_weapon_icon_flare_gun",         "UI_weapon_icon_frag_grenade",
+    "UI_weapon_icon_G36C",              "UI_weapon_icon_groza",             "UI_weapon_icon_K2",                "UI_weapon_icon_kar98k",
+    "UI_weapon_icon_Lynx6",             "UI_weapon_icon_m16a4",             "UI_weapon_icon_m24",               "UI_weapon_icon_m249",
+    "UI_weapon_icon_m416",              "UI_weapon_icon_machete",           "UI_weapon_icon_MG3",               "UI_weapon_icon_micro_uzi",
+    "UI_weapon_icon_mini_14",           "UI_weapon_icon_Mk12",              "UI_weapon_icon_mk14_ebr",          "UI_weapon_icon_mk47_mutant",
+    "UI_weapon_icon_molotov",           "UI_weapon_icon_mortar",            "UI_weapon_icon_MP5K",              "UI_weapon_icon_p18c",
+    "UI_weapon_icon_p1911",             "UI_weapon_icon_P90",               "UI_weapon_icon_p92",               "UI_weapon_icon_pan",
+    "UI_weapon_icon_PanzerFaust",       "UI_weapon_icon_PP-19_Bizon",       "UI_weapon_icon_qbu",               "UI_weapon_icon_qbz95",
+    "UI_weapon_icon_r1895",             "UI_weapon_icon_r45",               "UI_weapon_icon_s12k",              "UI_weapon_icon_s1897",
+    "UI_weapon_icon_s686",              "UI_weapon_icon_sawed-off",         "UI_weapon_icon_scar-l",            "UI_weapon_icon_sickle",
+    "UI_weapon_icon_sks",               "UI_weapon_icon_sks (1)",           "UI_weapon_icon_slr",               "UI_weapon_icon_smoke_grenade",
+    "UI_weapon_icon_Sticky_Bomb",       "UI_weapon_icon_stun_grenade",      "UI_weapon_icon_tommy_gun",         "UI_weapon_icon_ump9",
+    "UI_weapon_icon_vector",            "UI_behicle_explosion",             "UI_buggy",                         "UI_throwable_icon_Snowball",
     "UI_weapon_icon_vss"
   ],
   "path"       : "assets/img/killfeed-icons/pubg/",
   "player1"    : "Player1",
   "player2"    : "Player2",
   "additionals": ["Headshot", "No Scope"],
-  "flip"       : true
+  "flip"       : true,
+  "settings"   : {
+    "additionals": {"Headshot": "suffix", "No Scope": "suffix"},
+    "item_style" : {
+      "groups": [
+        {
+          "name"  : "Typography",
+          "fields": [
+            {"id": "item_font_size",   "label": "Font Size",   "type": "number",      "value": 25, "min": 8, "max": 120, "suffix": "px"},
+            {"id": "item_font_family", "label": "Font Family", "type": "font_family"                                                   }
+          ]
+        },
+        {"type": "font_source"},
+        {
+          "name"  : "Padding",
+          "fields": [
+            {"id": "item_p_x", "label": "Padding X", "type": "number", "value": 20, "min": 0, "max": 200},
+            {"id": "item_p_y", "label": "Padding Y", "type": "number", "value":  6, "min": 0, "max": 200}
+          ]
+        },
+        {
+          "name"  : "Colors",
+          "fields": [
+            {"id": "item_font_color_1", "label": "Text1 Color",        "type": "color", "value": "#e7eef3"                                 },
+            {"id": "item_font_color_2", "label": "Text2 Color",        "type": "color", "value": "#f6f0ea"                                 },
+            {"id": "item_bg_color",     "label": "Background",         "type": "color", "value": "#0c0c0c"                                 },
+            {"id": "item_bg_opacity",   "label": "Background Opacity", "type": "range", "value": 100,       "min": 0, "max": 100, "step": 1}
+          ]
+        },
+        {
+          "name"  : "Border",
+          "fields": [
+            {"id": "item_border_width",   "label": "Border Width",   "type": "number", "value": 2,         "min": 0, "max":  20           },
+            {"id": "item_border_radius",  "label": "Border Radius",  "type": "number", "value": 0,         "min": 0, "max": 100           },
+            {"id": "item_border_color",   "label": "Border Color",   "type": "color",  "value": "#1d1d1d"                                 },
+            {"id": "item_border_opacity", "label": "Border Opacity", "type": "range",  "value": 100,       "min": 0, "max": 100, "step": 1}
+          ]
+        },
+        { "name": "Effects", "fields": [ {"id": "item_icon_shadow", "label": "Items Shadow", "type": "range", "value": 0, "min": 0, "max": 100, "step": 1} ] }
+      ]
+    }
+  }
 }

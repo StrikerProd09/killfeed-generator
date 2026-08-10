@@ -1,5 +1,6 @@
 var nr = 0;
 var globalFlip = false;
+var settings = {};
 
 function bright() {
   document.getElementById("background_overlay").value = "#fff";
@@ -572,6 +573,7 @@ $(document).ready(function () {
         player2 = params.player2 || "Player2";
         additionals = params.additionals || [];
         globalFlip = params.flip === true;
+        settings = params.settings || {};
       } else {
         console.error(
           "Failed to load params: " + fileName + " (" + xhr.status + ")",
@@ -583,6 +585,182 @@ $(document).ready(function () {
   }
 
   loadParams(paramsFile);
+
+  var optionsTpl;
+  var optionsXhr = new XMLHttpRequest();
+  optionsXhr.open("GET", "assets/tpl/options.tpl", false);
+  try {
+    optionsXhr.send(null);
+    if (optionsXhr.status === 200 || optionsXhr.status === 0) {
+      optionsTpl = optionsXhr.responseText;
+    } else {
+      console.error("Failed to load options.tpl (" + optionsXhr.status + ")");
+    }
+  } catch (e) {
+    console.error("Failed to load options.tpl", e);
+  }
+
+  function slugify(name) {
+    return String(name)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "")
+      .trim();
+  }
+
+  function additionalId(name) {
+    return slugify(name) + "_toggle";
+  }
+
+  function buildAdditionalToggles() {
+    var locMap = settings.additionals || {};
+    var html = '<div class="option-group">';
+    additionals.forEach(function (name, index) {
+      var order = index + 1;
+      var loc = (locMap[name] || "suffix").toLowerCase();
+      html +=
+        '<div class="option-field">' +
+        "<span>" +
+        name +
+        ": </span>" +
+        '<label class="toggle-switch">' +
+        '<input type="checkbox" id="' +
+        additionalId(name) +
+        '" location="' +
+        loc +
+        '" order="' +
+        order +
+        '">' +
+        '<span class="toggle-track"><span class="toggle-thumb"></span></span>' +
+        "</label>" +
+        "</div>";
+    });
+    html += "</div>";
+    return html;
+  }
+
+  function buildField(field) {
+    if (field.type === "font_family") {
+      return (
+        '<div class="option-field"><span>' +
+        field.label +
+        ": </span><select id='" +
+        field.id +
+        "'></select></div>"
+      );
+    }
+    if (field.type === "color") {
+      return (
+        '<div class="option-field"><span>' +
+        field.label +
+        ": </span><input id='" +
+        field.id +
+        "' type='color' value='" +
+        field.value +
+        "'></div>"
+      );
+    }
+    if (field.type === "range") {
+      var fieldHtml =
+        '<div class="option-field"><span>' +
+        field.label +
+        ": </span><input id='" +
+        field.id +
+        "' type='range' min='" +
+        field.min +
+        "' max='" +
+        field.max +
+        "' value='" +
+        field.value +
+        "' step='" +
+        (field.step || 1) +
+        "' style='width: 120px;'><span id='" +
+        field.id +
+        "_value'>" +
+        field.value +
+        "%</span></div>";
+      return fieldHtml;
+    }
+    if (field.type === "number") {
+      return (
+        '<div class="option-field"><span>' +
+        field.label +
+        ": </span><input id='" +
+        field.id +
+        "' type='number' value='" +
+        field.value +
+        "' min='" +
+        field.min +
+        "' max='" +
+        field.max +
+        "'>" +
+        (field.suffix ? "<span>" + field.suffix + "</span>" : "") +
+        "</div>"
+      );
+    }
+    if (field.type === "text") {
+      return (
+        '<div class="option-field"><span>' +
+        field.label +
+        ": </span><input id='" +
+        field.id +
+        "' type='text' value='" +
+        (field.value || "") +
+        "'" +
+        (field.placeholder
+          ? " placeholder='" + field.placeholder + "'"
+          : "") +
+        "></div>"
+      );
+    }
+    return "";
+  }
+
+  function buildItemStyleGroups() {
+    if (!settings.item_style || !settings.item_style.groups) {
+      return "";
+    }
+    var fontSourceTpl = "";
+    var fsMatch =
+      optionsTpl !== undefined
+        ? optionsTpl.match(
+            /<script[^>]*id="rkg-tpl-font-source"[^>]*>([\s\S]*?)<\/script>/,
+          )
+        : null;
+    if (fsMatch) {
+      fontSourceTpl = fsMatch[1];
+    }
+    var html = "";
+    settings.item_style.groups.forEach(function (group) {
+      if (group.type === "font_source") {
+        html += fontSourceTpl;
+        return;
+      }
+      html += '<div class="option-group">';
+      (group.fields || []).forEach(function (field) {
+        html += buildField(field);
+      });
+      html += "</div>";
+    });
+    return html;
+  }
+
+  function optionsInner(tpl) {
+    var m = tpl.match(/<div id="options">([\s\S]*?)<\/div>\s*<script/);
+    return m ? m[1] : "";
+  }
+
+  function renderOptions() {
+    var optionsEl = document.getElementById("options");
+    if (!optionsEl || optionsTpl === undefined) {
+      return;
+    }
+    var html = optionsInner(optionsTpl)
+      .replace("{{additionals_toggles}}", buildAdditionalToggles())
+      .replace("{{item_style_groups}}", buildItemStyleGroups());
+    optionsEl.innerHTML = html;
+  }
+
+  renderOptions();
 
   function resolveFontSrc(src) {
     try {
@@ -955,5 +1133,80 @@ $(document).ready(function () {
         }
       });
     });
+  }
+
+  var urlItem = getUrlParam("killfeed-item");
+  if (urlItem !== null) {
+    var gridItems = document.querySelectorAll(
+      "#killfeed-generator .killfeed-item",
+    );
+    for (var gi = 0; gi < gridItems.length; gi++) {
+      var simg = gridItems[gi].querySelector("img.sp_icon");
+      var ssrc = simg ? simg.getAttribute("src") : "";
+      var sname = ssrc.replace(/^.*\//, "").replace(/\.(webp|png|jpg)$/, "");
+      if (sname === urlItem) {
+        gridItems[gi].click();
+        console.log("[url-params] killfeed-item selected: " + sname);
+        break;
+      }
+    }
+  }
+
+  var urlStyleIds = [
+    "item_font_size",
+    "item_font_family",
+    "item_p_x",
+    "item_p_y",
+    "item_font_color_1",
+    "item_font_color_2",
+    "item_bg_color",
+    "item_bg_opacity",
+    "item_border_width",
+    "item_border_radius",
+    "item_border_color",
+    "item_border_opacity",
+    "item_icon_shadow",
+    "item_font_src",
+  ];
+  var styleApplied = false;
+  urlStyleIds.forEach(function (id) {
+    var val = getUrlParam(id);
+    if (val === null) {
+      return;
+    }
+    var el = document.getElementById(id);
+    if (!el) {
+      return;
+    }
+    el.value = val;
+    var label = document.getElementById(id + "_value");
+    if (label) {
+      label.textContent = val + "%";
+    }
+    styleApplied = true;
+  });
+  if (styleApplied) {
+    applyItemStyle();
+    console.log("[url-params] item style overrides applied");
+  }
+
+  if (getUrlParam("convert") === "true" || getUrlParam("export") === "true") {
+    var fontsReady =
+      document.fonts && document.fonts.ready
+        ? document.fonts.ready
+        : Promise.resolve();
+    fontsReady
+      .then(function () {
+        return takeScreenShot();
+      })
+      .then(function (result) {
+        console.log("[url-params] conversion done");
+        if (getUrlParam("export") === "true") {
+          var canvases = Array.isArray(result) ? result : [result];
+          if (canvases.length) {
+            downloadCanvas(canvases[canvases.length - 1]);
+          }
+        }
+      });
   }
 });
