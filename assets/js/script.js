@@ -131,13 +131,15 @@ function applyItemStyle() {
     "--rkg-background-color-selected",
     hexToRgba(bgColor, bgOpacity / 100),
   );
+  var borderColor = elValue("item_border_color", "#1d1d1d");
+  var borderOpacity = parseFloat(elValue("item_border_opacity", "100")) || 100;
   root.style.setProperty(
     "--rkg-border-width-selected",
     borderWidth + "px",
   );
   root.style.setProperty(
     "--rkg-border-color-selected",
-    elValue("item_border_color", "#1d1d1d"),
+    hexToRgba(borderColor, borderOpacity / 100),
   );
   root.style.setProperty(
     "--rkg-border-radius-selected",
@@ -933,11 +935,17 @@ $(document).ready(function () {
           target.id.indexOf("item_") === 0 &&
           target.id !== "item_font_src"
         ) {
-          if (target.id === "item_bg_opacity" || target.id === "item_icon_shadow") {
+          if (
+            target.id === "item_bg_opacity" ||
+            target.id === "item_icon_shadow" ||
+            target.id === "item_border_opacity"
+          ) {
             var valueId =
               target.id === "item_bg_opacity"
                 ? "item_bg_opacity_value"
-                : "item_icon_shadow_value";
+                : target.id === "item_icon_shadow"
+                  ? "item_icon_shadow_value"
+                  : "item_border_opacity_value";
             var label = document.getElementById(valueId);
             if (label) {
               label.textContent = target.value + "%";
