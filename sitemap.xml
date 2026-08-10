@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
-  <!-- Homepage / Main Index -->
   <url>
     <loc>https://strikerprod09.github.io/killfeed-generator/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- PUBG Killfeed Generator -->
   <url>
     <loc>https://strikerprod09.github.io/killfeed-generator/killfeed-generator-pubg</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Rust Killfeed Generator -->
   <url>
     <loc>https://strikerprod09.github.io/killfeed-generator/killfeed-generator-rust</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
-  <!-- CS2 Killfeed Generator -->
   <url>
     <loc>https://strikerprod09.github.io/killfeed-generator/killfeed-generator-cs2</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+    <url>
+    <loc>https://strikerprod09.github.io/killfeed-generator/killfeed-generator-codmw3</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
