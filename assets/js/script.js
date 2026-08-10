@@ -1190,7 +1190,15 @@ $(document).ready(function () {
     console.log("[url-params] item style overrides applied");
   }
 
-  if (getUrlParam("convert") === "true" || getUrlParam("export") === "true") {
+  function urlFlag(name) {
+    var v = getUrlParam(name);
+    if (v === null) {
+      return false;
+    }
+    return v === "" || v.toLowerCase() === "true" || v === "1";
+  }
+
+  if (urlFlag("convert") || urlFlag("export")) {
     var fontsReady =
       document.fonts && document.fonts.ready
         ? document.fonts.ready
@@ -1201,7 +1209,7 @@ $(document).ready(function () {
       })
       .then(function (result) {
         console.log("[url-params] conversion done");
-        if (getUrlParam("export") === "true") {
+        if (urlFlag("export")) {
           var canvases = Array.isArray(result) ? result : [result];
           if (canvases.length) {
             downloadCanvas(canvases[canvases.length - 1]);
