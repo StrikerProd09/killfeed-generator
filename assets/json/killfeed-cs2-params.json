@@ -2,7 +2,8 @@
   "images"     : [
     "ak47",      "aug",       "awp",       "bizon",     "c75a",      "deagle",    "elite",     "famas",     "fiveseven", "g3sg1",     "galilar",   "glock18",   "hkp2000",
     "m249",      "m4a1s",     "m4a4",      "mac10",     "mag7",      "mp5 (1)",   "mp7",       "mp9",       "nova",      "p250",      "p90",       "revolver",  "scar20",
-    "sg552",     "ssg08",     "taser",     "tec9",      "ump45",     "usps",      "wawedoff",  "xm1014"
+    "sg552",     "ssg08",     "taser",     "tec9",      "ump45",     "usps",      "wawedoff",  "xm1014",
+    "Flashbang_hud_csgo", "Hegrenade_hud_csgo", "Incgrenade_hud_csgo", "Molotov_hud_csgo", "Smokegrenade_hud_csgo"
   ],
   "path"       : "assets/img/killfeed-icons/cs2/",
   "player1"    : "Player1",
@@ -35,7 +36,7 @@
         {
           "name"  : "Padding",
           "fields": [
-            {"id": "item_p_x", "label": "Padding X", "type": "number", "value": 20, "min":    0, "max": 200                },
+            {"id": "item_p_x", "label": "Padding X", "type": "number", "value": 14, "min":    0, "max": 200                },
             {"id": "item_p_y", "label": "Padding Y", "type": "number", "value":  6, "min":    0, "max": 200                },
             {"id": "item_gap", "label": "Items Gap", "type": "number", "value": 10, "min": -100, "max": 200, "suffix": "px"}
           ]
@@ -58,7 +59,13 @@
             {"id": "item_border_opacity", "label": "Border Opacity", "type": "range",  "value": 100,       "min": 0, "max": 100, "step": 1}
           ]
         },
-        { "name": "Effects", "fields": [ {"id": "item_icon_shadow", "label": "Items Shadow", "type": "range", "value": 70, "min": 0, "max": 100, "step": 1}, {"id": "item_position", "label": "Item Position", "type": "position", "value": "top:6%;right:2%" } ] }
+        {
+          "name"  : "Effects",
+          "fields": [
+            {"id": "item_icon_shadow", "label": "Items Shadow",  "type": "range",    "value": 70,                "min": 0, "max": 100, "step": 1},
+            {"id": "item_position",    "label": "Item Position", "type": "position", "value": "top:6%;right:2%"                                 }
+          ]
+        }
       ]
     }
   }
