@@ -62,7 +62,13 @@
             {"id": "item_border_opacity", "label": "Border Opacity", "type": "range",  "value": 5,         "min": 0, "max": 100, "step": 1}
           ]
         },
-        { "name": "Effects", "fields": [ {"id": "item_icon_shadow", "label": "Items Shadow", "type": "range", "value": 0, "min": 0, "max": 100, "step": 1}, {"id": "item_position", "label": "Item Position", "type": "position", "value": "bottom:14%;right:2%" } ] }
+        {
+          "name"  : "Effects",
+          "fields": [
+            {"id": "item_icon_shadow", "label": "Items Shadow",  "type": "range",    "value": 0,                    "min": 0, "max": 100, "step": 1},
+            {"id": "item_position",    "label": "Item Position", "type": "position", "value": "bottom:14%;left:2%"                                 }
+          ]
+        }
       ]
     }
   }
