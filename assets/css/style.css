@@ -351,8 +351,15 @@ footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none;
   text-align: start;
+  text-decoration: none;
+}
+
+.brand a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--rkg-color-white);
 }
 
 .brand .site-title {
@@ -916,7 +923,7 @@ article.aside-section .main-section {
   background-color: var(--rkg-color-gray-dark);
   border: 2px solid var(--rkg-color-gray-light);
   border-radius: 4px;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: all 0.15s ease-in-out;
 }
 
 .custom-checkbox .checkmark::after {
@@ -930,7 +937,7 @@ article.aside-section .main-section {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg) scale(0);
   opacity: 0;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: all 0.15s ease-in-out;
 }
 
 .custom-checkbox:hover .checkmark {
@@ -980,7 +987,7 @@ article.aside-section .main-section {
   background-color: var(--rkg-color-gray-dark);
   border: 2px solid var(--rkg-color-gray-light);
   border-radius: 12px;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .toggle-switch .toggle-thumb {
@@ -991,7 +998,7 @@ article.aside-section .main-section {
   height: 16px;
   background-color: var(--rkg-color-white);
   border-radius: 50%;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .toggle-switch:hover .toggle-track {
@@ -1072,7 +1079,7 @@ aside {
 
 .banner-slider-track {
   display: flex;
-  transition: transform 0.4s ease;
+  transition: all 0.4s ease-in-out;
 }
 
 .banner-slider-track .banner-slide {
@@ -1454,7 +1461,7 @@ h3 {
   background-color: var(--rkg-color-gray-dark);
   border: 1px solid rgba(255, 255, 255, 0.15);
   text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .footer-social svg {
@@ -1631,7 +1638,7 @@ canvas {
   background-color: rgba(0, 0, 0, 0.8);
   padding: var(--rkg-size-md);
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .popup-overlay.popup-closing {
@@ -1651,7 +1658,7 @@ canvas {
   max-width: 90vw;
   max-height: 90vh;
   overflow: auto;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .popup-overlay.popup-closing .popup-content {
