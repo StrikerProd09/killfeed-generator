@@ -18,8 +18,8 @@
     "Throwing_knife_icon",            "Semtex_HUD_icon_MW2",            "M67_Grenade_Icon_MW2"
   ],
   "path"       : "assets/img/killfeed-icons/codmw3/",
-  "player1"    : "Player1",
-  "player2"    : "Player2",
+  "player1"    : "Player",
+  "player2"    : "Enemy",
   "additionals": ["Headshot"],
   "flip"       : false,
   "settings"   : {

@@ -2,27 +2,9 @@ var nr = 0;
 var globalFlip = false;
 var settings = {};
 
-function bright() {
-  document.getElementById("background_overlay").value = "#fff";
-  document.getElementById("killfeed-generator").style.backgroundColor = "#fff";
-}
-
-function dark() {
-  document.getElementById("background_overlay").value = "#222222";
-  document.getElementById("killfeed-generator").style.backgroundColor =
-    "#222222";
-}
-
-function background_apply() {
-  var background = document.getElementById("background_overlay").value;
-  document.getElementById("killfeed-generator").style.backgroundColor =
-    background;
-}
-
 function players_apply() {
   var player_1 = document.getElementById("player_1").value;
   var player_2 = document.getElementById("player_2").value;
-  console.log("Player 1: " + player_1 + " Player 2: " + player_2);
   var p1 = document.getElementsByClassName("player1");
   for (var i = 0; i < p1.length; i++) {
     p1[i].innerHTML = player_1;
@@ -58,12 +40,9 @@ function updatePlayerParams(player_1, player_2) {
   params["player_2"] = player_2;
   var pairs = [];
   Object.keys(params).forEach(function (key) {
-    pairs.push(
-      encodeURIComponent(key) + "=" + encodeURIComponent(params[key]),
-    );
+    pairs.push(encodeURIComponent(key) + "=" + encodeURIComponent(params[key]));
   });
-  var newUrl =
-    window.location.pathname + "?" + pairs.join("&") + hashAnchor;
+  var newUrl = window.location.pathname + "?" + pairs.join("&") + hashAnchor;
   if (window.history && window.history.replaceState) {
     window.history.replaceState(null, "", newUrl);
   } else {
@@ -103,78 +82,78 @@ function hexToRgba(hex, opacity) {
 
 function applyItemStyle() {
   var root = document.documentElement;
-  var fontColor1 = elValue("item_font_color_1", elValue("item_font_color", "#ffffff"));
-  var fontColor2 = elValue("item_font_color_2", elValue("item_font_color", "#ffffff"));
+  var fontColor1 = elValue(
+    "item_font_color_1",
+    elValue("item_font_color", "#ffffff"),
+  );
+  var fontColor2 = elValue(
+    "item_font_color_2",
+    elValue("item_font_color", "#ffffff"),
+  );
   var bgColor = elValue("item_bg_color", "#0c0c0c");
   var bgOpacity = parseFloat(elValue("item_bg_opacity", "100")) || 100;
   var borderWidth = elValue("item_border_width", "2");
   var borderRadius = elValue("item_border_radius", "0");
   root.style.setProperty(
-    "--rkg-font-size-selected",
+    "--kg-font-size-selected",
     document.getElementById("item_font_size").value + "px",
   );
   root.style.setProperty(
-    "--rkg-font-family-selected",
+    "--kg-font-family-selected",
     "'" + document.getElementById("item_font_family").value + "'",
   );
   root.style.setProperty(
-    "--rkg-font-weight-selected",
+    "--kg-font-weight-selected",
     document.getElementById("item_font_weight")
       ? document.getElementById("item_font_weight").value
       : "500",
   );
   root.style.setProperty(
-    "--rkg-p-x-selected",
+    "--kg-p-x-selected",
     document.getElementById("item_p_x").value + "px",
   );
   root.style.setProperty(
-    "--rkg-p-y-selected",
+    "--kg-p-y-selected",
     document.getElementById("item_p_y").value + "px",
   );
-  root.style.setProperty("--rkg-font-color-selected", fontColor1);
-  root.style.setProperty("--rkg-font-color-1-selected", fontColor1);
-  root.style.setProperty("--rkg-font-color-2-selected", fontColor2);
+  root.style.setProperty("--kg-font-color-selected", fontColor1);
+  root.style.setProperty("--kg-font-color-1-selected", fontColor1);
+  root.style.setProperty("--kg-font-color-2-selected", fontColor2);
   root.style.setProperty(
-    "--rkg-background-color-selected",
+    "--kg-background-color-selected",
     hexToRgba(bgColor, bgOpacity / 100),
   );
   var borderColor = elValue("item_border_color", "#1d1d1d");
   var borderOpacity = parseFloat(elValue("item_border_opacity", "100")) || 100;
+  root.style.setProperty("--kg-border-width-selected", borderWidth + "px");
   root.style.setProperty(
-    "--rkg-border-width-selected",
-    borderWidth + "px",
-  );
-  root.style.setProperty(
-    "--rkg-border-color-selected",
+    "--kg-border-color-selected",
     hexToRgba(borderColor, borderOpacity / 100),
   );
-  root.style.setProperty(
-    "--rkg-border-radius-selected",
-    borderRadius + "px",
-  );
+  root.style.setProperty("--kg-border-radius-selected", borderRadius + "px");
   var itemsShadow = parseFloat(elValue("item_icon_shadow", "0")) || 0;
   var ratio = itemsShadow / 100;
   var iconMaxH = 50;
   var shadowOffset = (iconMaxH * 0.02 * ratio).toFixed(2);
   var shadowBlur = (iconMaxH * 0.1 * ratio).toFixed(2);
-  root.style.setProperty("--rkg-items-shadow-x-selected", shadowOffset + "px");
-  root.style.setProperty("--rkg-items-shadow-y-selected", shadowOffset + "px");
-  root.style.setProperty("--rkg-items-shadow-blur-selected", shadowBlur + "px");
+  root.style.setProperty("--kg-items-shadow-x-selected", shadowOffset + "px");
+  root.style.setProperty("--kg-items-shadow-y-selected", shadowOffset + "px");
+  root.style.setProperty("--kg-items-shadow-blur-selected", shadowBlur + "px");
   root.style.setProperty(
-    "--rkg-items-shadow-color-selected",
+    "--kg-items-shadow-color-selected",
     "rgba(0, 0, 0, " + (0.8 * ratio).toFixed(2) + ")",
   );
   var iconSize = parseFloat(elValue("item_icon_size", "50")) || 50;
   if (iconSize <= 0) {
     iconSize = 50;
   }
-  root.style.setProperty("--rkg-icon-size-selected", iconSize + "px");
+  root.style.setProperty("--kg-icon-size-selected", iconSize + "px");
   var itemsGap = parseFloat(elValue("item_gap", "10"));
   if (isNaN(itemsGap)) {
     itemsGap = 10;
   }
-  root.style.setProperty("--rkg-gap-selected", itemsGap + "px");
-  root.style.setProperty("--rkg-stack-gap", (itemsGap * 1.2).toFixed(2) + "px");
+  root.style.setProperty("--kg-gap-selected", itemsGap + "px");
+  root.style.setProperty("--kg-stack-gap", (itemsGap * 1.2).toFixed(2) + "px");
   var posEl = document.getElementById("item_position");
   var posValue = posEl ? posEl.value : "top:6%;right:2%";
   var posTokens = {
@@ -194,22 +173,10 @@ function applyItemStyle() {
         }
       }
     });
-  root.style.setProperty(
-    "--rkg-item-pos-top",
-    posTokens.top || "auto",
-  );
-  root.style.setProperty(
-    "--rkg-item-pos-right",
-    posTokens.right || "auto",
-  );
-  root.style.setProperty(
-    "--rkg-item-pos-bottom",
-    posTokens.bottom || "auto",
-  );
-  root.style.setProperty(
-    "--rkg-item-pos-left",
-    posTokens.left || "auto",
-  );
+  root.style.setProperty("--kg-item-pos-top", posTokens.top || "auto");
+  root.style.setProperty("--kg-item-pos-right", posTokens.right || "auto");
+  root.style.setProperty("--kg-item-pos-bottom", posTokens.bottom || "auto");
+  root.style.setProperty("--kg-item-pos-left", posTokens.left || "auto");
 }
 
 function loadFontFromUrl(src, family) {
@@ -228,7 +195,7 @@ function loadFontFromUrl(src, family) {
     "'); }";
   document.head.appendChild(style);
   document.documentElement.style.setProperty(
-    "--rkg-font-family-selected",
+    "--kg-font-family-selected",
     "'" + familyValue + "'",
   );
   console.log("Loading font: " + familyValue + " from " + srcValue);
@@ -281,13 +248,13 @@ function drawKillfeedItem(item, scale) {
 
     var rootStyle = window.getComputedStyle(document.documentElement);
     var varFamily = (
-      rootStyle.getPropertyValue("--rkg-font-family-selected") || ""
+      rootStyle.getPropertyValue("--kg-font-family-selected") || ""
     )
       .replace(/["']/g, "")
       .trim();
-    var varSize = rootStyle.getPropertyValue("--rkg-font-size-selected") || "";
+    var varSize = rootStyle.getPropertyValue("--kg-font-size-selected") || "";
     var varWeight =
-      rootStyle.getPropertyValue("--rkg-font-weight-selected") || "";
+      rootStyle.getPropertyValue("--kg-font-weight-selected") || "";
 
     var fontFamily = isFontFamilyKnown
       ? spec.fontFamily.replace(/["']/g, "")
@@ -316,10 +283,19 @@ function drawKillfeedItem(item, scale) {
     var fontColor2 = p2El
       ? window.getComputedStyle(p2El).color
       : spec.color || "#000";
-    var borderRadiusSpec =
-      parseFloat(spec.borderTopLeftRadius) || 0;
+    var borderRadiusSpec = parseFloat(spec.borderTopLeftRadius) || 0;
 
-    var weaponEl = item.querySelector("img.sp_icon");
+    var weaponEl = null;
+    for (var wi = 0; wi < item.children.length; wi++) {
+      var childEl = item.children[wi];
+      if (childEl.tagName === "IMG" && childEl.classList.contains("sp_icon")) {
+        weaponEl = childEl;
+        break;
+      }
+    }
+    if (!weaponEl) {
+      weaponEl = item.querySelector("img.sp_icon");
+    }
     var isWeaponFlipped = weaponEl
       ? weaponEl.classList.contains("flip-horizontal")
       : false;
@@ -329,30 +305,25 @@ function drawKillfeedItem(item, scale) {
     var suffixEls = Array.prototype.slice.call(
       item.querySelectorAll(".additional[data-location='suffix']"),
     );
-    var additionalEls = prefixEls.concat(suffixEls);
     var weaponSrc = weaponEl ? weaponEl.getAttribute("src") : null;
 
-    var loaders = [];
-    if (weaponSrc) loaders.push(loadImage(weaponSrc));
-    additionalEls.forEach(function (slot) {
-      var imgEl = slot.querySelector("img");
+    function loadSlotImage(slot) {
+      var imgEl = slot ? slot.querySelector("img") : null;
       var src = imgEl ? imgEl.getAttribute("src") : null;
-      if (src) loaders.push(loadImage(src));
-    });
+      return src ? loadImage(src) : Promise.resolve(null);
+    }
 
-    Promise.all(loaders)
+    var weaponPromise = weaponSrc
+      ? loadImage(weaponSrc)
+      : Promise.resolve(null);
+    var prefixPromises = prefixEls.map(loadSlotImage);
+    var suffixPromises = suffixEls.map(loadSlotImage);
+
+    Promise.all([weaponPromise].concat(prefixPromises, suffixPromises))
       .then(function (imgs) {
         var weapon = imgs[0] || null;
-        var prefixCount = prefixEls.length;
-        var prefixImages = [];
-        var suffixImages = [];
-        for (var k = 1; k < imgs.length; k++) {
-          if (k < 1 + prefixCount) {
-            prefixImages.push(imgs[k]);
-          } else {
-            suffixImages.push(imgs[k]);
-          }
-        }
+        var prefixImages = imgs.slice(1, 1 + prefixPromises.length);
+        var suffixImages = imgs.slice(1 + prefixPromises.length);
 
         var probe = document.createElement("canvas");
         var pctx = probe.getContext("2d");
@@ -362,12 +333,14 @@ function drawKillfeedItem(item, scale) {
 
         var rootStyleSel = window.getComputedStyle(document.documentElement);
         var iconSizeVal = parseFloat(
-          rootStyleSel.getPropertyValue("--rkg-icon-size-selected"),
+          rootStyleSel.getPropertyValue("--kg-icon-size-selected"),
         );
         var iconMaxH =
-          iconSizeVal && iconSizeVal > 0 ? iconSizeVal : Math.min(fontSize * 2, 50);
+          iconSizeVal && iconSizeVal > 0
+            ? iconSizeVal
+            : Math.min(fontSize * 2, 50);
         var gapVal = parseFloat(
-          rootStyleSel.getPropertyValue("--rkg-gap-selected"),
+          rootStyleSel.getPropertyValue("--kg-gap-selected"),
         );
         var gap = isNaN(gapVal) ? 10 : gapVal;
         var innerH = Math.max(fontSize, iconMaxH);
@@ -441,18 +414,18 @@ function drawKillfeedItem(item, scale) {
         var iconShadow = {
           x:
             parseFloat(
-              rootStyle.getPropertyValue("--rkg-items-shadow-x-selected"),
+              rootStyle.getPropertyValue("--kg-items-shadow-x-selected"),
             ) || 0,
           y:
             parseFloat(
-              rootStyle.getPropertyValue("--rkg-items-shadow-y-selected"),
+              rootStyle.getPropertyValue("--kg-items-shadow-y-selected"),
             ) || 0,
           blur:
             parseFloat(
-              rootStyle.getPropertyValue("--rkg-items-shadow-blur-selected"),
+              rootStyle.getPropertyValue("--kg-items-shadow-blur-selected"),
             ) || 0,
           color:
-            rootStyle.getPropertyValue("--rkg-items-shadow-color-selected") ||
+            rootStyle.getPropertyValue("--kg-items-shadow-color-selected") ||
             "rgba(0, 0, 0, 0)",
         };
         if (iconShadow.x || iconShadow.y || iconShadow.blur) {
@@ -632,8 +605,8 @@ $(document).ready(function () {
         var params = JSON.parse(xhr.responseText);
         images = params.images || [];
         path = params.path || "assets/img/killfeed-icons/rust/";
-        player1 = params.player1 || "Player1";
-        player2 = params.player2 || "Player2";
+        player1 = params.player1 || "Player";
+        player2 = params.player2 || "Enemy";
         additionals = params.additionals || [];
         globalFlip = params.flip === true;
         settings = params.settings || {};
@@ -676,18 +649,26 @@ $(document).ready(function () {
 
   function buildAdditionalToggles() {
     var locMap = settings.additionals || {};
-    var html = '<div class="option-group">';
+    var html = '<div class="option-group kg-additional-options">';
     additionals.forEach(function (name, index) {
       var order = index + 1;
       var loc = (locMap[name] || "suffix").toLowerCase();
+      var iconSrc = (typeof path === "string" ? path : "") + name + ".webp";
       html +=
-        '<div class="option-field">' +
-        "<span>" +
+        '<div class="option-field kg-additional-field">' +
+        '<div class="option-field-row">' +
+        '<img class="kg-additional-icon" src="' +
+        iconSrc +
+        '" alt="" title="' +
         name +
-        ": </span>" +
-        '<label class="toggle-switch">' +
+        '" loading="lazy" onerror="this.style.display=\'none\'">' +
+        '<label class="toggle-switch" title="' +
+        name +
+        '">' +
         '<input type="checkbox" id="' +
         additionalId(name) +
+        '" aria-label="' +
+        name +
         '" location="' +
         loc +
         '" order="' +
@@ -695,99 +676,166 @@ $(document).ready(function () {
         '">' +
         '<span class="toggle-track"><span class="toggle-thumb"></span></span>' +
         "</label>" +
+        "</div>" +
         "</div>";
     });
     html += "</div>";
     return html;
   }
 
+  function optionLabel(field) {
+    return (
+      '<label class="option-label" for="' +
+      field.id +
+      '">' +
+      field.label +
+      ":</label>"
+    );
+  }
+
+  function optionRow(content) {
+    return '<div class="option-field-row">' + content + "</div>";
+  }
+
   function buildField(field) {
+    if (field.id === "item_font_weight") {
+      var weightOptions = "";
+      for (var weight = 100; weight <= 900; weight += 100) {
+        weightOptions +=
+          '<option value="' +
+          weight +
+          '"' +
+          (String(field.value) === String(weight) ? " selected" : "") +
+          ">" +
+          weight +
+          "</option>";
+      }
+      return (
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<select id="' + field.id + '">' + weightOptions + "</select>",
+        ) +
+        "</div>"
+      );
+    }
     if (field.type === "font_family") {
       return (
-        '<div class="option-field"><span>' +
-        field.label +
-        ": </span><select id='" +
-        field.id +
-        "'" +
-        (field.value ? " data-default='" + field.value + "'" : "") +
-        "></select></div>"
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<select id="' +
+            field.id +
+            '"' +
+            (field.value ? ' data-default="' + field.value + '"' : "") +
+            "></select>",
+        ) +
+        "</div>"
       );
     }
     if (field.type === "position") {
       return (
-        '<div class="option-field"><span>' +
-        field.label +
-        ": </span><input id='" +
-        field.id +
-        "' type='text' value='" +
-        (field.value || "top:6%;right:2%") +
-        "' placeholder='top:6%;right:2%'>" +
-        (field.suffix ? "<span>" + field.suffix + "</span>" : "") +
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<input id="' +
+            field.id +
+            '" type="text" value="' +
+            (field.value || "top:6%;right:2%") +
+            '" placeholder="top:6%;right:2%">' +
+            (field.suffix
+              ? '<span class="option-suffix">' + field.suffix + "</span>"
+              : ""),
+        ) +
         "</div>"
       );
     }
     if (field.type === "color") {
       return (
-        '<div class="option-field"><span>' +
-        field.label +
-        ": </span><input id='" +
-        field.id +
-        "' type='color' value='" +
-        field.value +
-        "'></div>"
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<input id="' +
+            field.id +
+            '" type="color" value="' +
+            field.value +
+            '">',
+        ) +
+        "</div>"
       );
     }
     if (field.type === "range") {
-      var fieldHtml =
-        '<div class="option-field"><span>' +
-        field.label +
-        ": </span><input id='" +
-        field.id +
-        "' type='range' min='" +
-        field.min +
-        "' max='" +
-        field.max +
-        "' value='" +
-        field.value +
-        "' step='" +
-        (field.step || 1) +
-        "' style='width: 120px;'><span id='" +
-        field.id +
-        "_value'>" +
-        field.value +
-        "%</span></div>";
-      return fieldHtml;
+      return (
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<input id="' +
+            field.id +
+            '" type="range" min="' +
+            field.min +
+            '" max="' +
+            field.max +
+            '" value="' +
+            field.value +
+            '" step="' +
+            (field.step || 1) +
+            '">' +
+            '<span class="option-suffix" id="' +
+            field.id +
+            '_value">' +
+            field.value +
+            "%</span>",
+        ) +
+        "</div>"
+      );
     }
     if (field.type === "number") {
       return (
-        '<div class="option-field"><span>' +
-        field.label +
-        ": </span><input id='" +
-        field.id +
-        "' type='number' value='" +
-        field.value +
-        "' min='" +
-        field.min +
-        "' max='" +
-        field.max +
-        "'>" +
-        (field.suffix ? "<span>" + field.suffix + "</span>" : "") +
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<div class="kg-number-wrap">' +
+            '<button type="button" class="kg-number-btn" data-step="-1" aria-label="Decrease ' +
+            field.label +
+            '">-</button>' +
+            '<input id="' +
+            field.id +
+            '" type="number" value="' +
+            field.value +
+            '" min="' +
+            field.min +
+            '" max="' +
+            field.max +
+            '" step="' +
+            (field.step || 1) +
+            '">' +
+            '<button type="button" class="kg-number-btn" data-step="1" aria-label="Increase ' +
+            field.label +
+            '">+</button>' +
+            "</div>" +
+            (field.suffix
+              ? '<span class="option-suffix">' + field.suffix + "</span>"
+              : ""),
+        ) +
         "</div>"
       );
     }
     if (field.type === "text") {
       return (
-        '<div class="option-field"><span>' +
-        field.label +
-        ": </span><input id='" +
-        field.id +
-        "' type='text' value='" +
-        (field.value || "") +
-        "'" +
-        (field.placeholder
-          ? " placeholder='" + field.placeholder + "'"
-          : "") +
-        "></div>"
+        '<div class="option-field">' +
+        optionLabel(field) +
+        optionRow(
+          '<input id="' +
+            field.id +
+            '" type="text" value="' +
+            (field.value || "") +
+            '"' +
+            (field.placeholder
+              ? " placeholder='" + field.placeholder + "'"
+              : "") +
+            ">",
+        ) +
+        "</div>"
       );
     }
     return "";
@@ -801,24 +849,33 @@ $(document).ready(function () {
     var fsMatch =
       optionsTpl !== undefined
         ? optionsTpl.match(
-            /<script[^>]*id="rkg-tpl-font-source"[^>]*>([\s\S]*?)<\/script>/,
+            /<script[^>]*id="kg-tpl-font-source"[^>]*>([\s\S]*?)<\/script>/,
           )
         : null;
     if (fsMatch) {
-      fontSourceTpl = fsMatch[1];
+      fontSourceTpl = fsMatch[1].trim();
     }
     var html = "";
+    var pendingFields = null;
     settings.item_style.groups.forEach(function (group) {
       if (group.type === "font_source") {
-        html += fontSourceTpl;
+        if (pendingFields === null) {
+          pendingFields = "";
+        }
+        pendingFields += fontSourceTpl;
         return;
       }
-      html += '<div class="option-group">';
+      if (pendingFields !== null) {
+        html += '<div class="option-group">' + pendingFields + "</div>";
+      }
+      pendingFields = "";
       (group.fields || []).forEach(function (field) {
-        html += buildField(field);
+        pendingFields += buildField(field);
       });
-      html += "</div>";
     });
+    if (pendingFields !== null) {
+      html += '<div class="option-group">' + pendingFields + "</div>";
+    }
     return html;
   }
 
@@ -839,6 +896,46 @@ $(document).ready(function () {
   }
 
   renderOptions();
+
+  var playerInput1 = document.getElementById("player_1");
+  var playerInput2 = document.getElementById("player_2");
+  if (playerInput1) {
+    playerInput1.value = player1;
+    playerInput1.addEventListener("input", players_apply);
+  }
+  if (playerInput2) {
+    playerInput2.value = player2;
+    playerInput2.addEventListener("input", players_apply);
+  }
+
+  document.addEventListener("click", function (event) {
+    var button =
+      event.target && event.target.closest
+        ? event.target.closest(".kg-number-btn")
+        : null;
+    if (!button) {
+      return;
+    }
+    var row = button.parentNode;
+    var input = row ? row.querySelector("input[type='number']") : null;
+    if (!input) {
+      return;
+    }
+    var direction = button.getAttribute("data-step") === "-1" ? -1 : 1;
+    try {
+      if (direction > 0) {
+        input.stepUp();
+      } else {
+        input.stepDown();
+      }
+    } catch (error) {
+      var step = parseFloat(input.step) || 1;
+      var current = parseFloat(input.value) || 0;
+      input.value = current + direction * step;
+    }
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  });
 
   function resolveFontSrc(src) {
     try {
@@ -1101,6 +1198,28 @@ $(document).ready(function () {
     },
   );
 
+  var additionalToggleInputs = document.querySelectorAll(
+    ".toggle-switch input[type='checkbox'][location][order]",
+  );
+  for (var ati = 0; ati < additionalToggleInputs.length; ati++) {
+    var additionalToggle = additionalToggleInputs[ati];
+    var additionalOrder = parseInt(additionalToggle.getAttribute("order"), 10);
+    var additionalName = additionals[additionalOrder - 1];
+    if (!additionalName) {
+      continue;
+    }
+    var additionalValue = getUrlParam("ad_" + slugify(additionalName));
+    if (additionalValue === null) {
+      continue;
+    }
+    var additionalOn =
+      additionalValue === "1" || additionalValue.toLowerCase() === "true";
+    if (additionalToggle.checked !== additionalOn) {
+      additionalToggle.checked = additionalOn;
+      $(additionalToggle).trigger("change");
+    }
+  }
+
   $("#download_img").hide();
   $("#convert_elem").hide();
   $("#convert_elem_msg").hide();
@@ -1112,6 +1231,22 @@ $(document).ready(function () {
     var preview = document.getElementById(id);
     console.log("killfeed-generator " + id + ": " + preview);
     window.__selectedKillfeedHTML = preview.innerHTML;
+    var previewWeapon = null;
+    for (var pi = 0; pi < preview.children.length; pi++) {
+      var previewChild = preview.children[pi];
+      if (
+        previewChild.tagName === "IMG" &&
+        previewChild.classList.contains("sp_icon")
+      ) {
+        previewWeapon = previewChild;
+        break;
+      }
+    }
+    if (previewWeapon) {
+      window.__selectedKillfeedName = (previewWeapon.getAttribute("src") || "")
+        .replace(/^.*\//, "")
+        .replace(/\.(webp|png|jpg)$/, "");
+    }
     document.getElementById("target").innerHTML =
       "<div id='target_preview' id_target=" +
       id +
@@ -1141,15 +1276,22 @@ $(document).ready(function () {
   document
     .getElementById("download_link")
     .addEventListener("click", function (evt) {
+      var allContent = document.getElementById("download1");
       var canvases = Array.prototype.slice.call(
-        document.querySelectorAll("#killfeed-generator-output canvas"),
+        document.querySelectorAll(
+          "#kg-export-canvas-slot canvas, #killfeed-generator-output canvas",
+        ),
       );
-      if (canvases.length) {
-        if (document.getElementById("download1").checked) {
-          canvases.forEach(downloadCanvas);
-        } else {
-          downloadCanvas(canvases[canvases.length - 1]);
+      if (allContent && allContent.checked) {
+        if (typeof window.rkgClearExport === "function") {
+          window.rkgClearExport();
         }
+        takeScreenShot().then(function (result) {
+          var list = Array.isArray(result) ? result : [result];
+          list.forEach(downloadCanvas);
+        });
+      } else if (canvases.length) {
+        downloadCanvas(canvases[canvases.length - 1]);
       } else {
         takeScreenShot().then(function (result) {
           var list = Array.isArray(result) ? result : [result];
@@ -1166,14 +1308,14 @@ $(document).ready(function () {
       if (blob) {
         var url = URL.createObjectURL(blob);
         var link = document.createElement("a");
-        link.download = (canvas.id || "killfeed") + ".webp";
+        link.download = (canvas.id || "killfeed") + ".png";
         link.href = url;
         link.click();
         URL.revokeObjectURL(url);
       } else {
         console.error("Could not generate image blob.");
       }
-    }, "image/webp");
+    }, "image/png");
   }
 
   var itemStyleSection = document.querySelector(".item-style-tab");
@@ -1215,7 +1357,20 @@ $(document).ready(function () {
       "#killfeed-generator .killfeed-item",
     );
     for (var gi = 0; gi < gridItems.length; gi++) {
-      var simg = gridItems[gi].querySelector("img.sp_icon");
+      var simg = null;
+      for (var ci = 0; ci < gridItems[gi].children.length; ci++) {
+        var simgChild = gridItems[gi].children[ci];
+        if (
+          simgChild.tagName === "IMG" &&
+          simgChild.classList.contains("sp_icon")
+        ) {
+          simg = simgChild;
+          break;
+        }
+      }
+      if (!simg) {
+        simg = gridItems[gi].querySelector("img.sp_icon");
+      }
       var ssrc = simg ? simg.getAttribute("src") : "";
       var sname = ssrc.replace(/^.*\//, "").replace(/\.(webp|png|jpg)$/, "");
       if (sname === urlItem) {
@@ -1266,6 +1421,74 @@ $(document).ready(function () {
   if (styleApplied) {
     applyItemStyle();
     console.log("[url-params] item style overrides applied");
+  }
+
+  function collectUrlParams() {
+    var params = {};
+    ["convert", "export"].forEach(function (key) {
+      var flagValue = getUrlParam(key);
+      if (flagValue !== null) {
+        params[key] = flagValue;
+      }
+    });
+    var p1El = document.getElementById("player_1");
+    var p2El = document.getElementById("player_2");
+    if (p1El) {
+      params["player_1"] = p1El.value;
+    }
+    if (p2El) {
+      params["player_2"] = p2El.value;
+    }
+    if (window.__selectedKillfeedName) {
+      params["killfeed-item"] = window.__selectedKillfeedName;
+    }
+    urlStyleIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        params[id] = el.value;
+      }
+    });
+    var toggleInputs = document.querySelectorAll(
+      ".toggle-switch input[type='checkbox'][location][order]",
+    );
+    for (var i = 0; i < toggleInputs.length; i++) {
+      var toggleInput = toggleInputs[i];
+      if (!toggleInput.checked) {
+        continue;
+      }
+      var order = parseInt(toggleInput.getAttribute("order"), 10);
+      var name = additionals[order - 1];
+      if (name) {
+        params["ad_" + slugify(name)] = "1";
+      }
+    }
+    return params;
+  }
+
+  function writeUrlParams(params) {
+    var hashAnchor = window.location.hash.split("?")[0] || "";
+    var pairs = [];
+    Object.keys(params).forEach(function (key) {
+      pairs.push(
+        encodeURIComponent(key) + "=" + encodeURIComponent(params[key]),
+      );
+    });
+    var newUrl = window.location.pathname + "?" + pairs.join("&") + hashAnchor;
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, "", newUrl);
+    } else {
+      window.location.hash = hashAnchor + "?" + pairs.join("&");
+    }
+  }
+
+  var saveButton = document.querySelector(
+    ".kg-modal-foot [data-kg-settings-close]",
+  );
+  if (saveButton) {
+    saveButton.addEventListener("click", function () {
+      writeUrlParams(collectUrlParams());
+      console.log("[url-params] saved");
+    });
   }
 
   function urlFlag(name) {

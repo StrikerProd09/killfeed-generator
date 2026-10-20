@@ -19,6 +19,7 @@
   <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico">
   <link rel="stylesheet" href="assets/css/params_pubg.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/studio.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ERK4PD4QH4"></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSQ4MV82HE"></script>
@@ -39,48 +40,139 @@
   <script src="assets/js/screenshot-preview.js"></script>
   <script src="assets/js/navbar-toggler.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="assets/js/studio-ui.js" defer></script>
+  <script src="assets/js/aside-carousel.js" defer></script>
 </head>
 
-<body>
+<body class="kg-v2">
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="kg-logo-shape" viewBox="0 0 45 50">
+      <path
+        d="M0 21.8971L1.60142 28.8907L33.6299 5.75563L29.7544 0.401929L8.95196 15.4341L12.1068 19.8392L10.9217 20.6913L7.7669 16.2862L6.45374 17.2347L9.60854 21.6399L8.42349 22.492L5.26868 18.0868L3.89146 19.0836L7.04626 23.4887L5.86121 24.3408L2.70641 19.9357L0 21.8971ZM31.484 1.07717L33.8061 4.2926L35.2794 3.23151L32.9733 0L31.484 1.07717ZM2.91459 29.7428L6.35765 31.1093L12.5071 47.7974L20.9306 42.5723L17.0712 33.5852L26.1993 26.9936L22.8043 19.8071L36.3523 9.54984L34.4786 6.96141L2.91459 29.7428ZM21.3149 20.9325L23.9093 26.3987L16.3345 31.865L14.0125 26.463L14.9893 25.7235L16.8149 28.6656L18.7206 28.9228L16.879 26.2058L17.9039 23.5048C17.9039 23.5048 21.331 20.9325 21.3149 20.9325Z"
+        fill="var(--kg-color-white)" />
+      <path
+        d="M27.08 48.3923C20.7064 48.3923 14.9733 44.5499 12.5391 38.6496C10.105 32.7492 11.4501 25.9486 15.9501 21.4309C20.4501 16.9132 27.2242 15.5627 33.1014 18.0065C38.9786 20.4502 42.806 26.2058 42.806 32.6045C42.806 34.6785 42.3896 36.7203 41.6049 38.6496C40.8203 40.5627 39.6512 42.2991 38.1939 43.7621C36.7366 45.2251 35.0071 46.3988 33.0854 47.1865C31.1797 47.9743 29.1459 48.3923 27.08 48.3923ZM27.08 18.3602C21.3469 18.3602 16.1743 21.8328 13.9804 27.1544C11.7704 32.4759 12.9875 38.6013 17.0551 42.6688C21.1067 46.7364 27.2082 47.9582 32.5089 45.7557C37.7936 43.5531 41.2526 38.3602 41.2526 32.6045C41.2526 30.7235 40.8843 28.8746 40.1637 27.1544C39.459 25.4341 38.4181 23.8586 37.0889 22.5402C35.7758 21.2219 34.2224 20.1769 32.4929 19.4534C30.7793 18.7299 28.9377 18.3602 27.08 18.3602Z"
+        fill="var(--rkh-color-warning)" />
+      <path
+        d="M27.0801 21.2539C26.9733 21.2539 26.8719 21.2379 26.7758 21.2057C26.6798 21.1628 26.5943 21.1039 26.5196 21.0289C26.4556 20.9538 26.4022 20.8681 26.3595 20.7716C26.3168 20.6859 26.2954 20.5894 26.2954 20.4822V15.3054C26.2954 15.1125 26.3755 14.9035 26.5196 14.7588C26.6798 14.6141 26.8719 14.5337 27.0801 14.5337C27.2883 14.5337 27.4805 14.6141 27.6246 14.7588C27.7687 14.9035 27.8488 15.1125 27.8488 15.3054V20.4822C27.8488 20.5894 27.8274 20.6859 27.7847 20.7716C27.7527 20.8681 27.6993 20.9538 27.6246 21.0289C27.5499 21.1039 27.4644 21.1628 27.3684 21.2057C27.2723 21.2379 27.1762 21.2539 27.0801 21.2539Z"
+        fill="var(--rkh-color-warning)" />
+      <path
+        d="M27.0801 49.9034C26.9733 49.9034 26.8719 49.8819 26.7758 49.8391C26.6798 49.8069 26.5943 49.7533 26.5196 49.6783C26.4556 49.6033 26.4022 49.5175 26.3595 49.421C26.3168 49.3246 26.2954 49.2281 26.2954 49.1317V43.9548C26.2954 43.7458 26.3755 43.5529 26.5196 43.4082C26.6798 43.2635 26.8719 43.1831 27.0801 43.1831C27.2883 43.1831 27.4805 43.2635 27.6246 43.4082C27.7687 43.5529 27.8488 43.7458 27.8488 43.9548V49.1317C27.8488 49.2281 27.8274 49.3246 27.7847 49.421C27.7527 49.5175 27.6993 49.6033 27.6246 49.6783C27.5499 49.7533 27.4644 49.8069 27.3684 49.8391C27.2723 49.8819 27.1762 49.9034 27.0801 49.9034Z"
+        fill="var(--rkh-color-warning)" />
+      <path
+        d="M44.1833 33.3764H39.0428C38.8346 33.3764 38.6424 33.296 38.4823 33.1513C38.3381 33.0066 38.2581 32.8137 38.2581 32.6047C38.2581 32.3957 38.3381 32.2027 38.4823 32.042C38.6424 31.8973 38.8346 31.8169 39.0428 31.8169H44.1833C44.3915 31.8169 44.5837 31.8973 44.7278 32.042C44.8879 32.2027 44.968 32.3957 44.968 32.6047C44.968 32.8137 44.8879 33.0066 44.7278 33.1513C44.5837 33.296 44.3915 33.3764 44.1833 33.3764Z"
+        fill="var(--rkh-color-warning)" />
+      <path
+        d="M14.9734 32.8295H9.81678C9.62461 32.8295 9.41642 32.7491 9.2723 32.6044C9.12817 32.4597 9.0481 32.2668 9.0481 32.0578C9.0481 31.8488 9.12817 31.6559 9.2723 31.5112C9.41642 31.3665 9.62461 31.27 9.81678 31.27H14.9734C15.1815 31.27 15.3737 31.3665 15.5178 31.5112C15.662 31.6559 15.742 31.8488 15.742 32.0578C15.742 32.2668 15.662 32.4597 15.5178 32.6044C15.3737 32.7491 15.1815 32.8295 14.9734 32.8295Z"
+        fill="var(--rkh-color-warning)" />
+      <path
+        d="M27.08 34.8232C26.1832 34.8232 25.3825 34.2766 25.0302 33.4567C24.6939 32.6207 24.8861 31.6721 25.5106 31.029C26.1512 30.402 27.096 30.2091 27.9128 30.5467C28.7455 30.9004 29.29 31.7043 29.29 32.6046C29.29 32.894 29.2259 33.1834 29.1138 33.4406C28.9964 33.7086 28.8362 33.9497 28.6334 34.1641C28.4306 34.3784 28.1903 34.5392 27.9128 34.6464C27.6565 34.7589 27.3683 34.8232 27.08 34.8232ZM27.08 31.9454C26.8078 31.9454 26.5676 32.1062 26.4715 32.3474C26.3594 32.5885 26.4234 32.8779 26.6156 33.0708C26.7918 33.2638 27.08 33.312 27.3202 33.2155C27.5765 33.103 27.7366 32.8618 27.7366 32.6046C27.7366 32.5188 27.7206 32.4331 27.6886 32.3474C27.6565 32.2616 27.6085 32.1919 27.5444 32.1384C27.4804 32.074 27.4056 32.0258 27.3202 31.9937C27.2455 31.9615 27.1654 31.9454 27.08 31.9454Z"
+        fill="var(--rkh-color-warning)" />
+    </symbol>
+    <symbol id="kg-icon-gear" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle>
+      <path
+        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="kg-icon-close" viewBox="0 0 24 24">
+      <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      </path>
+    </symbol>
+    <symbol id="kg-icon-gameplay" viewBox="0 0 24 24">
+      <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
+      <path d="M10 9l5 3-5 3z" fill="currentColor"></path>
+    </symbol>
+    <symbol id="kg-icon-screenshot" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"></rect>
+      <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"></circle>
+      <path d="M21 15l-5-5L5 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="kg-icon-download" viewBox="0 0 24 24">
+      <path d="M12 3v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      <path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path d="M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </symbol>
+    <symbol id="kg-icon-image" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"></rect>
+      <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"></circle>
+      <path d="m21 15-5-5L5 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="kg-icon-eye" viewBox="0 0 24 24">
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linejoin="round"></path>
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle>
+    </symbol>
+    <symbol id="kg-icon-guide" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle>
+      <path d="M9.5 9a2.5 2.5 0 1 1 4 2c-1 .75-1.5 1.25-1.5 2.5" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round"></path>
+      <circle cx="12" cy="17" r="1" fill="currentColor"></circle>
+    </symbol>
+    <symbol id="kg-icon-expand" viewBox="0 0 24 24">
+      <path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="kg-icon-crosshair" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+      <path d="M12 2v4M12 18v4M2 12h4M18 12h4" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round"></path>
+      <circle cx="12" cy="12" r="1" fill="currentColor"></circle>
+    </symbol>
+    <symbol id="kg-icon-zap" viewBox="0 0 24 24">
+      <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linejoin="round"></path>
+    </symbol>
+    <symbol id="kg-icon-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle>
+      <path d="m8 12 3 3 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </symbol>
+  </svg>
+
   <header>
     <div class="site-header-bar">
       <div class="brand">
         <a href="index.html" aria-label="KillFeed Generator">
-        <svg width="45" height="50" viewBox="0 0 45 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M0 21.8971L1.60142 28.8907L33.6299 5.75563L29.7544 0.401929L8.95196 15.4341L12.1068 19.8392L10.9217 20.6913L7.7669 16.2862L6.45374 17.2347L9.60854 21.6399L8.42349 22.492L5.26868 18.0868L3.89146 19.0836L7.04626 23.4887L5.86121 24.3408L2.70641 19.9357L0 21.8971ZM31.484 1.07717L33.8061 4.2926L35.2794 3.23151L32.9733 0L31.484 1.07717ZM2.91459 29.7428L6.35765 31.1093L12.5071 47.7974L20.9306 42.5723L17.0712 33.5852L26.1993 26.9936L22.8043 19.8071L36.3523 9.54984L34.4786 6.96141L2.91459 29.7428ZM21.3149 20.9325L23.9093 26.3987L16.3345 31.865L14.0125 26.463L14.9893 25.7235L16.8149 28.6656L18.7206 28.9228L16.879 26.2058L17.9039 23.5048C17.9039 23.5048 21.331 20.9325 21.3149 20.9325Z"
-            fill="var(--rkg-color-white)" />
-          <path
-            d="M27.08 48.3923C20.7064 48.3923 14.9733 44.5499 12.5391 38.6496C10.105 32.7492 11.4501 25.9486 15.9501 21.4309C20.4501 16.9132 27.2242 15.5627 33.1014 18.0065C38.9786 20.4502 42.806 26.2058 42.806 32.6045C42.806 34.6785 42.3896 36.7203 41.6049 38.6496C40.8203 40.5627 39.6512 42.2991 38.1939 43.7621C36.7366 45.2251 35.0071 46.3988 33.0854 47.1865C31.1797 47.9743 29.1459 48.3923 27.08 48.3923ZM27.08 18.3602C21.3469 18.3602 16.1743 21.8328 13.9804 27.1544C11.7704 32.4759 12.9875 38.6013 17.0551 42.6688C21.1067 46.7364 27.2082 47.9582 32.5089 45.7557C37.7936 43.5531 41.2526 38.3602 41.2526 32.6045C41.2526 30.7235 40.8843 28.8746 40.1637 27.1544C39.459 25.4341 38.4181 23.8586 37.0889 22.5402C35.7758 21.2219 34.2224 20.1769 32.4929 19.4534C30.7793 18.7299 28.9377 18.3602 27.08 18.3602Z"
-            fill="var(--rkh-color-warning)" />
-          <path
-            d="M27.0801 21.2539C26.9733 21.2539 26.8719 21.2379 26.7758 21.2057C26.6798 21.1628 26.5943 21.1039 26.5196 21.0289C26.4556 20.9538 26.4022 20.8681 26.3595 20.7716C26.3168 20.6859 26.2954 20.5894 26.2954 20.4822V15.3054C26.2954 15.1125 26.3755 14.9035 26.5196 14.7588C26.6798 14.6141 26.8719 14.5337 27.0801 14.5337C27.2883 14.5337 27.4805 14.6141 27.6246 14.7588C27.7687 14.9035 27.8488 15.1125 27.8488 15.3054V20.4822C27.8488 20.5894 27.8274 20.6859 27.7847 20.7716C27.7527 20.8681 27.6993 20.9538 27.6246 21.0289C27.5499 21.1039 27.4644 21.1628 27.3684 21.2057C27.2723 21.2379 27.1762 21.2539 27.0801 21.2539Z"
-            fill="var(--rkh-color-warning)" />
-          <path
-            d="M27.0801 49.9034C26.9733 49.9034 26.8719 49.8819 26.7758 49.8391C26.6798 49.8069 26.5943 49.7533 26.5196 49.6783C26.4556 49.6033 26.4022 49.5175 26.3595 49.421C26.3168 49.3246 26.2954 49.2281 26.2954 49.1317V43.9548C26.2954 43.7458 26.3755 43.5529 26.5196 43.4082C26.6798 43.2635 26.8719 43.1831 27.0801 43.1831C27.2883 43.1831 27.4805 43.2635 27.6246 43.4082C27.7687 43.5529 27.8488 43.7458 27.8488 43.9548V49.1317C27.8488 49.2281 27.8274 49.3246 27.7847 49.421C27.7527 49.5175 27.6993 49.6033 27.6246 49.6783C27.5499 49.7533 27.4644 49.8069 27.3684 49.8391C27.2723 49.8819 27.1762 49.9034 27.0801 49.9034Z"
-            fill="var(--rkh-color-warning)" />
-          <path
-            d="M44.1833 33.3764H39.0428C38.8346 33.3764 38.6424 33.296 38.4823 33.1513C38.3381 33.0066 38.2581 32.8137 38.2581 32.6047C38.2581 32.3957 38.3381 32.2027 38.4823 32.042C38.6424 31.8973 38.8346 31.8169 39.0428 31.8169H44.1833C44.3915 31.8169 44.5837 31.8973 44.7278 32.042C44.8879 32.2027 44.968 32.3957 44.968 32.6047C44.968 32.8137 44.8879 33.0066 44.7278 33.1513C44.5837 33.296 44.3915 33.3764 44.1833 33.3764Z"
-            fill="var(--rkh-color-warning)" />
-          <path
-            d="M14.9734 32.8295H9.81678C9.62461 32.8295 9.41642 32.7491 9.2723 32.6044C9.12817 32.4597 9.0481 32.2668 9.0481 32.0578C9.0481 31.8488 9.12817 31.6559 9.2723 31.5112C9.41642 31.3665 9.62461 31.27 9.81678 31.27H14.9734C15.1815 31.27 15.3737 31.3665 15.5178 31.5112C15.662 31.6559 15.742 31.8488 15.742 32.0578C15.742 32.2668 15.662 32.4597 15.5178 32.6044C15.3737 32.7491 15.1815 32.8295 14.9734 32.8295Z"
-            fill="var(--rkh-color-warning)" />
-          <path
-            d="M27.08 34.8232C26.1832 34.8232 25.3825 34.2766 25.0302 33.4567C24.6939 32.6207 24.8861 31.6721 25.5106 31.029C26.1512 30.402 27.096 30.2091 27.9128 30.5467C28.7455 30.9004 29.29 31.7043 29.29 32.6046C29.29 32.894 29.2259 33.1834 29.1138 33.4406C28.9964 33.7086 28.8362 33.9497 28.6334 34.1641C28.4306 34.3784 28.1903 34.5392 27.9128 34.6464C27.6565 34.7589 27.3683 34.8232 27.08 34.8232ZM27.08 31.9454C26.8078 31.9454 26.5676 32.1062 26.4715 32.3474C26.3594 32.5885 26.4234 32.8779 26.6156 33.0708C26.7918 33.2638 27.08 33.312 27.3202 33.2155C27.5765 33.103 27.7366 32.8618 27.7366 32.6046C27.7366 32.5188 27.7206 32.4331 27.6886 32.3474C27.6565 32.2616 27.6085 32.1919 27.5444 32.1384C27.4804 32.074 27.4056 32.0258 27.3202 31.9937C27.2455 31.9615 27.1654 31.9454 27.08 31.9454Z"
-            fill="var(--rkh-color-warning)" />
-        </svg>
+          <svg width="45" height="50" viewBox="0 0 45 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0 21.8971L1.60142 28.8907L33.6299 5.75563L29.7544 0.401929L8.95196 15.4341L12.1068 19.8392L10.9217 20.6913L7.7669 16.2862L6.45374 17.2347L9.60854 21.6399L8.42349 22.492L5.26868 18.0868L3.89146 19.0836L7.04626 23.4887L5.86121 24.3408L2.70641 19.9357L0 21.8971ZM31.484 1.07717L33.8061 4.2926L35.2794 3.23151L32.9733 0L31.484 1.07717ZM2.91459 29.7428L6.35765 31.1093L12.5071 47.7974L20.9306 42.5723L17.0712 33.5852L26.1993 26.9936L22.8043 19.8071L36.3523 9.54984L34.4786 6.96141L2.91459 29.7428ZM21.3149 20.9325L23.9093 26.3987L16.3345 31.865L14.0125 26.463L14.9893 25.7235L16.8149 28.6656L18.7206 28.9228L16.879 26.2058L17.9039 23.5048C17.9039 23.5048 21.331 20.9325 21.3149 20.9325Z"
+              fill="var(--kg-color-white)" />
+            <path
+              d="M27.08 48.3923C20.7064 48.3923 14.9733 44.5499 12.5391 38.6496C10.105 32.7492 11.4501 25.9486 15.9501 21.4309C20.4501 16.9132 27.2242 15.5627 33.1014 18.0065C38.9786 20.4502 42.806 26.2058 42.806 32.6045C42.806 34.6785 42.3896 36.7203 41.6049 38.6496C40.8203 40.5627 39.6512 42.2991 38.1939 43.7621C36.7366 45.2251 35.0071 46.3988 33.0854 47.1865C31.1797 47.9743 29.1459 48.3923 27.08 48.3923ZM27.08 18.3602C21.3469 18.3602 16.1743 21.8328 13.9804 27.1544C11.7704 32.4759 12.9875 38.6013 17.0551 42.6688C21.1067 46.7364 27.2082 47.9582 32.5089 45.7557C37.7936 43.5531 41.2526 38.3602 41.2526 32.6045C41.2526 30.7235 40.8843 28.8746 40.1637 27.1544C39.459 25.4341 38.4181 23.8586 37.0889 22.5402C35.7758 21.2219 34.2224 20.1769 32.4929 19.4534C30.7793 18.7299 28.9377 18.3602 27.08 18.3602Z"
+              fill="var(--rkh-color-warning)" />
+            <path
+              d="M27.0801 21.2539C26.9733 21.2539 26.8719 21.2379 26.7758 21.2057C26.6798 21.1628 26.5943 21.1039 26.5196 21.0289C26.4556 20.9538 26.4022 20.8681 26.3595 20.7716C26.3168 20.6859 26.2954 20.5894 26.2954 20.4822V15.3054C26.2954 15.1125 26.3755 14.9035 26.5196 14.7588C26.6798 14.6141 26.8719 14.5337 27.0801 14.5337C27.2883 14.5337 27.4805 14.6141 27.6246 14.7588C27.7687 14.9035 27.8488 15.1125 27.8488 15.3054V20.4822C27.8488 20.5894 27.8274 20.6859 27.7847 20.7716C27.7527 20.8681 27.6993 20.9538 27.6246 21.0289C27.5499 21.1039 27.4644 21.1628 27.3684 21.2057C27.2723 21.2379 27.1762 21.2539 27.0801 21.2539Z"
+              fill="var(--rkh-color-warning)" />
+            <path
+              d="M27.0801 49.9034C26.9733 49.9034 26.8719 49.8819 26.7758 49.8391C26.6798 49.8069 26.5943 49.7533 26.5196 49.6783C26.4556 49.6033 26.4022 49.5175 26.3595 49.421C26.3168 49.3246 26.2954 49.2281 26.2954 49.1317V43.9548C26.2954 43.7458 26.3755 43.5529 26.5196 43.4082C26.6798 43.2635 26.8719 43.1831 27.0801 43.1831C27.2883 43.1831 27.4805 43.2635 27.6246 43.4082C27.7687 43.5529 27.8488 43.7458 27.8488 43.9548V49.1317C27.8488 49.2281 27.8274 49.3246 27.7847 49.421C27.7527 49.5175 27.6993 49.6033 27.6246 49.6783C27.5499 49.7533 27.4644 49.8069 27.3684 49.8391C27.2723 49.8819 27.1762 49.9034 27.0801 49.9034Z"
+              fill="var(--rkh-color-warning)" />
+            <path
+              d="M44.1833 33.3764H39.0428C38.8346 33.3764 38.6424 33.296 38.4823 33.1513C38.3381 33.0066 38.2581 32.8137 38.2581 32.6047C38.2581 32.3957 38.3381 32.2027 38.4823 32.042C38.6424 31.8973 38.8346 31.8169 39.0428 31.8169H44.1833C44.3915 31.8169 44.5837 31.8973 44.7278 32.042C44.8879 32.2027 44.968 32.3957 44.968 32.6047C44.968 32.8137 44.8879 33.0066 44.7278 33.1513C44.5837 33.296 44.3915 33.3764 44.1833 33.3764Z"
+              fill="var(--rkh-color-warning)" />
+            <path
+              d="M14.9734 32.8295H9.81678C9.62461 32.8295 9.41642 32.7491 9.2723 32.6044C9.12817 32.4597 9.0481 32.2668 9.0481 32.0578C9.0481 31.8488 9.12817 31.6559 9.2723 31.5112C9.41642 31.3665 9.62461 31.27 9.81678 31.27H14.9734C15.1815 31.27 15.3737 31.3665 15.5178 31.5112C15.662 31.6559 15.742 31.8488 15.742 32.0578C15.742 32.2668 15.662 32.4597 15.5178 32.6044C15.3737 32.7491 15.1815 32.8295 14.9734 32.8295Z"
+              fill="var(--rkh-color-warning)" />
+            <path
+              d="M27.08 34.8232C26.1832 34.8232 25.3825 34.2766 25.0302 33.4567C24.6939 32.6207 24.8861 31.6721 25.5106 31.029C26.1512 30.402 27.096 30.2091 27.9128 30.5467C28.7455 30.9004 29.29 31.7043 29.29 32.6046C29.29 32.894 29.2259 33.1834 29.1138 33.4406C28.9964 33.7086 28.8362 33.9497 28.6334 34.1641C28.4306 34.3784 28.1903 34.5392 27.9128 34.6464C27.6565 34.7589 27.3683 34.8232 27.08 34.8232ZM27.08 31.9454C26.8078 31.9454 26.5676 32.1062 26.4715 32.3474C26.3594 32.5885 26.4234 32.8779 26.6156 33.0708C26.7918 33.2638 27.08 33.312 27.3202 33.2155C27.5765 33.103 27.7366 32.8618 27.7366 32.6046C27.7366 32.5188 27.7206 32.4331 27.6886 32.3474C27.6565 32.2616 27.6085 32.1919 27.5444 32.1384C27.4804 32.074 27.4056 32.0258 27.3202 31.9937C27.2455 31.9615 27.1654 31.9454 27.08 31.9454Z"
+              fill="var(--rkh-color-warning)" />
+          </svg>
         </a>
         <a href="#home">
-        <span class="site-title"><span class="subtile">PUBG: Battlegrounds</span><br>KillFeed Generator</span>
+          <span class="site-title"><span class="subtile">PUBG: Battlegrounds</span><br>KillFeed Generator</span>
         </a>
       </div>
       <div class="main-nav-section">
         <nav class="main-nav">
-          <a href="#home">Home</a>
-          <a href="#killfeed-generator">Generator</a>
-          <a href="#preview-killfeed-gameplay">Preview</a>
-          <a href="#preview-killfeed-screenshot">Screenshot</a>
-          <a href="#how-to-use">Help</a>
+          <a href="index.html">Home</a>
+          <a href="#studio">Generator</a>
+          <a href="#previews" data-kg-open-tab="gameplay">Preview Video</a>
+          <a href="#previews" data-kg-open-tab="screenshot">Preview Photo</a>
+          <a href="#how-to-use" data-kg-guide-toggle aria-controls="kg-guide-drawer" aria-expanded="false">Help</a>
         </nav>
         <button class="nav-share" id="nav-share" type="button" aria-label="Share link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -108,172 +200,365 @@
       <section class="main-section">
         <section class="hero" id="home">
           <div class="hero-inner">
-            <span class="site-title width-md-100">PUBG <span style="color:var(--rkg-color-primary)">KillFeed</span>
-              Generator</span>
-            <p class="hero-subtitle">Generate <span style="font-style: italic;">PUBG Death Notice Overlays</span> for
-              photo-video editing, fast and simple to use.</p>
+            <span class="kg-eyebrow">PUBG</span>
+            <h1 class="hero-title">PUBG <span class="kg-accent-text">KillFeed</span> Generator</h1>
+            <p class="hero-subtitle">Design clean PUBG death-notice overlays for your videos in a few clicks.
+              Pick a weapon, fine-tune the look in the Customizer, and download a ready-to-use image.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#studio">Start creating</a>
+              <button class="btn btn-secondary" type="button" data-kg-guide-toggle aria-controls="kg-guide-drawer"
+                aria-expanded="false">
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-guide"></use>
+                </svg>
+                Guide
+              </button>
+            </div>
+            <ul class="hero-stats">
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-crosshair"></use>
+                </svg>
+                <strong data-kg-weapon-count>61</strong><span>weapons</span>
+              </li>
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-zap"></use>
+                </svg>
+                <strong>Instant</strong><span>export</span>
+              </li>
+              <li>
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-check"></use>
+                </svg>
+                <strong>Free</strong><span>to use</span>
+              </li>
+            </ul>
             <div class="time"><span>Published on: </span>
               <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 8V12L15 15" stroke="var(--rkg-color-white)" stroke-width="2" stroke-linecap="round" />
-                <circle cx="12" cy="12" r="9" stroke="var(--rkg-color-white)" stroke-width="2" />
+                <path d="M12 8V12L15 15" stroke="var(--kg-color-white)" stroke-width="2" stroke-linecap="round" />
+                <circle cx="12" cy="12" r="9" stroke="var(--kg-color-white)" stroke-width="2" />
               </svg>
               <time datetime="2026-08-09">Aug 2026</time>
             </div>
           </div>
-          <div class="hero-background" role="img" aria-label="Hero Banner KillFeed Generator preview image"
-            style="background-image: url('assets/img/banners/pubg_editing_contest/pubg_editing_contest_background.webp');">
+          <div class="hero-background" role="img" aria-label="Hero banner KillFeed Generator preview image"
+            style="background-image: url('assets/img/banners/killfeed_generator/killfeed_generator_pubg.webp');">
           </div>
         </section>
 
-        <div class="container">
-          <section class="settings-tab overlay-noise">
-            <h2>Settings</h2>
-            <div class="settings-actions">
-              <button class="btn btn-primary btn-active" id="customize" onclick="customize()">Options</button>
-              <a href="#preview-killfeed-gameplay" class="btn btn-primary">Preview</a>
+        <div class="kg-studio">
+          <section class="kg-picker" id="studio">
+            <div class="kg-section-head">
+              <div>
+                <span class="kg-step">Step 1 — Choose</span>
+                <h2 id="kg-picker-title">Pick your killfeed</h2>
+                <p>Click any weapon below to load it into the preview.</p>
+              </div>
+              <button class="kg-icon-btn kg-picker-expand" id="kg-picker-expand" type="button" data-kg-picker-expand
+                aria-controls="kg-settings-drawer" aria-expanded="false" aria-haspopup="dialog"
+                aria-label="Open customizer" title="Open customizer">
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-expand"></use>
+                </svg>
+              </button>
             </div>
-            <div id="options"></div>
+
+            <div class="kg-picker-hint">
+              <span>Want to change player names, colors or the item style?</span>
+              <button class="kg-link-btn" type="button" data-kg-settings-toggle aria-controls="kg-settings-drawer"
+                aria-expanded="false">
+                <svg width="14" height="14" aria-hidden="true">
+                  <use href="#kg-icon-gear"></use>
+                </svg>
+                Open Customizer
+              </button>
+            </div>
+
+            <div id="killfeed-generator" params="killfeed-pubg-params.json"></div>
           </section>
-          <section style="margin-top: var(--rkg-size-xl)">
-            <h3>Choose an element:</h3>
-          </section>
-          <div id="killfeed-generator" params="killfeed-pubg-params.json"></div>
+
+          <div class="kg-preview-column">
+            <section class="output-section" id="killfeed-generator-output">
+              <div class="kg-preview-head">
+                <div class="kg-section-head">
+                  <div>
+                    <span class="kg-step">Step 2 — Preview</span>
+                    <h3>Preview</h3>
+                    <p>Your pick appears here. Open the Customizer to adjust names, colors and style.</p>
+                  </div>
+                </div>
+                <button class="kg-customize-btn" id="customize" type="button" data-kg-settings-toggle
+                  aria-controls="kg-settings-drawer" aria-expanded="false">
+                  <svg aria-hidden="true">
+                    <use href="#kg-icon-gear"></use>
+                  </svg>
+                  <span>Customize</span>
+                </button>
+              </div>
+
+              <p class="kg-preview-empty">Pick a weapon from the list to Preview in Media here.</p>
+
+              <div id="preview-box-output" class="flex-center preview-box overlay-noise">
+                <span class="kg-output-label">Selected killfeed</span>
+                <div id="preview_content">
+                  <div id="target"></div>
+                </div>
+                <a class="btn btn-secondary kg-go-export" href="#export">
+                  <svg aria-hidden="true">
+                    <use href="#kg-icon-download"></use>
+                  </svg>
+                  Go to Export
+                </a>
+                <p class="kg-live-hint">The preview updates instantly while you pick a weapon or change settings in the
+                  Customizer.</p>
+              </div>
+            </section>
+          </div>
         </div>
 
-        <section class="output-section" id="killfeed-generator-output">
-          <div id="preview-box-output" class="flex-center preview-box overlay-noise"">
-          <span style=" display: block;">Selected Element: </span>
-            <div id="preview_content">
-              <div id="target"></div>
+        <div class="kg-modal-backdrop" id="kg-preview-backdrop" hidden></div>
+        <section class="kg-previews" id="previews">
+          <div class="kg-section-head">
+            <div>
+              <span class="kg-step">Step 3 — Check</span>
+              <h2 id="kg-preview-title">Preview in Media</h2>
+              <p>Check the same killfeed over real gameplay footage or a screenshot.</p>
             </div>
-            <button class="btn btn-primary" id="convert_elem" onclick="takeScreenShot()">Convert</button>
-            <span id="convert_elem_msg">Element converted to image. Scoll down to download it.</span>
+            <button class="kg-icon-btn kg-preview-expand" id="kg-preview-expand" type="button" aria-controls="previews"
+              aria-expanded="false" aria-haspopup="dialog" aria-label="Open previews fullscreen"
+              title="View previews fullscreen">
+              <svg aria-hidden="true">
+                <use href="#kg-icon-expand"></use>
+              </svg>
+            </button>
           </div>
-          <div id="download_img">
+          <button class="kg-icon-btn kg-preview-close" id="kg-preview-close" type="button"
+            aria-label="Close fullscreen previews" title="Close" hidden>
+            <svg aria-hidden="true">
+              <use href="#kg-icon-close"></use>
+            </svg>
+          </button>
 
-            <button class="btn btn-primary" id="download_link">Download</button>
-            <p>If the download don't start: Right click on image - Save image as...</p>
-          </div>
-        </section>
+          <div class="kg-tabs">
+            <div class="kg-tablist" role="tablist" aria-label="Preview type">
+              <button class="kg-tab is-active" id="kg-tab-gameplay" type="button" role="tab" aria-selected="true"
+                aria-controls="kg-panel-gameplay" data-kg-tab="gameplay">
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-gameplay"></use>
+                </svg>
+                Video
+              </button>
+              <button class="kg-tab" id="kg-tab-screenshot" type="button" role="tab" aria-selected="false"
+                aria-controls="kg-panel-screenshot" data-kg-tab="screenshot" tabindex="-1">
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-screenshot"></use>
+                </svg>
+                Photo
+              </button>
+            </div>
 
-        <section class="preview-killfeed-gameplay" id="preview-killfeed-gameplay">
+            <div class="kg-tabpanel" id="kg-panel-gameplay" role="tabpanel" aria-labelledby="kg-tab-gameplay"
+              data-kg-panel="gameplay">
+              <div class="preview-killfeed-gameplay" id="preview-killfeed-gameplay">
+                <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_2.webm" fps="24" killfeed-item-start="75"
+                  killfeed-item-end="270" data-popup="true">
+                  <killfeed-item img="UI_weapon_icon_ump9" player_name_1="Player" player_name_2="Enemy"
+                    params_root_id="killfeed-generator" id="19_L96"></killfeed-item>
+                </div>
 
-          <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_2.webm" fps="24" killfeed-item-start="75"
-            killfeed-item-end="270" data-popup="true">
-            <killfeed-item img="UI_weapon_icon_ump9" player_name_1="Player" player_name_2="Enemy"
-              params_root_id="killfeed-generator" id="19_L96"></killfeed-item>
-          </div>
+                <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_3.webm" fps="24" killfeed-item-start="24"
+                  killfeed-item-end="220" data-popup="true">
+                  <killfeed-item img="UI_weapon_icon_kar98k" player_name_1="Player" player_name_2="Enemy"
+                    params_root_id="killfeed-generator" id="2_Bolt"></killfeed-item>
+                </div>
 
-          <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_3.webm" fps="24" killfeed-item-start="24"
-            killfeed-item-end="220" data-popup="true">
-            <killfeed-item img="UI_weapon_icon_kar98k" player_name_1="Player" player_name_2="Enemy"
-              params_root_id="killfeed-generator" id="2_Bolt"></killfeed-item>
-          </div>
+                <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_1.webm" killfeed-item-start="150"
+                  killfeed-item-end="264" fps="24" data-popup="true">
+                  <killfeed-item img="UI_weapon_icon_beryl_m762" player_name_1="Player" player_name_2="Enemy"
+                    params_root_id="killfeed-generator" id="21_LR-300"></killfeed-item>
+                </div>
+              </div>
+            </div>
 
-          <div class="gameplay" root="assets/vid/gameplay/gameplay_pubg_1.webm" killfeed-item-start="150"
-            killfeed-item-end="264" fps="24" data-popup="true">
-            <killfeed-item img="UI_weapon_icon_beryl_m762" player_name_1="Player" player_name_2="Enemy"
-              params_root_id="killfeed-generator" id="21_LR-300"></killfeed-item>
-          </div>
-
-        </section>
-
-        <section class="preview-killfeed-screenshot" id="preview-killfeed-screenshot"
-          data-preview-img="assets/img/gameplay/gameplay_pubg.webp">
-          <h3>Preview in Screenshot</h3>
-          <div class="option-group">
-            <div class="option-field">
-              <span>Image: </span>
-              <input type="file" id="screenshot_file"
-                accept="image/png,image/jpg,image/jpeg,image/avif,image/webp,image/bmp">
+            <div class="kg-tabpanel" id="kg-panel-screenshot" role="tabpanel" aria-labelledby="kg-tab-screenshot"
+              data-kg-panel="screenshot" hidden>
+              <section class="preview-killfeed-screenshot" id="preview-killfeed-screenshot"
+                data-preview-img="assets/img/gameplay/gameplay_pubg.webp">
+                <p class="kg-tabpanel-hint">Upload your own screenshot, then add the selected killfeed to the photo.
+                </p>
+                <div class="option-group">
+                  <div class="option-field">
+                    <span>Image</span>
+                    <input type="file" id="screenshot_file"
+                      accept="image/png,image/jpg,image/jpeg,image/avif,image/webp,image/bmp">
+                  </div>
+                </div>
+                <div id="screenshot-stage">
+                  <img id="screenshot-image" alt="Screenshot preview">
+                  <div id="screenshot-killfeeds"></div>
+                </div>
+                <div class="screenshot-actions">
+                  <button class="btn btn-primary" id="screenshot_add_elem" type="button">
+                    <svg aria-hidden="true">
+                      <use href="#kg-icon-screenshot"></use>
+                    </svg>
+                    Add in Photo
+                  </button>
+                  <button class="btn btn-primary" id="screenshot_download" type="button">
+                    <svg aria-hidden="true">
+                      <use href="#kg-icon-download"></use>
+                    </svg>
+                    Download Image
+                  </button>
+                  <label class="screenshot-zoom-control option-field">
+                    <span>Zoom</span>
+                    <input type="range" id="screenshot_zoom" min="0" max="200" value="100" step="1"
+                      style="width: 100%;">
+                  </label>
+                </div>
+              </section>
             </div>
           </div>
-          <div id="screenshot-stage">
-            <img id="screenshot-image" alt="Screenshot preview">
-            <div id="screenshot-killfeeds"></div>
+        </section>
+
+        <section class="kg-export" id="export">
+          <div class="kg-section-head kg-export-head">
+            <div>
+              <span class="kg-step">Step 4 — Export</span>
+              <h2>Download your killfeed</h2>
+              <p>Your selected killfeed is rendered as a high-resolution PNG with a transparent background.</p>
+            </div>
+            <div class="kg-export-head-actions">
+              <span class="kg-export-badge">PNG · Transparent</span>
+              <button class="kg-customize-btn" type="button" data-kg-settings-toggle aria-controls="kg-settings-drawer"
+                aria-expanded="false">
+                <svg aria-hidden="true">
+                  <use href="#kg-icon-gear"></use>
+                </svg>
+                <span>Customize</span>
+              </button>
+            </div>
           </div>
-          <div class="screenshot-actions">
-            <button class="btn btn-primary" id="screenshot_add_elem" type="button">Add in Photo</button>
-            <button class="btn btn-primary" id="screenshot_download" type="button">Download Image</button>
-            <label class="screenshot-zoom-control option-field">
-              <span>Zoom:</span>
-              <input type="range" id="screenshot_zoom" min="0" max="200" value="100" step="1" style="width: 100%;">
-            </label>
+          <div class="kg-export-grid">
+            <div class="kg-export-preview" id="kg-export-preview">
+              <div class="kg-export-canvas-slot" id="kg-export-canvas-slot"></div>
+              <p class="kg-export-empty">Your image will appear here after the first conversion.</p>
+            </div>
+            <div class="kg-export-actions">
+              <div id="download_img">
+                <button class="btn btn-primary" id="download_link" type="button">
+                  <svg aria-hidden="true">
+                    <use href="#kg-icon-download"></use>
+                  </svg>
+                  Download image
+                </button>
+                <p>Transparent PNG. If the download doesn't start, right-click the preview and choose
+                  <strong>Save image as…</strong>
+                </p>
+              </div>
+              <div class="kg-export-refresh">
+                <button class="btn btn-secondary" id="convert_elem" type="button" onclick="takeScreenShot()">
+                  <svg aria-hidden="true">
+                    <use href="#kg-icon-image"></use>
+                  </svg>
+                  Refresh image
+                </button>
+                <span id="convert_elem_msg">Image ready. Use the download button above.</span>
+              </div>
+              <ul class="kg-export-points">
+                <li>High-resolution PNG</li>
+                <li>Transparent background</li>
+                <li>No account needed</li>
+              </ul>
+            </div>
           </div>
         </section>
 
-        <section class="how-to-use-section overlay-noise" id="how-to-use">
-          <h2>How to Use</h2>
-          <hr class="divider">
-          <p>In the page, you can customize Player 1 and Player 2 names, enable the headshot icon, download a single
-            item, or download all items at once.</p>
-          <p><strong>To download a single item:</strong></p>
-          <ol>
-            <li>Left-click on the item you want to download.</li>
-            <li>Scroll to the bottom of the page and click the <strong>Convert</strong> button to transform the HTML
-              element into a canvas.</li>
-            <li>use the <strong>Download</strong> button or Right-click on the generated canvas element, select
-              <strong>Save image as...</strong>, and choose a name
-              and location for your file.
-            </li>
-          </ol>
-        </section>
+        <section class="kg-aside-carousel" aria-label="More from KillFeed Generator">
+          <div class="kg-carousel-head">
+            <div>
+              <span class="kg-step">More</span>
+              <h2>From KillFeed Generator</h2>
+            </div>
+          </div>
+          <div class="kg-carousel-viewport" data-kg-carousel>
+            <div class="kg-carousel-track" data-kg-carousel-track>
+              <item class="kg-guide-card">
+                <span class="kg-step">Guide</span>
+                <h3 class="aside-title">How to use</h3>
+                <p class="aside-description">New here? See how to pick a killfeed, customize it, and download the final
+                  image.</p>
+                <button class="btn btn-secondary aside-button" type="button" data-kg-guide-toggle
+                  aria-controls="kg-guide-drawer" aria-expanded="false">
+                  <svg aria-hidden="true">
+                    <use href="#kg-icon-guide"></use>
+                  </svg>
+                  Open guide
+                </button>
+              </item>
+              <item class="aside-item">
+                <span class="kg-step">Credits</span>
+                <div class="aside-content">
+                  <h3 class="aside-title">PUBG Icons</h3>
+                  <p class="aside-description">Most weapon icons used on this website are sourced from PUBG Fandom. All
+                    rights
+                    belong to their respective owners.</p>
+                </div>
+                <a class="btn btn-secondary aside-button"
+                  href="https://pubg.fandom.com/wiki/Category:UI_weapon_icons">Icons</a>
+              </item>
+              <item>
+                <div class="banner-slider" id="banner-slider" data-popup="true">
+                  <div class="banner-slider-track" id="banner-slider-track">
+                    <img class="aside-image banner-slide"
+                      src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_01.webp"
+                      alt="Killfeed Generator Banner 1" width="250">
+                    <img class="aside-image banner-slide"
+                      src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_02.webp"
+                      alt="Killfeed Generator Banner 2" width="250">
+                    <img class="aside-image banner-slide"
+                      src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_03.webp"
+                      alt="Killfeed Generator Banner 3" width="250">
+                  </div>
+                  <button class="banner-slider-arrow banner-slider-prev" type="button" aria-label="Previous slide">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M15 18l-6-6 6-6"></path>
+                    </svg>
+                  </button>
+                  <button class="banner-slider-arrow banner-slider-next" type="button" aria-label="Next slide">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M9 18l6-6-6-6"></path>
+                    </svg>
+                  </button>
+                  <div class="banner-slider-dots" id="banner-slider-dots"></div>
+                </div>
+              </item>
+              <item>
+                <span class="kg-step">Contest</span>
+                <h3 class="aside-title">PUBG Editing Contest</h3>
+                <p class="aside-description">This is the first video editing contest hosted with PUBG pre-rendered video
+                  clips.</p>
+                <a class="btn btn-secondary aside-button"
+                  href="https://sites.google.com/view/strikerproduction/contests/pubg-editing-contest">About</a>
+              </item>
+              <item>
+                <span class="kg-step">Clips</span>
+                <h3 class="aside-title">PUBG Clips</h3>
+                <p class="aside-description">Free PUBG clips packs for video editing.</p>
+                <p class="aside-description">Packs have POVs and cinematics.
+                </p>
+                <a class="btn btn-secondary aside-button"
+                  href="https://drive.google.com/file/d/16N7qMhzL1iJ7gMDVbpUZv3t9RBZTXp0t/view">Download</a>
+              </item>
 
+            </div>
+          </div>
+        </section>
       </section>
-      <aside>
-        <item class="aside-item">
-          <div class="aside-content">
-            <h3 class="aside-title">PUBG Icons</h3>
-            <p class="aside-description">Most weapon icons used on this website are sourced from PUBG Fandom. All rights
-              belong to their respective owners.</p>
-          </div>
-          <a class="btn btn-secondary aside-button"
-            href="https://pubg.fandom.com/wiki/Category:UI_weapon_icons">Icons</a>
-        </item>
-        <item style="margin-bottom: var(--rkg-size-md);">
-          <div class="banner-slider" id="banner-slider" data-popup="true">
-            <div class="banner-slider-track" id="banner-slider-track">
-              <img class="aside-image banner-slide"
-                src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_01.webp"
-                alt="Killfeed Generator Banner 1" width="250">
-              <img class="aside-image banner-slide"
-                src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_02.webp"
-                alt="Killfeed Generator Banner 2" width="250">
-              <img class="aside-image banner-slide"
-                src="assets/img/banners/pubg_editing_contest/pubg_editing_contest_anc_03.webp"
-                alt="Killfeed Generator Banner 3" width="250">
-            </div>
-            <button class="banner-slider-arrow banner-slider-prev" type="button" aria-label="Previous slide">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M15 18l-6-6 6-6"></path>
-              </svg>
-            </button>
-            <button class="banner-slider-arrow banner-slider-next" type="button" aria-label="Next slide">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M9 18l6-6-6-6"></path>
-              </svg>
-            </button>
-            <div class="banner-slider-dots" id="banner-slider-dots"></div>
-          </div>
-        </item>
-        <item>
-          <h3 class="aside-title">PUBG Editing Contest</h3>
-          <p class="aside-description">This is the first video editing contest hosted with PUBG pre-rendered video
-            clips.</p>
-          <a class="btn btn-secondary aside-button"
-            href="https://sites.google.com/view/strikerproduction/contests/pubg-editing-contest">About</a>
-        </item>
-        <item>
-          <h3 class="aside-title">PUBG Clips</h3>
-          <p class="aside-description">Free PUBG clips packs for video editing.</p>
-          <p class="aside-description">Packs have POVs and cinematics.
-          </p>
-          <a class="btn btn-secondary aside-button"
-            href="https://drive.google.com/file/d/16N7qMhzL1iJ7gMDVbpUZv3t9RBZTXp0t/view">Download</a>
-        </item>
-      </aside>
+
     </article>
   </main>
 
@@ -282,33 +567,33 @@
       <div class="footer-section">
         <div class="brand">
           <a href="index.html" aria-label="KillFeed Generator">
-          <svg width="45" height="50" viewBox="0 0 45 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0 21.8971L1.60142 28.8907L33.6299 5.75563L29.7544 0.401929L8.95196 15.4341L12.1068 19.8392L10.9217 20.6913L7.7669 16.2862L6.45374 17.2347L9.60854 21.6399L8.42349 22.492L5.26868 18.0868L3.89146 19.0836L7.04626 23.4887L5.86121 24.3408L2.70641 19.9357L0 21.8971ZM31.484 1.07717L33.8061 4.2926L35.2794 3.23151L32.9733 0L31.484 1.07717ZM2.91459 29.7428L6.35765 31.1093L12.5071 47.7974L20.9306 42.5723L17.0712 33.5852L26.1993 26.9936L22.8043 19.8071L36.3523 9.54984L34.4786 6.96141L2.91459 29.7428ZM21.3149 20.9325L23.9093 26.3987L16.3345 31.865L14.0125 26.463L14.9893 25.7235L16.8149 28.6656L18.7206 28.9228L16.879 26.2058L17.9039 23.5048C17.9039 23.5048 21.331 20.9325 21.3149 20.9325Z"
-              fill="var(--rkg-color-white)" />
-            <path
-              d="M27.08 48.3923C20.7064 48.3923 14.9733 44.5499 12.5391 38.6496C10.105 32.7492 11.4501 25.9486 15.9501 21.4309C20.4501 16.9132 27.2242 15.5627 33.1014 18.0065C38.9786 20.4502 42.806 26.2058 42.806 32.6045C42.806 34.6785 42.3896 36.7203 41.6049 38.6496C40.8203 40.5627 39.6512 42.2991 38.1939 43.7621C36.7366 45.2251 35.0071 46.3988 33.0854 47.1865C31.1797 47.9743 29.1459 48.3923 27.08 48.3923ZM27.08 18.3602C21.3469 18.3602 16.1743 21.8328 13.9804 27.1544C11.7704 32.4759 12.9875 38.6013 17.0551 42.6688C21.1067 46.7364 27.2082 47.9582 32.5089 45.7557C37.7936 43.5531 41.2526 38.3602 41.2526 32.6045C41.2526 30.7235 40.8843 28.8746 40.1637 27.1544C39.459 25.4341 38.4181 23.8586 37.0889 22.5402C35.7758 21.2219 34.2224 20.1769 32.4929 19.4534C30.7793 18.7299 28.9377 18.3602 27.08 18.3602Z"
-              fill="var(--rkh-color-warning)" />
-            <path
-              d="M27.0801 21.2539C26.9733 21.2539 26.8719 21.2379 26.7758 21.2057C26.6798 21.1628 26.5943 21.1039 26.5196 21.0289C26.4556 20.9538 26.4022 20.8681 26.3595 20.7716C26.3168 20.6859 26.2954 20.5894 26.2954 20.4822V15.3054C26.2954 15.1125 26.3755 14.9035 26.5196 14.7588C26.6798 14.6141 26.8719 14.5337 27.0801 14.5337C27.2883 14.5337 27.4805 14.6141 27.6246 14.7588C27.7687 14.9035 27.8488 15.1125 27.8488 15.3054V20.4822C27.8488 20.5894 27.8274 20.6859 27.7847 20.7716C27.7527 20.8681 27.6993 20.9538 27.6246 21.0289C27.5499 21.1039 27.4644 21.1628 27.3684 21.2057C27.2723 21.2379 27.1762 21.2539 27.0801 21.2539Z"
-              fill="var(--rkh-color-warning)" />
-            <path
-              d="M27.0801 49.9034C26.9733 49.9034 26.8719 49.8819 26.7758 49.8391C26.6798 49.8069 26.5943 49.7533 26.5196 49.6783C26.4556 49.6033 26.4022 49.5175 26.3595 49.421C26.3168 49.3246 26.2954 49.2281 26.2954 49.1317V43.9548C26.2954 43.7458 26.3755 43.5529 26.5196 43.4082C26.6798 43.2635 26.8719 43.1831 27.0801 43.1831C27.2883 43.1831 27.4805 43.2635 27.6246 43.4082C27.7687 43.5529 27.8488 43.7458 27.8488 43.9548V49.1317C27.8488 49.2281 27.8274 49.3246 27.7847 49.421C27.7527 49.5175 27.6993 49.6033 27.6246 49.6783C27.5499 49.7533 27.4644 49.8069 27.3684 49.8391C27.2723 49.8819 27.1762 49.9034 27.0801 49.9034Z"
-              fill="var(--rkh-color-warning)" />
-            <path
-              d="M44.1833 33.3764H39.0428C38.8346 33.3764 38.6424 33.296 38.4823 33.1513C38.3381 33.0066 38.2581 32.8137 38.2581 32.6047C38.2581 32.3957 38.3381 32.2027 38.4823 32.042C38.6424 31.8973 38.8346 31.8169 39.0428 31.8169H44.1833C44.3915 31.8169 44.5837 31.8973 44.7278 32.042C44.8879 32.2027 44.968 32.3957 44.968 32.6047C44.968 32.8137 44.8879 33.0066 44.7278 33.1513C44.5837 33.296 44.3915 33.3764 44.1833 33.3764Z"
-              fill="var(--rkh-color-warning)" />
-            <path
-              d="M14.9734 32.8295H9.81678C9.62461 32.8295 9.41642 32.7491 9.2723 32.6044C9.12817 32.4597 9.0481 32.2668 9.0481 32.0578C9.0481 31.8488 9.12817 31.6559 9.2723 31.5112C9.41642 31.3665 9.62461 31.27 9.81678 31.27H14.9734C15.1815 31.27 15.3737 31.3665 15.5178 31.5112C15.662 31.6559 15.742 31.8488 15.742 32.0578C15.742 32.2668 15.662 32.4597 15.5178 32.6044C15.3737 32.7491 15.1815 32.8295 14.9734 32.8295Z"
-              fill="var(--rkh-color-warning)" />
-            <path
-              d="M27.08 34.8232C26.1832 34.8232 25.3825 34.2766 25.0302 33.4567C24.6939 32.6207 24.8861 31.6721 25.5106 31.029C26.1512 30.402 27.096 30.2091 27.9128 30.5467C28.7455 30.9004 29.29 31.7043 29.29 32.6046C29.29 32.894 29.2259 33.1834 29.1138 33.4406C28.9964 33.7086 28.8362 33.9497 28.6334 34.1641C28.4306 34.3784 28.1903 34.5392 27.9128 34.6464C27.6565 34.7589 27.3683 34.8232 27.08 34.8232ZM27.08 31.9454C26.8078 31.9454 26.5676 32.1062 26.4715 32.3474C26.3594 32.5885 26.4234 32.8779 26.6156 33.0708C26.7918 33.2638 27.08 33.312 27.3202 33.2155C27.5765 33.103 27.7366 32.8618 27.7366 32.6046C27.7366 32.5188 27.7206 32.4331 27.6886 32.3474C27.6565 32.2616 27.6085 32.1919 27.5444 32.1384C27.4804 32.074 27.4056 32.0258 27.3202 31.9937C27.2455 31.9615 27.1654 31.9454 27.08 31.9454Z"
-              fill="var(--rkh-color-warning)" />
-          </svg>
+            <svg width="45" height="50" viewBox="0 0 45 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0 21.8971L1.60142 28.8907L33.6299 5.75563L29.7544 0.401929L8.95196 15.4341L12.1068 19.8392L10.9217 20.6913L7.7669 16.2862L6.45374 17.2347L9.60854 21.6399L8.42349 22.492L5.26868 18.0868L3.89146 19.0836L7.04626 23.4887L5.86121 24.3408L2.70641 19.9357L0 21.8971ZM31.484 1.07717L33.8061 4.2926L35.2794 3.23151L32.9733 0L31.484 1.07717ZM2.91459 29.7428L6.35765 31.1093L12.5071 47.7974L20.9306 42.5723L17.0712 33.5852L26.1993 26.9936L22.8043 19.8071L36.3523 9.54984L34.4786 6.96141L2.91459 29.7428ZM21.3149 20.9325L23.9093 26.3987L16.3345 31.865L14.0125 26.463L14.9893 25.7235L16.8149 28.6656L18.7206 28.9228L16.879 26.2058L17.9039 23.5048C17.9039 23.5048 21.331 20.9325 21.3149 20.9325Z"
+                fill="var(--kg-color-white)" />
+              <path
+                d="M27.08 48.3923C20.7064 48.3923 14.9733 44.5499 12.5391 38.6496C10.105 32.7492 11.4501 25.9486 15.9501 21.4309C20.4501 16.9132 27.2242 15.5627 33.1014 18.0065C38.9786 20.4502 42.806 26.2058 42.806 32.6045C42.806 34.6785 42.3896 36.7203 41.6049 38.6496C40.8203 40.5627 39.6512 42.2991 38.1939 43.7621C36.7366 45.2251 35.0071 46.3988 33.0854 47.1865C31.1797 47.9743 29.1459 48.3923 27.08 48.3923ZM27.08 18.3602C21.3469 18.3602 16.1743 21.8328 13.9804 27.1544C11.7704 32.4759 12.9875 38.6013 17.0551 42.6688C21.1067 46.7364 27.2082 47.9582 32.5089 45.7557C37.7936 43.5531 41.2526 38.3602 41.2526 32.6045C41.2526 30.7235 40.8843 28.8746 40.1637 27.1544C39.459 25.4341 38.4181 23.8586 37.0889 22.5402C35.7758 21.2219 34.2224 20.1769 32.4929 19.4534C30.7793 18.7299 28.9377 18.3602 27.08 18.3602Z"
+                fill="var(--rkh-color-warning)" />
+              <path
+                d="M27.0801 21.2539C26.9733 21.2539 26.8719 21.2379 26.7758 21.2057C26.6798 21.1628 26.5943 21.1039 26.5196 21.0289C26.4556 20.9538 26.4022 20.8681 26.3595 20.7716C26.3168 20.6859 26.2954 20.5894 26.2954 20.4822V15.3054C26.2954 15.1125 26.3755 14.9035 26.5196 14.7588C26.6798 14.6141 26.8719 14.5337 27.0801 14.5337C27.2883 14.5337 27.4805 14.6141 27.6246 14.7588C27.7687 14.9035 27.8488 15.1125 27.8488 15.3054V20.4822C27.8488 20.5894 27.8274 20.6859 27.7847 20.7716C27.7527 20.8681 27.6993 20.9538 27.6246 21.0289C27.5499 21.1039 27.4644 21.1628 27.3684 21.2057C27.2723 21.2379 27.1762 21.2539 27.0801 21.2539Z"
+                fill="var(--rkh-color-warning)" />
+              <path
+                d="M27.0801 49.9034C26.9733 49.9034 26.8719 49.8819 26.7758 49.8391C26.6798 49.8069 26.5943 49.7533 26.5196 49.6783C26.4556 49.6033 26.4022 49.5175 26.3595 49.421C26.3168 49.3246 26.2954 49.2281 26.2954 49.1317V43.9548C26.2954 43.7458 26.3755 43.5529 26.5196 43.4082C26.6798 43.2635 26.8719 43.1831 27.0801 43.1831C27.2883 43.1831 27.4805 43.2635 27.6246 43.4082C27.7687 43.5529 27.8488 43.7458 27.8488 43.9548V49.1317C27.8488 49.2281 27.8274 49.3246 27.7847 49.421C27.7527 49.5175 27.6993 49.6033 27.6246 49.6783C27.5499 49.7533 27.4644 49.8069 27.3684 49.8391C27.2723 49.8819 27.1762 49.9034 27.0801 49.9034Z"
+                fill="var(--rkh-color-warning)" />
+              <path
+                d="M44.1833 33.3764H39.0428C38.8346 33.3764 38.6424 33.296 38.4823 33.1513C38.3381 33.0066 38.2581 32.8137 38.2581 32.6047C38.2581 32.3957 38.3381 32.2027 38.4823 32.042C38.6424 31.8973 38.8346 31.8169 39.0428 31.8169H44.1833C44.3915 31.8169 44.5837 31.8973 44.7278 32.042C44.8879 32.2027 44.968 32.3957 44.968 32.6047C44.968 32.8137 44.8879 33.0066 44.7278 33.1513C44.5837 33.296 44.3915 33.3764 44.1833 33.3764Z"
+                fill="var(--rkh-color-warning)" />
+              <path
+                d="M14.9734 32.8295H9.81678C9.62461 32.8295 9.41642 32.7491 9.2723 32.6044C9.12817 32.4597 9.0481 32.2668 9.0481 32.0578C9.0481 31.8488 9.12817 31.6559 9.2723 31.5112C9.41642 31.3665 9.62461 31.27 9.81678 31.27H14.9734C15.1815 31.27 15.3737 31.3665 15.5178 31.5112C15.662 31.6559 15.742 31.8488 15.742 32.0578C15.742 32.2668 15.662 32.4597 15.5178 32.6044C15.3737 32.7491 15.1815 32.8295 14.9734 32.8295Z"
+                fill="var(--rkh-color-warning)" />
+              <path
+                d="M27.08 34.8232C26.1832 34.8232 25.3825 34.2766 25.0302 33.4567C24.6939 32.6207 24.8861 31.6721 25.5106 31.029C26.1512 30.402 27.096 30.2091 27.9128 30.5467C28.7455 30.9004 29.29 31.7043 29.29 32.6046C29.29 32.894 29.2259 33.1834 29.1138 33.4406C28.9964 33.7086 28.8362 33.9497 28.6334 34.1641C28.4306 34.3784 28.1903 34.5392 27.9128 34.6464C27.6565 34.7589 27.3683 34.8232 27.08 34.8232ZM27.08 31.9454C26.8078 31.9454 26.5676 32.1062 26.4715 32.3474C26.3594 32.5885 26.4234 32.8779 26.6156 33.0708C26.7918 33.2638 27.08 33.312 27.3202 33.2155C27.5765 33.103 27.7366 32.8618 27.7366 32.6046C27.7366 32.5188 27.7206 32.4331 27.6886 32.3474C27.6565 32.2616 27.6085 32.1919 27.5444 32.1384C27.4804 32.074 27.4056 32.0258 27.3202 31.9937C27.2455 31.9615 27.1654 31.9454 27.08 31.9454Z"
+                fill="var(--rkh-color-warning)" />
+            </svg>
           </a>
           <a href="#home">
-          <span class="site-title">PUBG <span style="color:var(--rkg-color-primary)">KillFeed</span>
-            <br><span>Generator</span></span>
+            <span class="site-title">PUBG <span style="color:var(--kg-color-primary)">KillFeed</span>
+              <br><span>Generator</span></span>
           </a>
         </div>
         <p class="footer-rights">All rights reserved by Striker Production</p>
@@ -355,6 +640,127 @@
     <p class="cookie-notice-text">This website uses cookies and tracks user interactions to measure site performance.
       We use Google Analytics to understand how visitors use this site and to improve our content.</p>
     <button class="btn btn-secondary aside-button cookie-accept" id="cookie-accept" type="button">I understand</button>
+  </div>
+  <div class="kg-drawer-overlay" id="kg-settings-overlay" hidden></div>
+
+  <div class="kg-settings-drawer kg-studio-modal" id="kg-settings-drawer" role="dialog" aria-modal="true"
+    aria-hidden="true" aria-labelledby="kg-settings-title" data-active-pane="settings">
+    <div class="kg-drawer-head kg-modal-head">
+      <div>
+        <span class="kg-step">Step 3 — Customize</span>
+        <h2 id="kg-settings-title">Killfeed Customize</h2>
+        <p>Pick a weapon and tune it. The preview stays visible while you work.</p>
+      </div>
+      <button class="kg-icon-btn" type="button" data-kg-settings-close aria-label="Close customizer">
+        <svg aria-hidden="true">
+          <use href="#kg-icon-close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="kg-modal-preview">
+      <div class="kg-modal-preview-head">
+        <span class="kg-step">Preview</span>
+        <span class="kg-modal-preview-note">Updates as you adjust</span>
+      </div>
+      <div class="kg-modal-preview-slot" id="kg-modal-preview-slot"></div>
+    </div>
+
+    <div class="kg-modal-tabs" role="tablist" aria-label="Customize sections">
+      <button class="kg-modal-tab is-active" id="kg-modal-tab-weapons" type="button" role="tab" aria-selected="true"
+        aria-controls="kg-modal-pane-weapons" data-kg-modal-tab="weapons">Weapons</button>
+      <button class="kg-modal-tab" id="kg-modal-tab-settings" type="button" role="tab" aria-selected="false"
+        aria-controls="kg-modal-pane-settings" data-kg-modal-tab="settings" tabindex="-1">Settings</button>
+    </div>
+
+    <div class="kg-drawer-body kg-modal-body">
+      <section class="kg-modal-pane" id="kg-modal-pane-weapons" role="tabpanel" aria-labelledby="kg-modal-tab-weapons"
+        data-kg-modal-pane="weapons">
+        <div class="kg-modal-pane-head">
+          <span class="kg-step">Weapons</span>
+          <h3>Pick your killfeed</h3>
+          <p>Click any weapon to load it into the preview above.</p>
+        </div>
+        <div class="kg-modal-picker-slot" id="kg-modal-picker-slot"></div>
+      </section>
+      <section class="kg-modal-pane" id="kg-modal-pane-settings" role="tabpanel" aria-labelledby="kg-modal-tab-settings"
+        data-kg-modal-pane="settings">
+        <div class="kg-modal-pane-head">
+          <span class="kg-step">Settings</span>
+          <h3>Killfeed settings</h3>
+          <p>Player names, colors and item style update the preview above. Changes apply automatically.</p>
+        </div>
+        <div id="options"></div>
+      </section>
+    </div>
+
+    <div class="kg-drawer-foot kg-modal-foot">
+      <button class="btn btn-primary" type="button" data-kg-settings-close>Save</button>
+    </div>
+  </div>
+
+  <div class="kg-drawer-overlay" id="kg-guide-overlay" hidden></div>
+
+  <div class="kg-settings-drawer kg-guide-drawer" id="kg-guide-drawer" role="dialog" aria-modal="true"
+    aria-hidden="true" aria-labelledby="kg-guide-title">
+    <div class="kg-drawer-head">
+      <div>
+        <span class="kg-step">Guide</span>
+        <h2 id="kg-guide-title">How to use</h2>
+        <p>From picking a killfeed to downloading the final image.</p>
+      </div>
+      <button class="kg-icon-btn" type="button" data-kg-guide-close aria-label="Close guide">
+        <svg aria-hidden="true">
+          <use href="#kg-icon-close"></use>
+        </svg>
+      </button>
+    </div>
+
+    <div class="kg-drawer-body">
+      <div class="how-to-use-section kg-guide-content" id="how-to-use">
+        <p>Pick a weapon, open the <strong>Customizer</strong> to set player names, colors and item style, then download
+          a high-resolution image from the <strong>Export</strong> section.</p>
+        <p><strong>To download a single item:</strong></p>
+        <ol>
+          <li>Pick the weapon you want to download.</li>
+          <li>Use the <strong>Customizer</strong> to set names, colors and item style. The preview updates as you adjust
+            settings.</li>
+          <li>In the <strong>Export</strong> section, press <strong>Download image</strong>. The image refreshes
+            automatically, so it always matches the preview.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="kg-drawer-foot">
+      <button class="btn btn-primary" type="button" data-kg-guide-close>Got it</button>
+    </div>
+  </div>
+
+  <div class="kg-fab-stack" role="group" aria-label="Quick actions">
+    <button class="kg-fab kg-fab--secondary" type="button" data-kg-picker-expand aria-controls="kg-settings-drawer"
+      aria-haspopup="dialog" aria-label="Open customizer" title="Open customizer">
+      <svg aria-hidden="true">
+        <use href="#kg-icon-crosshair"></use>
+      </svg>
+    </button>
+    <button class="kg-fab kg-fab--secondary" type="button" data-kg-preview-expand aria-controls="previews"
+      aria-haspopup="dialog" aria-label="Open previews fullscreen" title="Fullscreen previews">
+      <svg aria-hidden="true">
+        <use href="#kg-icon-eye"></use>
+      </svg>
+    </button>
+    <button class="kg-fab kg-fab--secondary" type="button" data-kg-guide-toggle aria-controls="kg-guide-drawer"
+      aria-expanded="false" aria-label="Open guide" title="Guide">
+      <svg aria-hidden="true">
+        <use href="#kg-icon-guide"></use>
+      </svg>
+    </button>
+    <button class="kg-fab kg-fab--primary" type="button" data-kg-settings-toggle aria-controls="kg-settings-drawer"
+      aria-expanded="false" aria-label="Open killfeed settings" title="Customize">
+      <svg aria-hidden="true">
+        <use href="#kg-icon-gear"></use>
+      </svg>
+    </button>
   </div>
 </body>
 

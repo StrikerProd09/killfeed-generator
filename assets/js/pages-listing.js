@@ -131,7 +131,27 @@
     description.textContent = page.description || "";
     inner.appendChild(description);
 
+    var cta = document.createElement("span");
+    cta.className = "card-page-cta";
+    cta.innerHTML =
+      "Open generator" +
+      '<span class="card-page-cta-icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" ' +
+      'stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path>' +
+      '<path d="M13 6l6 6-6 6"></path></svg></span>';
+    inner.appendChild(cta);
+
     link.appendChild(inner);
+
+    var arrow = document.createElement("span");
+    arrow.className = "card-page-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" ' +
+      'stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path>' +
+      '<path d="M8 7h9v9"></path></svg>';
+    link.appendChild(arrow);
+
     item.appendChild(link);
     return item;
   }

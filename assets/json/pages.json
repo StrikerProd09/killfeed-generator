@@ -1,34 +1,34 @@
 [
-    {
-        "page_id"    : "1",
-        "page_html"  : "killfeed-generator-rust.html",
-        "path_url"   : "killfeed-generator-rust",
-        "title"      : "Rust - Killfeed Generator",
-        "description": "Generate RUST Death Notice Overlays for photo-video editing, fast and simple to use.",
-        "img_bg"     : "assets/img/banners/rust_editing_contest/rust_editing_contest_background.webp"
-    },
-    {
-        "page_id"    : "2",
-        "page_html"  : "killfeed-generator-pubg.html",
-        "path_url"   : "killfeed-generator-pubg",
-        "title"      : "PUBG - Killfeed Generator",
-        "description": "Generate PUBG Death Notice Overlays for photo-video editing, fast and simple to use.",
-        "img_bg"     : "assets/img/banners/pubg_editing_contest/pubg_editing_contest_background.webp"
-    },
-    {
-        "page_id"    : "3",
-        "page_html"  : "killfeed-generator-cs2.html",
-        "path_url"   : "killfeed-generator-cs2",
-        "title"      : "CS2 - Killfeed Generator",
-        "description": "Generate CS2 Death Notice Overlays for photo-video editing, fast and simple to use.",
-        "img_bg"     : "assets/img/banners/csgo_editing_contest/csgo_editing_contest_background.webp"
-    },
-    {
-        "page_id"    : "4",
-        "page_html"  : "killfeed-generator-codmw3.html",
-        "path_url"   : "killfeed-generator-codmw3",
-        "title"      : "COD MW3 - Killfeed Generator",
-        "description": "Generate COD MW3 Death Notice Overlays for photo-video editing, fast and simple to use.",
-        "img_bg"     : "assets/img/banners/codmw3_editing_contest/codmw3_editing_contest_background.webp"
-    }
+  {
+    "page_id": "1",
+    "page_html": "killfeed-generator-rust.html",
+    "path_url": "killfeed-generator-rust",
+    "title": "Rust - Killfeed Generator",
+    "description": "Design Rust death notice overlays with the game's authentic weapon icons, then fine-tune names, colors and spacing before exporting a transparent PNG.",
+    "img_bg": "assets/img/banners/killfeed_generator/killfeed_generator_rust.webp"
+  },
+  {
+    "page_id": "2",
+    "page_html": "killfeed-generator-pubg.html",
+    "path_url": "killfeed-generator-pubg",
+    "title": "PUBG - Killfeed Generator",
+    "description": "Build PUBG killfeeds with the exact in-game weapon icons. Customize player names, headshots and colors, then export a ready-to-edit PNG.",
+    "img_bg": "assets/img/banners/killfeed_generator/killfeed_generator_pubg.webp"
+  },
+  {
+    "page_id": "3",
+    "page_html": "killfeed-generator-cs2.html",
+    "path_url": "killfeed-generator-cs2",
+    "title": "CS2 - Killfeed Generator",
+    "description": "Create CS2 killfeed overlays with real weapon icons and extra effect slots. Tune the styling and download a transparent PNG.",
+    "img_bg": "assets/img/banners/killfeed_generator/killfeed_generator_cs2.webp"
+  },
+  {
+    "page_id": "4",
+    "page_html": "killfeed-generator-codmw3.html",
+    "path_url": "killfeed-generator-codmw3",
+    "title": "COD MW3 - Killfeed Generator",
+    "description": "Make COD MW3 death notice overlays with the original weapon icons. Adjust names, colors and icons, then export a transparent PNG.",
+    "img_bg": "assets/img/banners/killfeed_generator/killfeed_generator_codmw3.webp"
+  }
 ]

@@ -1,18 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: =================================================================
-:: REQUIREMENTS & SETUP GUIDE:
-:: -----------------------------------------------------------------
-:: 1. PYTHON: 
-::    - Required path: C:\Python\python.exe
-::    - If your python is elsewhere, change the path below.
-::
-:: 2. PILLOW (PIL) LIBRARY:
-::    - Required for WebP transparency handling.
-::    - If missing, this script will auto-install it via pip.
-:: =================================================================
-
 set "PYTHON_EXE=C:\Python\python.exe"
 
 if not exist "%PYTHON_EXE%" (
@@ -20,7 +8,6 @@ if not exist "%PYTHON_EXE%" (
     goto :end
 )
 
-:: Check and auto-install Pillow if missing
 "%PYTHON_EXE%" -c "import PIL" >nul 2>&1
 if %errorlevel% neq 0 (
     echo [INFO] Pillow module missing. Installing Pillow automatically...

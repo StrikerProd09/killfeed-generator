@@ -1,24 +1,119 @@
-Summary:
-Simple death notice overlays for RUST, customizable in html and psd.
-Package Included: 
-➟ 1 HTML File for overall preview and editing
-➟ 1 PSD File for editing
-➟ 57 PNG Weapons Images
-➟ 1 PNG Headshot Image
+<p align="center">
+  <img src="assets/img/banners/killfeed_generator/killfeed_generator_banner.webp" alt="KillFeed Generator banner" width="100%">
+</p>
 
-Details:
-RUST Death notice overlays for video editing, with customizable files in html and psd.
-Package Included: 
-➟ 1 HTML File for overall preview and editing
-➟ 1 PSD File for editing
-➟ 57 PNG Weapons Icons
-➟ 1 PNG Headshot Icon
+<h1 align="center">KillFeed Generator</h1>
 
-Weapons: Assault Rifle,Beancan Grenade,Bolt Action Rifle,Bone Club,Bone Knife, Butcher Knife, Candy Cane Club, Chainsaw, Combat Knife, Compound Bow, Crossbow, Custom SMG,Double Barrel Shotgun,Eoka Pistol,F1 Grenade, Flame Thrower,Hatchet,Hunting Bow,Jackhammer,L96 Rifle, Longsword, LR-300 Assault Rifle, M39 Rifle, M92 Pistol, M249, Mace, Machete, MP5A4, Multiple Grenade Launcher, Nailgun, Paddle, Pickaxe, Pitchfork, Pump Shotgun, Python Revolver, Revolver, Rock, Rocket Launcher, Salvaged Axe, Salvaged Cleaver, Salvaged Hammer, Salvaged Icepick, Salvaged Sword, Satchel Charge, Semi-Automatic Pistol, Semi-Automatic Rifle, Snowball Gun, Snowball, Spas-12 Shotgun, Spear, Stone Hatchet, Stone Pickaxe, Stone Spear, Thompson, Timed Explosive Charge, Torch, Waterpipe Shotgun
+<p align="center">
+  Create death notice overlays and killfeeds for <strong>Rust</strong>, <strong>PUBG</strong>,
+  <strong>CS2</strong> and <strong>COD MW3</strong> directly in the browser.
+  Customize names, icons, colors and layout, then export a transparent PNG for your edit.
+</p>
 
-Documentation:
-Rust Death Notice - HTML:
-In the HTML file, you can customize Player1 and Player2 names, enable the headshot icon, download the item once or download all items once. To download one item you have to left-click on it, in the bottom page choice Convert button then from the bottom page the HTML element was converted in canvas. To download it you have to right-click on element - Save image as... - Select a name and location for the file.
+## Features
 
-Rust Death Notice - PSD
-In the PSD file, you can customize everything with Photoshop or www.photopea.com. PSD file has all icons, background, player1, and player2 layers.
+- Four game templates with the original weapon icons.
+- Live video and photo previews while you edit.
+- Player names, headshot and extra icons per kill.
+- Font family, size, weight, colors, padding, spacing, border and position controls.
+- Custom font loading from a URL.
+- Combined "All Content" export for a full killfeed.
+- High-resolution PNG download with a transparent background.
+- Responsive layout with a dedicated Customize popup on desktop and mobile.
+- Shareable setups through URL parameters, saved from the Customize popup.
+
+## Supported games
+
+| Game | Generator page | Style tokens |
+| --- | --- | --- |
+| Rust | `killfeed-generator-rust.html` | `assets/css/params_rust.css` |
+| PUBG | `killfeed-generator-pubg.html` | `assets/css/params_pubg.css` |
+| CS2 | `killfeed-generator-cs2.html` | `assets/css/params_cs2.css` |
+| COD MW3 | `killfeed-generator-codmw3.html` | `assets/css/params_codmw3.css` |
+
+The Rust package also includes the editable Photoshop template
+`assets/psd/rust_death_notice.psd`.
+
+## Getting started
+
+The pages load templates and game data with XHR, so they must be served over HTTP.
+Opening the HTML files directly with `file://` will not work.
+
+### Windows
+
+Run `start.bat`. It checks for PHP 8.4, downloads a portable copy into
+`dependencies/php` when needed, starts a local server and opens:
+
+```
+http://127.0.0.1:8000/
+```
+
+### Any static server
+
+The site is plain HTML, CSS, JavaScript and JSON. From the project root:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://127.0.0.1:8000/index.html`.
+
+## How to use
+
+1. Open a game generator from the home page.
+2. Pick a weapon in the generator.
+3. Use the video and photo preview tabs to check the overlay in context.
+4. Open **Customize** to edit names, icons, typography, colors and item style.
+5. Press **Save** to apply the changes and write the current setup to the URL.
+6. Go to **Export**, then download the generated PNG.
+
+## Project structure
+
+```
+.
+├── index.html                     Home page and generator listing
+├── 404.html                       Not-found page
+├── killfeed-generator-*.html      Game generator pages
+├── assets/
+│   ├── css/
+│   │   ├── params_global.css      Shared design tokens
+│   │   ├── params_*.css           Per-game color themes
+│   │   ├── studio.css             Studio, modal and export UI
+│   │   └── style.css              Base layout and components
+│   ├── js/
+│   │   ├── script.js              Generator, settings and export logic
+│   │   ├── studio-ui.js           Customize popup, previews and drawers
+│   │   ├── screenshot-preview.js  Canvas rendering
+│   │   ├── gameplay-player.js     Video preview
+│   │   ├── aside-carousel.js      Infinite aside cards
+│   │   └── pages-listing.js       Home page cards
+│   ├── json/
+│   │   ├── killfeed-*-params.json Game data, weapons and options
+│   │   ├── pages.json             Home page card data
+│   │   └── fonts.json             Bundled font list
+│   ├── tpl/options.tpl            Customizer markup template
+│   ├── img/                       Banners, icons and backgrounds
+│   ├── font/                      Bundled fonts
+│   └── psd/                       Rust PSD template
+├── start.bat                      Windows development server
+└── dependencies/                  Portable PHP installed by start.bat
+```
+
+## Customizing a game
+
+- **Colors and theme:** edit `assets/css/params_<game>.css`.
+- **Weapons, player defaults, additional icons and option groups:**
+  edit `assets/json/killfeed-<game>-params.json`.
+- **Home page cards:** edit `assets/json/pages.json`.
+- **Customizer markup:** edit `assets/tpl/options.tpl`.
+
+## Notes
+
+- `studio.css` and the shared Studio scripts are used by all four generator pages.
+- Export images are generated as PNG with a transparent background.
+- URL parameters cover player names, the selected weapon, style fields and
+  additional-icon toggles, so a saved link restores the setup.
+
+---
+
+© Striker Production. All rights reserved.

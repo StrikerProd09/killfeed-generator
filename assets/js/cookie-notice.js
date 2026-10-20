@@ -9,7 +9,6 @@
           return true;
         }
       } catch (e) {
-        // ignore
       }
       return document.cookie.indexOf("rkg_cookie_consent=accepted") !== -1;
     }
@@ -24,7 +23,6 @@
       try {
         localStorage.setItem("rkg_cookie_consent", "accepted");
       } catch (e) {
-        // localStorage unavailable; rely on document.cookie above.
       }
     }
 

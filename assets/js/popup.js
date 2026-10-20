@@ -52,8 +52,6 @@
     var overlay = createPopup();
     var content = overlay.querySelector(".popup-content");
 
-    // Elements that hold live behavior (video, buttons, sliders) must be
-    // moved, not cloned, because cloned nodes lose their event listeners.
     var hasInteraction =
       sourceEl.querySelector &&
       sourceEl.querySelector("video, button, input, select, textarea, a");

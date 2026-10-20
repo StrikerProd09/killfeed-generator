@@ -20,7 +20,8 @@
     }
 
     var defaultImg =
-      section.getAttribute("data-preview-img") || "assets/img/gameplay/cs2.webp";
+      section.getAttribute("data-preview-img") ||
+      "assets/img/gameplay/cs2.webp";
     image.src = defaultImg;
 
     fileInput.addEventListener("change", function () {
@@ -90,18 +91,16 @@
       var padY = "";
       try {
         var root = window.getComputedStyle(document.documentElement);
-        fontFamily = root.getPropertyValue("--rkg-font-family-selected") || "";
-        fontSize = root.getPropertyValue("--rkg-font-size-selected") || "";
-        fontWeight = root.getPropertyValue("--rkg-font-weight-selected") || "";
-        color = root.getPropertyValue("--rkg-font-color-selected") || "";
+        fontFamily = root.getPropertyValue("--kg-font-family-selected") || "";
+        fontSize = root.getPropertyValue("--kg-font-size-selected") || "";
+        fontWeight = root.getPropertyValue("--kg-font-weight-selected") || "";
+        color = root.getPropertyValue("--kg-font-color-selected") || "";
         backgroundColor =
-          root.getPropertyValue("--rkg-background-color-selected") || "";
-        borderWidth =
-          root.getPropertyValue("--rkg-border-width-selected") || "";
-        borderColor =
-          root.getPropertyValue("--rkg-border-color-selected") || "";
-        padX = root.getPropertyValue("--rkg-p-x-selected") || "";
-        padY = root.getPropertyValue("--rkg-p-y-selected") || "";
+          root.getPropertyValue("--kg-background-color-selected") || "";
+        borderWidth = root.getPropertyValue("--kg-border-width-selected") || "";
+        borderColor = root.getPropertyValue("--kg-border-color-selected") || "";
+        padX = root.getPropertyValue("--kg-p-x-selected") || "";
+        padY = root.getPropertyValue("--kg-p-y-selected") || "";
       } catch (e) {
         fontFamily = "";
       }
@@ -154,8 +153,7 @@
       if (typeof imgName === "object") {
         imgName = imgName.name || "ak47";
       }
-      var flipClass =
-        window.globalFlip === true ? " flip-horizontal" : "";
+      var flipClass = window.globalFlip === true ? " flip-horizontal" : "";
       return (
         "<p class='player1'>" +
         (window.player1 || "Player1") +
@@ -195,15 +193,16 @@
           ? document.fonts.ready
           : Promise.resolve();
 
-      return Promise.all([fontReady, loadBackgroundImage()])
-        .then(function (data) {
+      return Promise.all([fontReady, loadBackgroundImage()]).then(
+        function (data) {
           var bg = data[1];
           var bgW = bg.naturalWidth || bg.width;
           var bgH = bg.naturalHeight || bg.height;
           var rootStyle = window.getComputedStyle(document.documentElement);
           function cssVarToPx(name, fallback, base) {
-            var val =
-              (rootStyle.getPropertyValue(name) || "").trim().toLowerCase();
+            var val = (rootStyle.getPropertyValue(name) || "")
+              .trim()
+              .toLowerCase();
             if (!val || val === "auto" || val === "") {
               return fallback;
             }
@@ -213,13 +212,19 @@
             var px = parseFloat(val);
             return isNaN(px) ? fallback : px;
           }
-          var top = cssVarToPx("--rkg-item-pos-top", Math.round(bgH * 0.06), bgH);
-          var bottom = cssVarToPx("--rkg-item-pos-bottom", 0, bgH);
-          var right = cssVarToPx("--rkg-item-pos-right", Math.round(bgW * 0.02), bgW);
-          var left = cssVarToPx("--rkg-item-pos-left", 0, bgW);
-          var gap = parseFloat(
-            rootStyle.getPropertyValue("--rkg-stack-gap"),
+          var top = cssVarToPx(
+            "--kg-item-pos-top",
+            Math.round(bgH * 0.06),
+            bgH,
           );
+          var bottom = cssVarToPx("--kg-item-pos-bottom", 0, bgH);
+          var right = cssVarToPx(
+            "--kg-item-pos-right",
+            Math.round(bgW * 0.02),
+            bgW,
+          );
+          var left = cssVarToPx("--kg-item-pos-left", 0, bgW);
+          var gap = parseFloat(rootStyle.getPropertyValue("--kg-stack-gap"));
           if (isNaN(gap) || gap <= 0) {
             gap = Math.round(bgH * 0.024);
           }
@@ -232,9 +237,7 @@
           ctx.fillRect(0, 0, bgW, bgH);
           ctx.drawImage(bg, 0, 0, bgW, bgH);
           return Promise.all(jobs).then(function (itemCanvases) {
-            var x = right
-              ? bgW - itemCanvases[0].width - right
-              : left;
+            var x = right ? bgW - itemCanvases[0].width - right : left;
             if (bottom) {
               var y = bgH - bottom;
               for (var i = 0; i < itemCanvases.length; i++) {
@@ -251,7 +254,8 @@
             }
             return canvas;
           });
-        });
+        },
+      );
     }
 
     function downloadScreenshot() {
@@ -260,12 +264,9 @@
           canvas.id = "screenshot_canvas_" + count;
           count++;
           return new Promise(function (resolve) {
-            canvas.toBlob(
-              function (blob) {
-                resolve(blob);
-              },
-              "image/webp",
-            );
+            canvas.toBlob(function (blob) {
+              resolve(blob);
+            }, "image/webp");
           });
         })
         .then(function (blob) {
