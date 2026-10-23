@@ -56,14 +56,17 @@
   "flip": false,
   "settings": {
     "additionals": {
-      "Headshot": "suffix",
-      "No Scope": "suffix",
-      "Blind": "suffix",
-      "Door": "suffix",
-      "Flashbang": "suffix",
-      "Fly": "prefix",
-      "Smoke": "suffix",
-      "Explosion": "suffix"
+      "Headshot": { "order": "suffix" },
+      "No Scope": { "order": "suffix" },
+      "Blind": { "order": "suffix" },
+      "Door": { "order": "suffix" },
+      "Flashbang": { "order": "suffix" },
+      "Fly": {
+        "order": "prefix",
+        "margin": "calc(var(--kg-icon-size-selected) * -1 / 1.3) calc(var(--kg-icon-size-selected) * -1 / 2) 0 0"
+      },
+      "Smoke": { "order": "suffix" },
+      "Explosion": { "order": "suffix" }
     },
     "item_style": {
       "groups": [

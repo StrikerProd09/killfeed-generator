@@ -815,7 +815,7 @@ article.aside-section .main-section {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.22;
+  opacity: 0.5;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

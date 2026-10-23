@@ -68,7 +68,10 @@
   "additionals": ["Headshot", "No Scope"],
   "flip": true,
   "settings": {
-    "additionals": { "Headshot": "suffix", "No Scope": "suffix" },
+    "additionals": {
+      "Headshot": { "order": "suffix" },
+      "No Scope": { "order": "suffix" }
+    },
     "item_style": {
       "groups": [
         {

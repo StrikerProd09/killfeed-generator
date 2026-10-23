@@ -307,6 +307,19 @@ function drawKillfeedItem(item, scale) {
     );
     var weaponSrc = weaponEl ? weaponEl.getAttribute("src") : null;
 
+    function slotMargin(slot) {
+      var style = window.getComputedStyle(slot);
+      return {
+        top: parseFloat(style.marginTop) || 0,
+        right: parseFloat(style.marginRight) || 0,
+        bottom: parseFloat(style.marginBottom) || 0,
+        left: parseFloat(style.marginLeft) || 0,
+      };
+    }
+
+    var prefixMargins = prefixEls.map(slotMargin);
+    var suffixMargins = suffixEls.map(slotMargin);
+
     function loadSlotImage(slot) {
       var imgEl = slot ? slot.querySelector("img") : null;
       var src = imgEl ? imgEl.getAttribute("src") : null;
@@ -355,12 +368,20 @@ function drawKillfeedItem(item, scale) {
         });
 
         var contentW = w1 + gap;
-        prefixW.forEach(function (w) {
-          contentW += w ? gap + w : 0;
+        prefixW.forEach(function (w, index) {
+          if (!w) {
+            return;
+          }
+          var margin = prefixMargins[index];
+          contentW += gap + margin.left + w + margin.right;
         });
         contentW += weaponW ? gap + weaponW : 0;
-        suffixW.forEach(function (w) {
-          contentW += w ? gap + w : 0;
+        suffixW.forEach(function (w, index) {
+          if (!w) {
+            return;
+          }
+          var margin = suffixMargins[index];
+          contentW += gap + margin.left + w + margin.right;
         });
         contentW += gap + w2;
         var totalW = contentW + padX * 2 + borderWidth * 2;
@@ -445,8 +466,12 @@ function drawKillfeedItem(item, scale) {
           if (!pImg || !pW) {
             continue;
           }
-          ctx.drawImage(pImg, cursor, centerY - iconMaxH / 2, pW, iconMaxH);
-          cursor += pW + gap;
+          var pMargin = prefixMargins[p];
+          var pX = cursor + pMargin.left;
+          var pY =
+            centerY - iconMaxH / 2 + (pMargin.top - pMargin.bottom) / 2;
+          ctx.drawImage(pImg, pX, pY, pW, iconMaxH);
+          cursor += pMargin.left + pW + pMargin.right + gap;
         }
 
         if (weapon) {
@@ -480,8 +505,12 @@ function drawKillfeedItem(item, scale) {
           if (!aImg || !aW) {
             continue;
           }
-          ctx.drawImage(aImg, cursor, centerY - iconMaxH / 2, aW, iconMaxH);
-          cursor += aW + gap;
+          var aMargin = suffixMargins[a];
+          var aX = cursor + aMargin.left;
+          var aY =
+            centerY - iconMaxH / 2 + (aMargin.top - aMargin.bottom) / 2;
+          ctx.drawImage(aImg, aX, aY, aW, iconMaxH);
+          cursor += aMargin.left + aW + aMargin.right + gap;
         }
 
         ctx.fillStyle = fontColor2;
@@ -647,12 +676,34 @@ $(document).ready(function () {
     return slugify(name) + "_toggle";
   }
 
+  function additionalConfig(name) {
+    var entry = (settings.additionals || {})[name];
+    if (typeof entry === "string") {
+      return { order: entry, margin: "" };
+    }
+    return {
+      order: entry && entry.order ? entry.order : "suffix",
+      margin: entry && entry.margin ? entry.margin : "",
+    };
+  }
+
+  function escapeAttribute(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
   function buildAdditionalToggles() {
-    var locMap = settings.additionals || {};
     var html = '<div class="option-group kg-additional-options">';
     additionals.forEach(function (name, index) {
       var order = index + 1;
-      var loc = (locMap[name] || "suffix").toLowerCase();
+      var config = additionalConfig(name);
+      var loc = config.order.toLowerCase();
+      var marginAttr = config.margin
+        ? ' data-margin="' + escapeAttribute(config.margin) + '"'
+        : "";
       var iconSrc = (typeof path === "string" ? path : "") + name + ".webp";
       html +=
         '<div class="option-field kg-additional-field">' +
@@ -673,7 +724,9 @@ $(document).ready(function () {
         loc +
         '" order="' +
         order +
-        '">' +
+        '"' +
+        marginAttr +
+        ">" +
         '<span class="toggle-track"><span class="toggle-thumb"></span></span>' +
         "</label>" +
         "</div>" +
@@ -1011,6 +1064,7 @@ $(document).ready(function () {
       }
       var order = parseInt(toggle.getAttribute("order"), 10);
       var name = additionals[order - 1];
+      var margin = toggle.getAttribute("data-margin");
       html +=
         "<span class='additional' data-additional='" +
         name +
@@ -1018,7 +1072,9 @@ $(document).ready(function () {
         location +
         "' data-order='" +
         order +
-        "'></span>";
+        "'" +
+        (margin ? " style='margin: " + margin + "'" : "") +
+        "></span>";
     }
     return html;
   }

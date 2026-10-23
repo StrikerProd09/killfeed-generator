@@ -104,8 +104,21 @@ Then open `http://127.0.0.1:8000/index.html`.
 - **Colors and theme:** edit `assets/css/params_<game>.css`.
 - **Weapons, player defaults, additional icons and option groups:**
   edit `assets/json/killfeed-<game>-params.json`.
+- **Additional icon order and spacing:** each entry in `settings.additionals`
+  uses `{ "order": "prefix" | "suffix", "margin": "..." }`. `order` places the
+  icon before or after the weapon. `margin` is optional and accepts any CSS
+  margin shorthand; CS2 uses it to pull the `Fly` icon over the weapon.
 - **Home page cards:** edit `assets/json/pages.json`.
 - **Customizer markup:** edit `assets/tpl/options.tpl`.
+
+Example:
+
+```json
+"Fly": {
+  "order": "prefix",
+  "margin": "calc(var(--kg-icon-size-selected) * -1 / 1.3) calc(var(--kg-icon-size-selected) * -1 / 2) 0 0"
+}
+```
 
 ## Notes
 

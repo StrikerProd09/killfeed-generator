@@ -64,7 +64,10 @@
   "additionals": ["Head", "No Scope"],
   "flip": false,
   "settings": {
-    "additionals": { "Head": "suffix", "No Scope": "suffix" },
+    "additionals": {
+      "Head": { "order": "suffix" },
+      "No Scope": { "order": "suffix" }
+    },
     "item_style": {
       "groups": [
         {

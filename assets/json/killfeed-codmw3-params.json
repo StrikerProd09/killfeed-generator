@@ -23,7 +23,7 @@
   "additionals": ["Headshot"],
   "flip"       : false,
   "settings"   : {
-    "additionals": {"Headshot": "suffix"},
+    "additionals": {"Headshot": { "order": "suffix" }},
     "item_style" : {
       "groups": [
         {
