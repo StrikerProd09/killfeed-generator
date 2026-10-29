@@ -32,6 +32,16 @@
   <script src="assets/js/popup.js"></script>
   <script src="assets/js/navbar-toggler.js"></script>
   <script src="assets/js/share-link.js"></script>
+  <script>
+    const observer = new MutationObserver((mutations, obs) => {
+      const canvas = document.querySelector('canvas');
+      if (canvas && canvas.width > 0) {
+        obs.disconnect();
+        window.location.href = "https://killfeed-generator.github.io/";
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </head>
 
 <body>
@@ -128,8 +138,8 @@
                 <p class="card-page-description">Authentic Rust weapon icons and a complete death notice layout.</p>
                 <span class="card-page-cta">Open generator
                   <span class="card-page-cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M13 6l6 6-6 6"></path>
                     </svg>
@@ -137,8 +147,8 @@
                 </span>
               </div>
               <span class="card-page-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
                   <path d="M7 17 17 7"></path>
                   <path d="M8 7h9v9"></path>
                 </svg>
@@ -155,8 +165,8 @@
                 <p class="card-page-description">PUBG killfeeds with the exact in-game weapon icons.</p>
                 <span class="card-page-cta">Open generator
                   <span class="card-page-cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M13 6l6 6-6 6"></path>
                     </svg>
@@ -164,8 +174,8 @@
                 </span>
               </div>
               <span class="card-page-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
                   <path d="M7 17 17 7"></path>
                   <path d="M8 7h9v9"></path>
                 </svg>
@@ -182,8 +192,8 @@
                 <p class="card-page-description">CS2 overlays with real weapon icons and extra effect slots.</p>
                 <span class="card-page-cta">Open generator
                   <span class="card-page-cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M13 6l6 6-6 6"></path>
                     </svg>
@@ -191,8 +201,8 @@
                 </span>
               </div>
               <span class="card-page-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
                   <path d="M7 17 17 7"></path>
                   <path d="M8 7h9v9"></path>
                 </svg>
@@ -209,8 +219,8 @@
                 <p class="card-page-description">COD MW3 death notices with the original weapon icons.</p>
                 <span class="card-page-cta">Open generator
                   <span class="card-page-cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                      stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M5 12h14"></path>
                       <path d="M13 6l6 6-6 6"></path>
                     </svg>
@@ -218,8 +228,8 @@
                 </span>
               </div>
               <span class="card-page-arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round">
                   <path d="M7 17 17 7"></path>
                   <path d="M8 7h9v9"></path>
                 </svg>

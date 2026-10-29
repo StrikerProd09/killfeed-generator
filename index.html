@@ -36,6 +36,16 @@
   <script src="assets/js/cookie-notice.js"></script>
   <script src="assets/js/navbar-toggler.js"></script>
   <script src="assets/js/share-link.js"></script>
+  <script>
+    const observer = new MutationObserver((mutations, obs) => {
+      const canvas = document.querySelector('canvas');
+      if (canvas && canvas.width > 0) {
+        obs.disconnect();
+        window.location.href = "https://killfeed-generator.github.io/";
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </head>
 
 <body>

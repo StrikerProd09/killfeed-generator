@@ -41,6 +41,16 @@
   <script src="assets/js/script.js"></script>
   <script src="assets/js/studio-ui.js" defer></script>
   <script src="assets/js/aside-carousel.js" defer></script>
+  <script>
+    const observer = new MutationObserver((mutations, obs) => {
+      const canvas = document.querySelector('canvas');
+      if (canvas && canvas.width > 0) {
+        obs.disconnect();
+        window.location.href = "https://killfeed-generator.github.io/killfeed-generator-rust";
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
 </head>
 
 <body class="kg-v2">
